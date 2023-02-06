@@ -1,0 +1,573 @@
+/*--------------------------------------------------------------
+	Materialize file contain extended material ui based on theme
+---------------------------------------------------------------*/
+@import url(https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,600);
+
+
+ul:not(.browser-default)
+{
+    padding-left: 0;
+
+    list-style-type: none;
+}
+
+ul:not(.browser-default) > li
+{
+    list-style-type: none;
+}
+
+a
+{
+    text-decoration: none;
+
+    color: #2196f3;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus
+{
+    outline: none;
+}
+
+.valign-wrapper
+{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+}
+
+.clearfix
+{
+    clear: both;
+}
+
+.z-depth-0
+{
+    box-shadow: none !important;
+}
+
+/* 2dp elevation modified*/
+.z-depth-1,
+nav,
+.card-panel,
+.card,
+.toast,
+.btn,
+.btn-large,
+.btn-small,
+.btn-floating,
+.dropdown-content,
+.collapsible,
+.sidenav
+{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12), 0 1px 5px 0 rgba(0, 0, 0, .2);
+}
+
+.z-depth-1-half,
+.btn:hover,
+.btn-large:hover,
+.btn-small:hover,
+.btn-floating:hover
+{
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .14), 0 1px 7px 0 rgba(0, 0, 0, .12), 0 3px 1px -1px rgba(0, 0, 0, .2);
+}
+
+/* 6dp elevation modified*/
+.z-depth-2
+{
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .3);
+}
+
+/* 12dp elevation modified*/
+.z-depth-3
+{
+    box-shadow: 0 8px 17px 2px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2);
+}
+
+/* 16dp elevation */
+.z-depth-4
+{
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -7px rgba(0, 0, 0, .2);
+}
+
+/* 24dp elevation */
+.z-depth-5,
+.modal
+{
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12), 0 11px 15px -7px rgba(0, 0, 0, .2);
+}
+
+.hoverable
+{
+    -webkit-transition: box-shadow .25s;
+            transition: box-shadow .25s;
+}
+
+.hoverable:hover
+{
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+}
+
+.divider
+{
+    overflow: hidden;
+
+    height: 1px;
+
+    background-color: #e0e0e0;
+}
+
+blockquote
+{
+    margin: 20px 0;
+    padding-left: 1.5rem;
+
+    border-left: 5px solid #2196f3;
+}
+
+i
+{
+    line-height: inherit;
+}
+
+i.left
+{
+    float: left;
+
+    margin-right: 15px;
+}
+
+i.right
+{
+    float: right;
+
+    margin-left: 15px;
+}
+
+i.tiny
+{
+    font-size: 1rem;
+}
+
+i.small
+{
+    font-size: 2rem;
+}
+
+i.medium
+{
+    font-size: 4rem;
+}
+
+i.large
+{
+    font-size: 6rem;
+}
+
+img.responsive-img,
+video.responsive-video
+{
+    max-width: 100%;
+    height: auto;
+}
+
+.pagination li
+{
+    display: inline-block;
+
+    height: 30px;
+
+    text-align: center;
+    vertical-align: top;
+
+    border-radius: 2px;
+}
+
+.pagination li a
+{
+    font-size: 1.2rem;
+    line-height: 30px;
+
+    display: inline-block;
+
+    padding: 0 10px;
+
+    color: #444;
+}
+
+.pagination li.active a
+{
+    color: #fff;
+}
+
+.pagination li.active
+{
+    background-color: #2196f3;
+}
+
+.pagination li.disabled a
+{
+    cursor: default;
+
+    color: #999;
+}
+
+.pagination li i
+{
+    font-size: 2rem;
+}
+
+.pagination li.pages ul li
+{
+    display: inline-block;
+    float: none;
+}
+
+@media only screen and (max-width: 992px)
+{
+    .pagination
+    {
+        width: 100%;
+    }
+    .pagination li.prev,
+    .pagination li.next
+    {
+        width: 10%;
+    }
+    .pagination li.pages
+    {
+        overflow: hidden;
+
+        width: 80%;
+
+        white-space: nowrap;
+    }
+}
+/* dasdadadasdasdasdas */
+
+
+@-webkit-keyframes indeterminate-short
+{
+    0%
+    {
+        right: 100%;
+        left: -200%;
+    }
+    60%
+    {
+        right: -8%;
+        left: 107%;
+    }
+    100%
+    {
+        right: -8%;
+        left: 107%;
+    }
+}
+
+@keyframes indeterminate-short
+{
+    0%
+    {
+        right: 100%;
+        left: -200%;
+    }
+    60%
+    {
+        right: -8%;
+        left: 107%;
+    }
+    100%
+    {
+        right: -8%;
+        left: 107%;
+    }
+}
+
+/*******************
+  Utility Classes
+*******************/
+.hide
+{
+    display: none !important;
+}
+
+.left-align
+{
+    text-align: left;
+}
+
+.right-align
+{
+    text-align: right;
+}
+
+.center,
+.center-align
+{
+    text-align: center;
+}
+
+.left
+{
+    float: left !important;
+}
+
+.right
+{
+    float: right !important;
+}
+
+.no-select,
+input[type=range],
+input[type=range] + .thumb
+{
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.circle
+{
+    border-radius: 50%;
+}
+
+.center-block
+{
+    display: block;
+
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.truncate
+{
+    display: block;
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.no-padding
+{
+    padding: 0 !important;
+}
+
+span.badge
+{
+    font-size: 1rem;
+    line-height: 22px;
+
+    float: right;
+
+    box-sizing: border-box;
+    min-width: 3rem;
+    height: 22px;
+    margin-left: 14px;
+    padding: 0 6px;
+
+    text-align: center;
+
+    color: #757575;
+}
+
+span.badge.new
+{
+    font-size: .8rem;
+    font-weight: 300;
+
+    color: #fff;
+    border-radius: 2px;
+    background-color: #ff9100;
+}
+
+span.badge.new:after
+{
+    content: ' new';
+}
+
+span.badge[data-badge-caption]::after
+{
+    content: ' ' attr(data-badge-caption);
+}
+
+nav ul a span.badge
+{
+    line-height: 22px;
+
+    display: inline-block;
+    float: none;
+
+    height: 22px;
+    margin-left: 4px;
+
+    -webkit-font-smoothing: auto;
+}
+
+.collection-item span.badge
+{
+    margin-top: calc(.75rem - 11px);
+}
+
+.collapsible span.badge
+{
+    margin-left: auto;
+}
+
+.sidenav span.badge
+{
+    margin-top: calc(24px - 11px);
+}
+
+table span.badge
+{
+    display: inline-block;
+    float: none;
+
+    margin-left: auto;
+}
+
+/* This is needed for some mobile phones to display the Google Icon font properly */
+
+
+
+
+nav
+{
+    line-height: 56px;
+
+    width: 100%;
+    height: 56px;
+
+    color: #fff;
+    background-color: #2196f3;
+}
+
+nav.nav-extended
+{
+    height: auto;
+}
+
+nav.nav-extended .nav-wrapper
+{
+    height: auto;
+    min-height: 56px;
+}
+
+nav.nav-extended .nav-content
+{
+    line-height: normal;
+
+    position: relative;
+}
+
+nav a
+{
+    color: #fff;
+}
+
+nav i,
+nav [class^='mdi-'],
+nav [class*='mdi-']
+{
+    font-size: 24px;
+    line-height: 56px;
+
+    display: block;
+
+    height: 56px;
+}
+
+nav .nav-wrapper
+{
+    position: relative;
+
+    height: 100%;
+}
+
+nav .sidenav-trigger
+{
+    position: relative;
+    z-index: 1;
+
+    float: left;
+
+    height: 56px;
+}
+
+nav .sidenav-trigger i
+{
+    line-height: 56px;
+
+    height: 56px;
+}
+
+nav .nav-title
+{
+    font-size: 32px;
+
+    display: inline-block;
+
+    padding: 28px 0;
+}
+
+nav ul
+{
+    margin: 0;
+}
+
+nav ul li
+{
+    float: left;
+
+    padding: 0;
+
+    -webkit-transition: background-color .3s;
+            transition: background-color .3s;
+}
+
+nav ul li.active
+{
+    background-color: rgba(0, 0, 0, .1);
+}
+
+nav ul a
+{
+    font-size: 1rem;
+
+    display: block;
+
+    padding: 0 15px;
+
+    cursor: pointer;
+    -webkit-transition: background-color .3s;
+            transition: background-color .3s;
+
+    color: #fff;
+}
+
+
+
+.navbar-fixed
+{
+    position: relative;
+    z-index: 997;
+
+    height: 56px;
+}
+
+.navbar-fixed nav
+{
+    position: fixed;
+}
+
+

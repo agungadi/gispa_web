@@ -1,0 +1,177 @@
+/* ----------------------------------------------------------------
+	Custom SCSS
+
+	Add all your Custom Styled SCSS here for New Styles or
+	Overwriting Default Theme Styles for Better Handling Updates
+-----------------------------------------------------------------*/
+.frt-footer-bg {
+    background-color: #C9D6CF;
+}
+
+.slider-hero {
+    background: #FFF url('../images/hero-bg.svg') repeat top center;
+    background-size: cover;
+
+    .slider-text-secondary {
+        max-width: 600px;
+    }
+}
+
+.section-content {
+    .section-wrapper {
+        background-color: #F4F4F4;
+        margin-top: 150px;
+        overflow: visible;
+
+        .section-parallax {
+            //background-image: url('../images/me.jpg');
+            background-size: cover;
+            background-position: center center;
+        }
+    }
+
+    .section-counters {
+        max-width: 1100px;
+    }
+
+    .help-section {
+        .card-one-color {
+            background-color: #E2E8D8;
+        }
+
+        .card-two-color {
+            background-color: #C2DFEC;
+        }
+
+        .card-three-color {
+            background-color: #FADCE4;
+        }
+
+        .card-four-color {
+            background-color: #E4E4E4;
+        }
+
+        .card-five-color {
+            background-color: #E5E3CE;
+        }
+
+        .card-six-color {
+            background-color: #C9D6CF;
+        }
+    }
+
+    .clients-section {
+        background-color: #F1F1F1;
+    }
+
+    .faq-section {
+        background: #f1efe5 url('../images/bg.svg') no-repeat right center;
+        padding-top: 240px
+    }
+}
+
+.footer-section {
+    border-top: 1px solid #d3d0d0;
+    @media (max-width: 768px) {
+        div {
+            justify-content: center !important;
+            padding-bottom: .55em;
+        }
+    }
+}
+
+.title-heading-bg {
+    background-color: #F9F9F9;
+}
+
+.title-gradient {
+    background-color: #f3ec78;
+    background-image: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    -webkit-background-image: -webkit-linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    -moz-background-image: -moz-linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.contact-textarea-size {
+    height: 6em !important;
+}
+
+#logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100px;
+    width: 120px;
+}
+
+/* Social Icons */
+.icon-container {
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+.icon-container .in-1 {
+    background: #3B5998 !important;
+}
+
+.icon-container .in-2 {
+    background: #8A3AB9 !important;
+}
+
+.icon-container .in-3 {
+    background: #00ACEE !important;
+}
+
+.icon-container .in-4 {
+    background: #C4302B !important;
+}
+
+.icon-container .in-5 {
+    background: #0E76A8 !important;
+}
+
+.icon-container .in-6 {
+    background: #00AFF0 !important;
+}
+
+.social-iocon-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.social-iocon-container:hover .visble-icon {
+    top: -30px;
+}
+
+.social-iocon-container:hover .invisble-icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.visble-icon {
+    position: relative;
+    top: 0px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.invisble-icon {
+    position: absolute;
+    top: 50px;
+    transition: all 0.3s ease;
+    color: #fff;
+}

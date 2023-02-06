@@ -1,0 +1,333 @@
+@font-face {
+  font-family: "poppins extra light";
+  font-style: normal;
+  font-weight: 100;
+  src: url(/fonts/poppins-100.woff2?ab66112cac2ca46d6cf8501653479d36) format("woff2"), url(/fonts/poppins-100.woff?9eef15e6adb5c1840e4b22bc13b63057) format("woff"), url(/fonts/poppins-100.ttf?0131622371d352b87e8cbf25e976cfd7) format("truetype"), url(/fonts/poppins-100.svg?201dad4681f813d5ca0cd5f20c33ebde) format("svg"), url(/fonts/poppins-100.eot?f11c82b363b285fb4ea47300bf099761) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins light";
+  font-style: normal;
+  font-weight: 200;
+  src: url(/fonts/poppins-200.woff2?7f0cadcc9081ce094690e3e026dbe5a3) format("woff2"), url(/fonts/poppins-200.woff?6661712e99d1f44c5696d0634026a4b7) format("woff"), url(/fonts/poppins-200.ttf?8b8831d3df39e834327833c19ea140cf) format("truetype"), url(/fonts/poppins-200.svg?7faf41cb6da0aa209b8bd93397b1e6e1) format("svg"), url(/fonts/poppins-200.eot?65a0cdd88c06faf1419f3283ef29d5a7) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins medium light";
+  font-style: italic;
+  font-weight: 300;
+  src: url(/fonts/poppins-300.woff2?82a53579cedb4011592d4320c84f6d07) format("woff2"), url(/fonts/poppins-300.woff?8583fb076895d267edefc900e8b8954b) format("woff"), url(/fonts/poppins-300.ttf?51b8481fc94de404b55707ad412fb014) format("truetype"), url(/fonts/poppins-300.svg?7f9d3e5f7c4a5f4e7583505ef13f12c0) format("svg"), url(/fonts/poppins-300.eot?7e0cff5e2ce63adc5cafb61e5bf16c0e) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/poppins-regular.woff2?5b8f3ba886526963a788fb19c016bcee) format("woff2"), url(/fonts/poppins-regular.woff?c14093cee8c440c1884e38f2a2732bd6) format("woff"), url(/fonts/poppins-regular.ttf?b739ab04747cf8e3325a748352a3d3cb) format("truetype"), url(/fonts/poppins-regular.svg?40774db72678ae06911d356c6740f34b) format("svg"), url(/fonts/poppins-regular.eot?18418ab667b4f80aa3cf1fe2572b4ce4) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins light bold";
+  font-style: normal;
+  font-weight: 500;
+  src: url(/fonts/poppins-500.woff2?dc16a3592fdb61b620cc43491f783eb7) format("woff2"), url(/fonts/poppins-500.woff?ff86872bdc62f119cb706aead2388c8b) format("woff"), url(/fonts/poppins-500.ttf?9b6457625f42c09416f4ff0c6481fa8d) format("truetype"), url(/fonts/poppins-500.svg?a4f7952a7b77eff5747f806f5fe78e20) format("svg"), url(/fonts/poppins-500.eot?e154054d9b801f3e9d2f270e42f831f9) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins bold";
+  font-style: normal;
+  font-weight: 600;
+  src: url(/fonts/poppins-600.woff2?e49343f0bcfb860280ab61e01514eaa6) format("woff2"), url(/fonts/poppins-600.woff?8c4516c52b9adc82164334445e4eb33b) format("woff"), url(/fonts/poppins-600.ttf?154211b038f3fa7f2fd269dde178549c) format("truetype"), url(/fonts/poppins-600.svg?f8a2b4f4ff16aba474e4621e505cb73b) format("svg"), url(/fonts/poppins-600.eot?8a9db166c6f41d4eff76fad8380a0191) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins medium bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url(/fonts/poppins-700.woff2?9690ce6275ddc5645cfa2d0162d2e309) format("woff2"), url(/fonts/poppins-700.woff?eb23bc4e632c6270a7f67ebbeccf3784) format("woff"), url(/fonts/poppins-700.ttf?5727a288740eaac4ef33863a092172a9) format("truetype"), url(/fonts/poppins-700.svg?358fdbf0de9d4c8f009d802e2bee7984) format("svg"), url(/fonts/poppins-700.eot?7cc029aec7398b2afb50145feff5e2c1) format("eot");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "poppins extra bold";
+  font-style: normal;
+  font-weight: 800;
+  src: url(/fonts/poppins-800.woff2?8314fda16443ec0fff15723cea0f9524) format("woff2"), url(/fonts/poppins-800.woff?2923e77ee4131a6bdf8523dfc2f100e8) format("woff"), url(/fonts/poppins-800.ttf?1da2dc116f222daad95d52bf28732532) format("truetype"), url(/fonts/poppins-800.svg?270ac32f8e4b820154c95b08b2d92734) format("svg"), url(/fonts/poppins-800.eot?7db7febef40943661841cd3393fd84be) format("eot");
+  font-display: swap;
+}
+
+@media (max-width: 767px) {
+  .blog-detail-page__main-blog-title {
+    font-size: 32px;
+  }
+}
+
+.blog-detail-page__category-name {
+  color: #989898;
+  font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  .blog-detail-page__category-name {
+    font-size: 16px;
+  }
+}
+
+.blog-detail-page__sub-text {
+  color: #343353;
+  opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+  .blog-detail-page__sub-text {
+    font-size: 15px;
+  }
+}
+
+.blog-detail-page .tag-list__tag-btn {
+  box-shadow: 0 0 6px #00000029;
+  border-radius: 40px;
+  height: 44px;
+  width: auto;
+  min-width: 138px;
+  font-size: 14px;
+  line-height: 26px;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  margin: 5px 10px;
+  color: #343353;
+}
+
+@media (max-width: 767px) {
+  .blog-detail-page .tag-list__tag-btn {
+    height: 40px;
+    min-width: 110px;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 8px;
+  }
+}
+
+.blog-detail-page__first-image {
+  max-width: 950px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1400px) {
+  .blog-detail-page__first-image {
+    max-width: 850px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .blog-detail-page__first-image {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 991px) {
+  .blog-detail-page__first-image {
+    max-width: 550px;
+  }
+}
+
+.blog-detail-page__first-image:before {
+  content: "";
+}
+
+.blog-detail-page__first-image img {
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  min-width: 90%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-width: 200px;
+}
+
+.blog-detail-page__description {
+  padding: 80px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00000017;
+}
+
+@media (max-width: 1400px) {
+  .blog-detail-page__description {
+    padding: 60px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page__description {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  .blog-detail-page__description {
+    padding: 25px;
+  }
+}
+
+.blog-detail-page__description-title {
+  color: #343353;
+  letter-spacing: 1.12px;
+  font-family: "poppins bold", "sans-serif";
+}
+
+@media (max-width: 1400px) {
+  .blog-detail-page__description-title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page__description-title {
+    font-size: 22px;
+    letter-spacing: 0.6px;
+  }
+}
+
+@media (max-width: 767px) {
+  .blog-detail-page__description-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page strong {
+    font-size: 16px;
+  }
+}
+
+.blog-detail-page__paragraphs > * {
+  font-size: 17px !important;
+  color: #343353;
+  font-family: Poppins, Product Sans, sans-serif !important;
+}
+
+.blog-detail-page__paragraphs {
+  font-size: 17px !important;
+  font-family: Poppins, Product Sans, sans-serif !important;
+  letter-spacing: 0.24px;
+  color: #343353;
+}
+
+.blog-detail-page__paragraphs span {
+  letter-spacing: 0.24px !important;
+  color: #343353 !important;
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page__paragraphs span {
+    font-size: 17px !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page__paragraphs {
+    font-size: 17px;
+  }
+}
+
+.blog-detail-page .blog-pagination {
+  border-top: 1px solid #989898;
+  padding-top: 40px;
+}
+
+@media (max-width: 769px) {
+  .blog-detail-page .blog-pagination .custom_center_class {
+    text-align: center !important;
+  }
+}
+
+.blog-detail-page .blog-pagination .custom_center_class .custom_next_link {
+  justify-content: flex-end;
+}
+
+@media (max-width: 769px) {
+  .blog-detail-page .blog-pagination .custom_center_class .custom_next_link {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 769px) {
+  .blog-detail-page .blog-pagination {
+    display: block;
+  }
+}
+
+.blog-detail-page .blog-pagination__post-link {
+  font-size: 18px;
+  letter-spacing: 0.77px;
+  font-family: "poppins bold", "sans-serif";
+}
+
+@media (max-width: 1024px) {
+  .blog-detail-page .blog-pagination__post-link {
+    font-size: 16px;
+  }
+}
+
+.blog-detail-page .blog-pagination__post-link:hover {
+  color: #343353;
+}
+
+@media (min-width: 1200px) {
+  .blog-detail-page .blog-pagination .custom_pagination_link {
+    display: -webkit-box;
+    max-width: 400px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 1199px) {
+  .blog-detail-page .blog-pagination .custom_pagination_link {
+    display: -webkit-box;
+    max-width: 250px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-detail-page .blog-pagination .custom_pagination_link {
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.blog-detail-page .blog-pagination .next_arrow_icon {
+  color: #343353;
+}
+
+.blog-detail-page .blog-pagination__pagination-name {
+  font-size: 16px;
+  color: #989898;
+  font-family: "poppins light bold", "sans-serif";
+}
+
+@media (max-width: 1024px) {
+  .blog-detail-page .blog-pagination__pagination-name {
+    font-size: 14px;
+  }
+}
+
+

@@ -1,83 +1,101 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="To manage the InfyOm Portfolio">
+    <meta name="author" content="InfyOm Technologies">
 
-    <!-- CSRF Token -->
+    <title>@yield('title') | {{config('app.name')}} </title>
+    <!-- Favicon -->
+    {{-- <link rel="icon" href="{{ asset(getAdminSettingValue('favicon')) }}" type="image/png"> --}}
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{{ asset('porto/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('porto/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('porto/assets/css/font-awesome.min.css') }}">
+    <link href="{{ asset('porto/assets/css/sweetalert2.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('porto/assets/css/iziToast.min.css') }}">
+    <link href="{{ asset('porto/assets/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('porto/assets/css/bootstrap-datetimepicker.min.css') }}">
+
+
+    <!-- General CSS Files -->
+
+    <link rel="stylesheet" href="{{ asset('porto/css/argon.css') }}" type="text/css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('porto/assets/css/style.css') }}">
+
+    <link href="{{ asset('porto/assets/css/phone-number-code.css') }}" rel="stylesheet" type="text/css" />
+    <!-- CSS Libraries -->
+    @yield('page_css')
+    @yield('css')
+    @routes
+    <!-- Template CSS -->
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body id="app">
+        @include('layouts.header')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+{{-- @include('layouts.sidebar') --}}
+@stack('sidebar_js')
 
-                    </ul>
+<div class="main-content" id="panel">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+    @yield('content')
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+    <footer>
+        <div class="container-fluid padding-0">
+            {{-- @include('layouts.footer') --}}
+        </div>
+    </footer>
+</div>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+{{-- @include('profile.change_password') --}}
+{{-- @include('profile.edit_profile')
+@include('profile.change_langauge') --}}
+<!-- Scripts -->
+<script src="{{ asset('porto/vendor/js-cookie/js.cookie.js') }}"></script>
+<script src="{{ asset('porto/assets/js/moment.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/sidebar_menu_search/sidebar_menu_search.js') }}"></script>
+<script src="{{ asset('porto/assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/select2.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('porto/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+<script src="{{ asset('porto/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+<script src="{{ asset('porto/assets/js/bootstrap-datepicker.js') }}"></script>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+<script src="{{ asset('porto/js/argon.js') }}"></script>
+
+<script src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'></script>
+
+
+
+@yield('page_js')
+@yield('scripts')
+<script src="{{ asset('porto/assets/js/app/app.js') }}"></script>
+<script>
+    let pdfDocumentImageUrl = "{{asset('assets/img/pdf_icon.png')}}";
+    let docxDocumentImageUrl = "{{asset('assets/img/doc_icon.png')}}";
+    let xlsxDocumentImageUrl = "{{asset('assets/img/xlsx_icon.png')}}";
+    let defaultImage = "{{asset('img/infyom-logo.png')}}";
+    let successMessage = "{{ session('successMessage') }}";
+    let iconUrl = '{{asset('assets/web/css/images/done.png')}}';
+</script>
+<script src="{{ asset('porto/assets/js/custom/custom.js') }}"></script>
+<script src="{{ asset('porto/assets/js/user-profile/user-profile.js') }}"></script>
+
+
 </body>
 </html>
