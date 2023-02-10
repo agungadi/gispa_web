@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GeografisController;
 use App\Http\Controllers\LayerController;
+use App\Http\Controllers\IsiGeografisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,8 +53,16 @@ Route::put('geografis/{id}', [GeografisController::class, 'update'])->name('geog
 Route::post('geografis', [GeografisController::class, 'store'])->name('geografis.store');
 Route::delete('geografis/{id}', [GeografisController::class, 'destroy'])->name('geografis.destroy');
 
-Route::get('data_geografis', [GeografisController::class, 'index'])->name('geografis.index');
-Route::get('data_geografis/{id}/edit', [GeografisController::class, 'edit'])->name('geografis.edit');
-Route::put('data_geografis/{id}', [GeografisController::class, 'update'])->name('geografis.update');
-Route::post('data_geografis', [GeografisController::class, 'store'])->name('geografis.store');
-Route::delete('data_geografis/{id}', [GeografisController::class, 'destroy'])->name('geografis.destroy');
+Route::get('data_geografis/{enc}', [IsiGeografisController::class, 'index'])->name('datageografis.index');
+Route::get('data_geografis/{id}/edit', [IsiGeografisController::class, 'edit'])->name('datageografis.edit');
+Route::put('data_geografis/{id}', [IsiGeografisController::class, 'update'])->name('datageografis.update');
+Route::post('data_geografis', [IsiGeografisController::class, 'store'])->name('datageografis.store');
+Route::delete('data_geografis/{id}', [IsiGeografisController::class, 'destroy'])->name('datageografis.destroy');
+Route::get('data_geografis/editdata/{id}', [IsiGeografisController::class, 'editdata'])->name('datageografis.editdata');
+
+
+Route::get('result/datageo', [IsiGeografisController::class, 'hasil'])->name('edit.datageo');
+
+Route::get('/leaflet', [App\Http\Controllers\HomeController::class, 'leaflet'])->name('leaflet');
+
+Route::post('/peta', [GeografisController::class, 'peta'])->name('geografis.peta');

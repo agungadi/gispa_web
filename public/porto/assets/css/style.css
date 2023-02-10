@@ -2397,3 +2397,66 @@ header {
       justify-content: center;
     }
   }
+
+
+#mapid {
+
+    height: 180px ;
+    width: 80%;
+    }
+
+    .leaflet-container {
+        height: 400px;
+        width: 600px;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #posisiBtn {
+        text-align: right;
+    }
+
+#cancelBtn {
+    position: relative;
+    float:right;
+	margin-left: 5px;
+	margin-top: 15px;
+}
+#saveBtn {
+    position: relative;
+    float:right;
+	margin-left: 5px;
+	margin-top: 15px;
+}
+
+
+/* #next {
+    position: relative;
+    float:right;
+	margin-left: 5px;
+	margin-top: 15px;
+}
+
+#prev {
+    position: relative;
+    float:right;
+	margin-left: 5px;
+	margin-top: 15px;
+}
+
+#submit {
+    position: relative;
+    float:right;
+	margin-left: 5px;
+	margin-top: 15px;
+} */
+/* #saveBtn {
+    margin:0 20px;
+    display:inline-block;
+
+} */
+/*
+#cancelBtn {
+    position: absolute;
+    right: 20%;
+} */

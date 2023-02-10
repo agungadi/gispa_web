@@ -7,6 +7,8 @@ var __webpack_exports__ = {};
   \**********************************************/
 
 
+
+
 $(document).ready(function () {
   $('#editopd,#createopd').select2({
     'width': '100%',
@@ -69,10 +71,9 @@ $(document).ready(function () {
       },
       {
         data: function data(row) {
-            var url = route('geografis.edit', row.id);
+
             var data = [{
               'id': row.id,
-              'url': url
             }];
             return prepareTemplateRender('#statesTemplateIsi', data);
           },
@@ -81,6 +82,7 @@ $(document).ready(function () {
 
     {
       data: function data(row) {
+
         var url = route('geografis.edit', row.id);
         var data = [{
           'id': row.id,
@@ -150,77 +152,7 @@ $(document).ready(function () {
         $('#edit_tipe').val(result.data.tipe).trigger('change.select2');
         $('#editModal').modal('show');
 
-        if(result.data.field1 != ""){
-            var fields = result.data.field1;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field1" class="form-control" type="${results[0]}" placeholder="nama field 1" value="${results[2]}">
-            <input type="hidden" name="type_of_name1" value="${results[0]}">
-            `)
-        }
-        if(result.data.field2 != ""){
-            var fields = result.data.field2;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field2" class="form-control" type="${results[0]}" placeholder="nama field 2" value="${results[2]}">
-            <input type="hidden" name="type_of_name2" value="${results[0]}">
 
-            `)
-        }
-        if(result.data.field3 != ""){
-            var fields = result.data.field3;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field3" class="form-control" type="${results[0]}" placeholder="nama field 3 value="${results[2]}">
-            <input type="hidden" name="type_of_name3" value="${results[0]}">
-
-            `)
-        }
-        if(result.data.field4 != ""){
-            var fields = result.data.field4;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field4" class="form-control" type="${results[0]}" placeholder="nama field 4" value="${results[2]}">
-            <input type="hidden" name="type_of_name4" value="${results[0]}">
-
-            `)
-        }
-        if(result.data.field5 != ""){
-            var fields = result.data.field5;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field5" class="form-control" type="${results[0]}" placeholder="nama field 5" value="${results[2]}">
-            <input type="hidden" name="type_of_name5" value="${results[0]}">
-
-            `)
-        }
-        if(result.data.field6 != ""){
-            var fields = result.data.field6;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field6" class="form-control" type="${results[0]}" placeholder="nama field 6" value="${results[2]}">
-            <input type="hidden" name="type_of_name6" value="${results[0]}">
-
-            `)
-        }
-        if(result.data.field7 != ""){
-            var fields = result.data.field7;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field7" class="form-control" type="${results[0]}" placeholder="nama field 7" value="${results[2]}">
-            <input type="hidden" name="type_of_name7" value="${results[0]}">
-
-            `)
-        }
-        if(result.data.field8 != ""){
-            var fields = result.data.field8;
-            var results = fields.split("||");
-             $(".koloms").append(`
-            <input name="field8" class="form-control" type="${results[0]}" placeholder="nama field 8" value="${results[2]}">
-            <input type="hidden" name="type_of_name8" value="${results[0]}">
-
-            `)
-        }
 
         // for(var i = 1; i <= 8; i++){
         //     // fields = datas.field+i;
@@ -296,6 +228,25 @@ $(document).ready(function () {
   $(document).on('click', '.remove-field', function(e) {
     $(this).parent('.remove').remove();
     e.preventDefault();
+  });
+
+
+  $(document).on('click', '.isi-data', function (event) {
+    var id = $(event.currentTarget).data('id');
+    console.log(id);
+    $.ajax({
+        url: route('geografis.edit', id),
+        type: 'GET',
+        // async: false,
+        success: function success(result) {
+            console.log(result);
+            var enc = result.data.enkrip;
+            var url = route('datageografis.index', enc);
+            window.open(url, '_blank').focus();
+
+        }
+    });
+    // renderData(id);
   });
 
 });

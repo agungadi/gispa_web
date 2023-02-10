@@ -2392,7 +2392,7 @@ pre code {
     background-color: rgba(255, 255, 255, .075);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 1075.98px) {
     .table-responsive-sm {
         display: block;
         overflow-x: auto;

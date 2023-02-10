@@ -30,6 +30,7 @@
             </div>
         </div>
     </div>
+
     <div class="container-fluid mt--6">
         <div class="card mb-4">
             <div class="card-body">
@@ -39,6 +40,7 @@
         @include('admin.geografis.create_modal')
         @include('admin.geografis.edit_modal')
         @include('admin.geografis.templates.templates')
+
         @include('admin.geografis.templates.templatesisi')
 
     </div>

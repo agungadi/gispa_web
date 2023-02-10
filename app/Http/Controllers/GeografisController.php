@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Geografis;
 use Yajra\DataTables\DataTables;
 use DB;
+use Illuminate\Support\Facades\Crypt;
 
 class GeografisController extends AppBaseController
 {
@@ -22,12 +23,13 @@ class GeografisController extends AppBaseController
         //
         $keldata = KelompokData::pluck('nama', 'id');
 
+        $geo = Geografis::query()->select('geografis.*')->get();
 
         if ($request->ajax()) {
             return DataTables::of((new GeografisDataTable())->get($request->only(['kel_data'])))->make(true);
         }
 
-        return view('admin.geografis.index', compact('keldata'));
+        return view('admin.geografis.index', compact('keldata', 'geo'));
 
     }
 
@@ -170,9 +172,22 @@ class GeografisController extends AppBaseController
     public function edit(Geografis $id)
     {
         //
+        // dd($id);
+        $enkripsi = json_decode($id);
+
+        $encrypted = Crypt::encryptString($enkripsi->nama_tabel . "||" . $enkripsi->id);
+
+        $enkripsi->enkrip =  $encrypted;
 
 
-        return $this->sendResponse($id, 'Item Pernyataaan  successfully retrieved.');
+        // dd($enkripsi);
+
+        // $json = json_encode($enkripsi);
+
+
+        // dd($encrypted);
+
+        return $this->sendResponse($enkripsi,  'Item Pernyataaan  successfully retrieved.');
 
     }
 
@@ -297,5 +312,14 @@ class GeografisController extends AppBaseController
         Geografis::find($id)->delete();
 
         return $this->sendSuccess('Geografis berhasil dihapus.');
+    }
+
+    public function peta(Request $request)
+    {
+        // $wkt = $request->wkt;
+        // dd($wkt);
+        // return view('peta.leaflet', compact('wkt'));
+        return view('peta.leaflet');
+
     }
 }
