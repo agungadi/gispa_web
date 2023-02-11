@@ -151,6 +151,47 @@ class IsiGeografisController extends AppBaseController
     public function update(Request $request, $id)
     {
         //
+
+        $this->validate($request, [
+            'geojson' => 'required',
+        ]);
+
+
+        $id_geo = $request->getId;
+
+        $geo = Geografis::whereId($id_geo)->first();
+
+        $arr_data=[
+            'geojson' => $request->geojson
+        ];
+
+        $field1 = explode("||", $geo->field1);
+        $field2 = explode("||", $geo->field2);
+        $field3 = explode("||", $geo->field3);
+        $field4 = explode("||", $geo->field4);
+        $field5 = explode("||", $geo->field5);
+        $field6 = explode("||", $geo->field6);
+        $field7 = explode("||", $geo->field7);
+        $field8 = explode("||", $geo->field8);
+
+        for ($i=1; $i <= 8; $i++) {
+            if(!empty($geo->{'field'.$i}))
+            {
+                $arr_data = $arr_data+[${'field'.$i}[1] => $request->{${'field'.$i}[1]}];
+            }
+        }
+
+
+
+
+
+        $inset = DB::table($geo->nama_tabel)
+        ->where('id', $id)
+        ->update($arr_data);
+
+        return $this->sendResponse("inset_history",  json_encode($inset));
+
+
     }
 
     /**
@@ -185,10 +226,33 @@ class IsiGeografisController extends AppBaseController
 
         $data= DB::table($nama_tabel)->where('id', $request->id)->first();
 
-        dd($data);
 
-        // $query = lke::query()->where(['id_evaluasi'=>$request->id_evaluasi, 'id_indikator'=>$request->id_indikator])->with('review', 'file')->get();
-        // return $this->sendResponse($query, 'LKE successfully retrieved.');
+        // dd($data);
+        for ($i = 1; $i <= 8; $i++) {
+            $field = explode("||", $geo->{'field' . $i});
+
+            if(sizeof($field) >= 2){
+                $kolom = $field[1];
+                $data->{'field' . $i} = $data->$kolom;
+            }else{
+                $data->{'field' . $i} = $field[0];
+            }
+
+        }
+        // dd($data);
+
+        return $this->sendResponse($data, 'Data Geografis successfully retrieved.');
         }
 
+        public function hapus(Request $request, $id)
+        {
+            $id_geo = $request->idgeo;
+            $geo = Geografis::whereId($id_geo)->first();
+
+            $nama_tabel = $geo->nama_tabel;
+            $delete=DB::table($nama_tabel)->where('id', $request->id)->delete();
+
+            return $this->sendSuccess('Geografis berhasil dihapus.');
+
+        }
 }

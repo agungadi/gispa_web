@@ -68,7 +68,7 @@ $field8 = explode("||", $geo->field8);
     <a title="Edit" class="btn btn-default btn-icon-only-action rounded-circle edit-btn" href="javascript:void(0)" data-tb="{{$geo->id}}"  data-id="{{$rs->id}}">
         <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
 </a>
-<a title="Delete" class="btn btn-danger btn-icon-only-action rounded-circle delete-btn" data-id="{{$rs->id}}" href="#">
+<a title="Delete" class="btn btn-danger btn-icon-only-action rounded-circle delete-btn" data-tb="{{$geo->id}}" data-id="{{$rs->id}}" href="#">
         <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
 </a>
 

@@ -1,5 +1,3 @@
-{{-- <div id="fsModal" class="modal animated bounceIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true"> --}}
 
 <?php
 $field1 = explode('||', $geo->field1);
@@ -37,12 +35,13 @@ if ($field8[0] != 'text') {
 }
 ?>
 
-<div id="stateModal" class="modal animated bounceIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modalfull-dialog">
+<div class="modal fade pr-0" id="editModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel"
+     aria-hidden="true">
+
+     <div class="modalfull-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modalfull-title" id="stateModalLabel">Tambah Layer</h4>
+                <h3 class="modalfull-title" id="stateModalLabel">Edit Data Geografis</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -51,9 +50,8 @@ if ($field8[0] != 'text') {
 
 
                 <div class="alert-danger alert d-none" id="validationErrorsBox"></div>
-                {{ Form::open(['id' => 'createStateForm', 'method' => 'post']) }}
-                <input type="hidden" name="getId" id="getId" value="{{$geo->id}}">
-
+                {{ Form::open(['id' =>'editStateForm','method'=>'post']) }}
+                {{ Form::hidden('id', null, ['id' => 'stateFieldId']) }}
                 <div class="row">
                     <?php for ($i=1; $i <= 8; $i++) {  ?>
                     @if (!empty($geo->{'field' . $i}))
@@ -61,7 +59,7 @@ if ($field8[0] != 'text') {
                             <label>
                                 {{ ${'field' . $i}[2] }} - {{ ${'field' . $i}[0] }} : <span class="text-danger">*</span>
                             </label>
-                            <input required="required" type="{{ ${'field' . $i}[0] }}" class="form-control"
+                            <input required="required" type="{{ ${'field' . $i}[0] }}" id="edit{{$i}}" class="form-control"
                                 name="{{ ${'field' . $i}[1] }}" step=0.01>
                         </div>
                     @endif
@@ -72,8 +70,8 @@ if ($field8[0] != 'text') {
                     <div class="form-group col-lg-12 col-sm-12">
                         {{ Form::label('GeoJson :') }}<span class="text-danger">*</span>
 
-                        <input id="polygon" readonly="readonly" required="required" type="text"
-                            class="form-control" name="geojson" value="{{ request('polygon') }}">
+                        <input readonly="readonly" required="required" type="text"
+                            class="form-control" id="editgeojson" name="geojson" value="{{ request('polygon') }}">
                         <small>
                             * Data harus diisi melalui peta
                         </small>
@@ -104,12 +102,15 @@ if ($field8[0] != 'text') {
                 <button class="btn btn-primary" id="next">Next</button>
                 <button class="btn btn-info" id="prev">Prev</button> --}}
 
+
             </div>
         </div>
 
 
     </div>
 
-
-
 </div>
+
+<script>
+</script>
+

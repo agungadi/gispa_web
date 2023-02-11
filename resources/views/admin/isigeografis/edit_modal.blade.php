@@ -1,3 +1,5 @@
+{{-- <div id="fsModal" class="modal animated bounceIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true"> --}}
 
 <?php
 $field1 = explode('||', $geo->field1);
@@ -35,13 +37,12 @@ if ($field8[0] != 'text') {
 }
 ?>
 
-<div class="modal fade pr-0" id="editModal" tabindex="-1" role="dialog" aria-labelledby="countryModalLabel"
-     aria-hidden="true">
-
-     <div class="modalfull-dialog">
+<div id="editModal" class="modal animated bounceIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modalfull-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modalfull-title" id="stateModalLabel">Edit Data Geografis</h4>
+                <h3 class="modalfull-title" id="stateModalLabel">Edit Layer</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,8 +51,11 @@ if ($field8[0] != 'text') {
 
 
                 <div class="alert-danger alert d-none" id="validationErrorsBox"></div>
-                {{ Form::open(['id' =>'editStateForm','method'=>'post']) }}
+                {{ Form::open(['id' => 'editStateForm', 'method' => 'post']) }}
                 {{ Form::hidden('id', null, ['id' => 'stateFieldId']) }}
+                <input type="hidden" name="getId" id="getId" value="{{$geo->id}}">
+
+
                 <div class="row">
                     <?php for ($i=1; $i <= 8; $i++) {  ?>
                     @if (!empty($geo->{'field' . $i}))
@@ -59,53 +63,46 @@ if ($field8[0] != 'text') {
                             <label>
                                 {{ ${'field' . $i}[2] }} - {{ ${'field' . $i}[0] }} : <span class="text-danger">*</span>
                             </label>
-                            <input required="required" type="{{ ${'field' . $i}[0] }}" id="edit{{$i}}" class="form-control"
-                                name="{{ ${'field' . $i}[1] }}" step=0.01>
+                            <input required="required" type="{{ ${'field' . $i}[0] }}" id="edit{{ $i }}"
+                                class="form-control" name="{{ ${'field' . $i}[1] }}" step=0.01>
                         </div>
                     @endif
                     <?php } ?>
 
 
 
+
                     <div class="form-group col-lg-12 col-sm-12">
                         {{ Form::label('GeoJson :') }}<span class="text-danger">*</span>
 
-                        <input id="polygon" readonly="readonly" required="required" type="text"
-                            class="form-control" id="editgeojson" name="geojson" value="{{ request('polygon') }}">
+                        <input readonly="readonly" required="required" type="text" class="form-control"
+                            id="editgeojson" name="geojson" value="{{ request('polygon') }}">
                         <small>
                             * Data harus diisi melalui peta
                         </small>
 
                     </div>
 
-                    <div id="map" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div>
-                    <br>
-                    {{-- <div>
-                        <label>The layer To Be Stored:</label>
-                        <input id="polygon" type="text" class="form-control" name="polygon" value="{{request('polygon')}}">
-                    </div> --}}
+                    {{-- <div id="mapedit"> --}}
+                    <div id="mapid" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div>
+                    {{-- </div> --}}
                     <br>
 
-
-
+                    <br>
 
 
                 </div>
-                {{-- <div class="d-flex align-items-right" id="posisiBtn"> --}}
-                    {{ Form::button('Simpan', ['type' => 'submit', 'class' => 'btn btn-primary text-right', 'id' => 'saveBtn', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
+                {{ Form::button('Simpan', ['type' => 'submit', 'class' => 'btn btn-primary text-right', 'id' => 'saveBtn', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
 
-                    {{ Form::button('Batalkan   ', ['type' => 'button', 'class' => 'btn btn-light text-dark', 'data-dismiss' => 'modal', 'id' => 'cancelBtn']) }}
+                {{ Form::button('Batalkan   ', ['type' => 'button', 'class' => 'btn btn-light text-dark', 'data-dismiss' => 'modal', 'id' => 'cancelBtn']) }}
 
                 {{-- </div> --}}
                 {{ Form::close() }}
-                {{-- <button class="btn btn-success" id="submit">Submit</button>
-                <button class="btn btn-primary" id="next">Next</button>
-                <button class="btn btn-info" id="prev">Prev</button> --}}
             </div>
+
+
         </div>
 
 
+
     </div>
-
-</div>
-

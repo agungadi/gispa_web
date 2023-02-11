@@ -59,6 +59,7 @@ Route::put('data_geografis/{id}', [IsiGeografisController::class, 'update'])->na
 Route::post('data_geografis', [IsiGeografisController::class, 'store'])->name('datageografis.store');
 Route::delete('data_geografis/{id}', [IsiGeografisController::class, 'destroy'])->name('datageografis.destroy');
 Route::get('data_geografis/editdata/{id}', [IsiGeografisController::class, 'editdata'])->name('datageografis.editdata');
+Route::post('data_geografis_hapus/{id}', [IsiGeografisController::class, 'hapus'])->name('datageografis.hapus');
 
 
 Route::get('result/datageo', [IsiGeografisController::class, 'hasil'])->name('edit.datageo');
