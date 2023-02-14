@@ -90,17 +90,21 @@
             console.log($(this).serialize());
             var loadingButton = jQuery(this).find('#saveBtn');
             loadingButton.button('loading');
-            console.log("asuuuuuu");
             $.ajax({
                 url: route('datageografis.store'),
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function success(result) {
-                    console.log("asuuuuuu");
+
+
+
+
                     if (result.success) {
+
+                        window.location.reload();
                         displaySuccessMessage(result.message);
                         $('#stateModal').modal('hide');
-                        $(tablename).DataTable().ajax.reload(null, false);
+
                     }
                 },
                 error: function error(result) {
@@ -233,8 +237,9 @@
 
             console.log(id);
             console.log(tb);
-            // $('#mapedit').empty();
+            $('#mapid').remove();
             // $("#mapedit").append(`<div id="mapid" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div>`);
+            $('#petaku').after('.peta').append(`<div id="mapid" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div>`);
 
 
             renderData(id, tb);
@@ -289,9 +294,12 @@
                     }
 
                     $('#editModal').modal('show');
+
+                    var map = null;
+                    console.log(map);
                     var center = [-7.2369247, 111.894956];
                     // Create the map
-                    var map = L.map('mapid').setView(center, 10);
+                    map = L.map('mapid').setView(center, 10);
 
 
                     // Set up the Open Street map layer
@@ -301,6 +309,7 @@
                         maxZoom: 18
                     }).addTo(map);
                     var drawnItems = new L.FeatureGroup();
+
                     map.addLayer(drawnItems);
 
 
@@ -396,6 +405,7 @@
                     var polygon = wicket.read(gjson);
                     var data_wicket = polygon.toObject();
 
+                    // drawnItems.clearLayers();
 
                     data_wicket.addTo(map);
                     drawnItems.addLayer(data_wicket);
@@ -494,9 +504,9 @@
                 type: 'PUT',
                 data: $(this).serialize(),
                 success: function success(result) {
+                    window.location.reload();
                     $('#editModal').modal('hide');
                     displaySuccessMessage(result.message);
-                    $(tablename).DataTable().ajax.reload(null, false);
                 },
                 error: function error(result) {
                     displayErrorMessage(result.responseJSON.message);
@@ -564,6 +574,8 @@
 
                     // $('#docTable').empty();
                     // renderData(id_pernyataan);
+                    window.location.reload();
+
                 }
 
                 swal.fire({

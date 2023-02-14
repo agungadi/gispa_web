@@ -56,7 +56,7 @@ if ($field8[0] != 'text') {
                 <input type="hidden" name="getId" id="getId" value="{{$geo->id}}">
 
 
-                <div class="row">
+                <div class="row" id="petaku">
                     <?php for ($i=1; $i <= 8; $i++) {  ?>
                     @if (!empty($geo->{'field' . $i}))
                         <div class="form-group col-lg-12 col-sm-12">
@@ -72,7 +72,7 @@ if ($field8[0] != 'text') {
 
 
 
-                    <div class="form-group col-lg-12 col-sm-12">
+                    <div class="form-group col-lg-12 col-sm-12 peta">
                         {{ Form::label('GeoJson :') }}<span class="text-danger">*</span>
 
                         <input readonly="readonly" required="required" type="text" class="form-control"
@@ -84,7 +84,7 @@ if ($field8[0] != 'text') {
                     </div>
 
                     {{-- <div id="mapedit"> --}}
-                    <div id="mapid" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div>
+                    {{-- <div id="mapid" style="height: 600px; width: 95%; margin-left: 2%; margin-bottom: 2%;"></div> --}}
                     {{-- </div> --}}
                     <br>
 

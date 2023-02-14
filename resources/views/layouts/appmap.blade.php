@@ -28,7 +28,8 @@
         <!-- Peta Leaflet Js -->
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    {{-- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 
 
     <!-- General CSS Files -->
@@ -38,14 +39,14 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('porto/assets/css/style.css') }}">
 
-    <link href="{{ asset('porto/assets/css/phone-number-code.css') }}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{ asset('porto/assets/css/phone-number-code.css') }}" rel="stylesheet" type="text/css" /> --}}
     <!-- CSS Libraries -->
     @yield('page_css')
     @yield('css')
     @routes
     <!-- Template CSS -->
 </head>
-<body id="app">
+<body id="">
         @include('sweetalert::alert')
 
         @include('layouts.header')
@@ -53,17 +54,10 @@
 {{-- @include('layouts.sidebar') --}}
 @stack('sidebar_js')
 
-<div class="main-content" id="panel">
 
 
     @yield('content')
 
-    <footer>
-        <div class="container-fluid padding-0">
-            {{-- @include('layouts.footer') --}}
-        </div>
-    </footer>
-</div>
 
 {{-- @include('profile.change_password') --}}
 {{-- @include('profile.edit_profile')
@@ -91,7 +85,7 @@
 
 @yield('page_js')
 @yield('scripts')
-<script src="{{ asset('porto/assets/js/app/app.js') }}"></script>
+{{-- <script src="{{ asset('porto/assets/js/app/app.js') }}"></script>
 <script>
     let pdfDocumentImageUrl = "{{asset('assets/img/pdf_icon.png')}}";
     let docxDocumentImageUrl = "{{asset('assets/img/doc_icon.png')}}";
@@ -102,7 +96,7 @@
 </script>
 <script src="{{ asset('porto/assets/js/custom/custom.js') }}"></script>
 <script src="{{ asset('porto/assets/js/user-profile/user-profile.js') }}"></script>
-
+ --}}
 
 </body>
 </html>

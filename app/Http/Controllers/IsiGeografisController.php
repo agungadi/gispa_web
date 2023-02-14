@@ -10,6 +10,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
 use DB;
 use App\Http\Controllers\AppBaseController;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class IsiGeografisController extends AppBaseController
 {
@@ -70,6 +71,7 @@ class IsiGeografisController extends AppBaseController
         //     'geojson' => 'required',
         // ]);
 
+
         $id_geo = $request->getId;
 
         $geo = Geografis::whereId($id_geo)->first();
@@ -88,10 +90,7 @@ class IsiGeografisController extends AppBaseController
         $field7 = explode("||", $geo->field7);
         $field8 = explode("||", $geo->field8);
 
-        // $get_id_tabel =  "SELECT *FROM {$geo->nama_tabel}";
 
-
-        // // $arr_data =[];
 
         for ($i=1; $i <= 8; $i++) {
             if(!empty($geo->{'field'.$i}))
@@ -105,9 +104,10 @@ class IsiGeografisController extends AppBaseController
         $inset = DB::table($geo->nama_tabel)
         ->insert($arr_data);
 
-        return $this->sendResponse("inset_history",  json_encode($inset));
 
-        // return $this->sendResponse($inset_history, "Isi Geografis Berhasil Ditambahkan");
+        // session()->put('status', 'Data Geografis Berhasil disimpan');
+        // return back();
+        return $this->sendResponse($inset, "Isi Geografis Berhasil Ditambahkan");
     }
 
     /**
@@ -189,7 +189,7 @@ class IsiGeografisController extends AppBaseController
         ->where('id', $id)
         ->update($arr_data);
 
-        return $this->sendResponse("inset_history",  json_encode($inset));
+        return $this->sendResponse($inset,  "Data Geografis Berhasil Diubah");
 
 
     }

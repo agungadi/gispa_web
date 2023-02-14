@@ -52,6 +52,7 @@ if ($field8[0] != 'text') {
 
                 <div class="alert-danger alert d-none" id="validationErrorsBox"></div>
                 {{ Form::open(['id' => 'createStateForm', 'method' => 'post']) }}
+
                 <input type="hidden" name="getId" id="getId" value="{{$geo->id}}">
 
                 <div class="row">

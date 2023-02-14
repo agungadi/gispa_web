@@ -39,6 +39,9 @@
                 <a href="javascript:void(0);">
                     <h1>Home</h1>
                 </a>
+                <a href="{{ route('patok.index') }}">
+                    <h1>Patok</h1>
+                </a>
                 <a href="{{ route('geografis.index') }}">
                     <h1>Geografis</h1>
                 </a>
@@ -48,7 +51,7 @@
                 <a href="javascript:void(0);">
                     <h1>Clustering</h1>
                 </a>
-                <a href="javascript:void(0);">
+                <a href="{{ route('geografis.peta') }}">
                     <h1>Peta</h1>
                 </a>
                 <a href="{{ route('users.index') }}">

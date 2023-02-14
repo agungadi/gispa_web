@@ -36,6 +36,31 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        @if (session()->has('status'))
+        <script type="text/javascript">
+            alertKu('success', "{{ session()->get('status') }}");
+        </script>
+        <div class="alert alert-success alert-styled-left alert-arrow-left alert-bordered">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <span class="text-semibold">Berhasil! </span> {{ session()->get('status') }}
+            {{session()->forget('status')}}
+        </div>
+        @endif
+        @if (session()->has('statusT'))
+        <div class="alert alert-warning alert-styled-left">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>×</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <span class="text-semibold">Gagal!<br></span> {{ session()->get('statusT') }}
+            {{session()->forget('statusT')}}
+        </div>
+        @endif
+    </div>
 
     <div class="container-fluid mt--6">
         <div class="card mb-4">
@@ -56,6 +81,25 @@
 @section('scripts')
     <script type="text/javascript">
 
+function alertKu(tipe, isi){
+
+    swal.fire({
+                        title: "Good job",
+                        text: "You clicked the button!",
+                        type: "success"
+                      },
+                 );
+
+	// var warnabtn = "#FF5722";
+	// if(tipe == 'success'){ warnabtn = "#4CAF50"; }
+    // swal({
+    // 	html: true,
+    //     title: isi,
+    //     text: "",
+    //     confirmButtonColor: warnabtn,
+    //     type: tipe
+    // });
+}
 
         ///Setting the center of the map
         // var center = [-7.2369247, 111.894956];

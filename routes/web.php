@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GeografisController;
 use App\Http\Controllers\LayerController;
 use App\Http\Controllers\IsiGeografisController;
+use App\Http\Controllers\PetaController;
+use App\Http\Controllers\PatokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +63,14 @@ Route::delete('data_geografis/{id}', [IsiGeografisController::class, 'destroy'])
 Route::get('data_geografis/editdata/{id}', [IsiGeografisController::class, 'editdata'])->name('datageografis.editdata');
 Route::post('data_geografis_hapus/{id}', [IsiGeografisController::class, 'hapus'])->name('datageografis.hapus');
 
+Route::get('patok', [PatokController::class, 'index'])->name('patok.index');
+Route::get('patok/{id}/edit', [PatokController::class, 'edit'])->name('patok.edit');
+Route::put('patok/{id}', [PatokController::class, 'update'])->name('patok.update');
+Route::post('patok', [PatokController::class, 'store'])->name('patok.store');
+Route::delete('patok/{id}', [PatokController::class, 'destroy'])->name('patok.destroy');
 
 Route::get('result/datageo', [IsiGeografisController::class, 'hasil'])->name('edit.datageo');
 
-Route::get('/leaflet', [App\Http\Controllers\HomeController::class, 'leaflet'])->name('leaflet');
+Route::get('/petabeta', [App\Http\Controllers\HomeController::class, 'leaflet'])->name('leaflet');
 
-Route::post('/peta', [GeografisController::class, 'peta'])->name('geografis.peta');
+Route::get('/peta', [PetaController::class, 'index'])->name('geografis.peta');
