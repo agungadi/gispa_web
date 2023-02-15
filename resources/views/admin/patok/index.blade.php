@@ -39,6 +39,7 @@
         @include('admin.patok.create_modal')
         @include('admin.patok.edit_modal')
         @include('admin.patok.templates.templates')
+        @include('admin.patok.templates.warna')
 
     </div>
 @endsection

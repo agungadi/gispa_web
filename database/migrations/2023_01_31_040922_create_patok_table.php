@@ -16,6 +16,7 @@ class CreatePatokTable extends Migration
         Schema::create('patok', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('kategori_id');
+            $table->unsignedInteger('image_id');
             $table->string('nama');
             $table->string('nilai_km');
             $table->string('nilai_hm');
@@ -33,6 +34,8 @@ class CreatePatokTable extends Migration
 
 
             $table->foreign('kategori_id')->references('id')->on('kategori')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('image_id')->references('id')->on('images')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }

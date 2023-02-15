@@ -39,11 +39,17 @@ $(document).ready(function () {
     }
     },
     columnDefs: [{
-      'targets': [2],
+      'targets': [8],
       'width': '8%',
       'orderable': false,
       'className': 'text-center action-table-btn'
-    }, {
+    },{
+        'targets': [6],
+        'width': '8%',
+        "className": "text-center",
+        'orderable': false,
+        'className': 'text-center action-table-btn'
+      }, {
       targets: '_all',
       defaultContent: 'N/A'
     }],
@@ -51,46 +57,73 @@ $(document).ready(function () {
       data: 'nama',
       name: 'nama'
     },
-    // {
-    //     data: 'kategori.id',
-    //     name: 'kategori_id'
-    //   },
+    {
+        data: 'kategori.singkatan',
+        name: 'kategori_id'
+      },
     {
         data: 'nilai_km',
         name: 'nilai_km'
       },
-    //   {
-    //     data: 'nilai_hm',
-    //     name: 'nilai_hm'
-    //   },
-    //   {
-    //     data: 'wilayah',
-    //     name: 'wilayah'
-    //   },
-    //   {
-    //     data: 'wilayah',
-    //     name: 'wilayah'
-    //   },
-    //   {
-    //     data: 'ruas_jalan',
-    //     name: 'ruas_jalan'
-    //   },
-    //   {
-    //     data: 'hilang',
-    //     name: 'hilang'
-    //   },
-    //   {
-    //     data: 'rusak',
-    //     name: 'rusak'
-    //   },
-    //   {
-    //     data: 'geser',
-    //     name: 'geser'
-    //   },
-    //   {
-    //     data: 'terhalang',
-    //     name: 'terhalang'
-    //   },
+      {
+        data: 'nilai_hm',
+        name: 'nilai_hm'
+      },
+      {
+        data: 'wilayah',
+        name: 'wilayah'
+      },
+      {
+        data: 'ruas_jalan',
+        name: 'ruas_jalan'
+      },
+      {
+        data: function data(row) {
+            var shilang;
+            if(row.hilang == "Tidak"){
+                shilang = "<i class='fas fa-check-circle greeniconcolor'> Hilang : Tidak"
+            }else {
+                shilang = "<i class='fas fa-times-circle rediconcolor'> Hilang : Ya"
+            }
+
+            var srusak;
+            if(row.rusak == "Tidak"){
+                srusak = "<i class='fas fa-check-circle greeniconcolor'> Rusak : Tidak"
+            }else {
+                srusak = "<i class='fas fa-times-circle rediconcolor'> Tusak : Ya"
+            }
+
+            var sgeser;
+            if(row.geser == "Tidak"){
+                sgeser = "<i class='fas fa-check-circle greeniconcolor'> Bergeser : Tidak"
+            }else {
+                sgeser = "<i class='fas fa-times-circle rediconcolor'> Bergeser : Ya"
+            }
+
+            var sterhalang;
+            if(row.terhalang == "Tidak"){
+                sterhalang = "<i class='fas fa-check-circle greeniconcolor'> Terhalang : Tidak"
+            }else {
+                sterhalang = "<i class='fas fa-times-circle rediconcolor'> Terhalang : Ya"
+            }
+
+            var data = [{
+              'id': row.id,
+              'hilang': shilang,
+              'rusak': srusak,
+              'geser': sgeser,
+              'terhalang': sterhalang,
+
+            }];
+            return prepareTemplateRender('#statesWarna', data);
+          },
+        name: 'id'
+      },
+      {
+        data: 'status',
+        name: 'status'
+      },
+
     {
       data: function data(row) {
         var url = route('patok.edit', row.id);

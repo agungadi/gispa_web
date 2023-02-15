@@ -2552,6 +2552,22 @@ header {
     }
   }
 
+  .dobelText {
+    padding-top: 1rem;
+    display:table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .greeniconcolor {
+    color: #0bbe29;
+  }
+
+  .rediconcolor {
+    color: #ff0000c1;
+  }
+
+
 /* #next {
     position: relative;
     float:right;
