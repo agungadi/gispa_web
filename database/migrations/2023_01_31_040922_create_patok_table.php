@@ -17,25 +17,29 @@ class CreatePatokTable extends Migration
             $table->id();
             $table->unsignedInteger('kategori_id');
             $table->unsignedInteger('image_id');
+            $table->unsignedInteger('id_user');
             $table->string('nama');
-            $table->string('nilai_km');
-            $table->string('nilai_hm');
+            $table->integer('nilai_km');
+            $table->integer('nilai_hm');
             $table->string('wilayah');
             $table->string('ruas_jalan');
             $table->string('hilang');
             $table->string('rusak');
             $table->string('terhalang');
             $table->string('geser');
-            $table->string('status_geser');
+            $table->string('status_geser')->nullable();
             $table->string('status');
             $table->string('deskripsi');
             $table->string('latlng');
+
             $table->timestamps();
 
 
             $table->foreign('kategori_id')->references('id')->on('kategori')
             ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('image_id')->references('id')->on('images')
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_user')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }

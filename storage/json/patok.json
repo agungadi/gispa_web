@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "kategori_id" : 1,
+            "image_id" : 1,
+            "id_user" : 1,
+            "nama" : "Patok KM1+000",
+            "nilai_km" : 1,
+            "nilai_hm" : 0,
+            "wilayah" : "Bojonegoro",
+            "ruas_jalan" : "JL Basuki Rahmad",
+            "hilang" : "Tidak",
+            "rusak" : "Ya",
+            "terhalang" : "Tidak",
+            "geser" : "Ya",
+            "status_geser" : "",
+            "status" : "Menunggu",
+            "deskripsi" : "Patok Membutuhkan Pengecatan Ulang",
+            "latlng" : "-7.267805, 111.87572166666665"
+        },
+        {
+            "kategori_id" : 2,
+            "image_id" : 2,
+            "id_user" : 1,
+            "nama" : "Patok KM1+100",
+            "nilai_km" : 1,
+            "nilai_hm" : 0,
+            "wilayah" : "Bojonegoro",
+            "ruas_jalan" : "JL Basuki Rahmad",
+            "hilang" : "Tidak",
+            "rusak" : "Ya",
+            "terhalang" : "Tidak",
+            "geser" : "Ya",
+            "status_geser" : "",
+            "status" : "Menunggu",
+            "deskripsi" : "Patok Membutuhkan Pengecatan Ulang",
+            "latlng" : "-7.190410000000001, 111.86470666666668"        }
+
+    ]
+}

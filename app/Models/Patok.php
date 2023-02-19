@@ -17,4 +17,14 @@ class Patok extends Model
     {
         return $this->belongsTo(kategori::class, 'kategori_id');
     }
+
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Images::class, 'image_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

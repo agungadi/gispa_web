@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleKepalaUPTSeeder::class);
         $this->call(RolePetugasSeeder::class);
         $this->call(KelompokDataSeeder::class);
+        $this->call(PatokDataSeeder::class);
 
     }
 }

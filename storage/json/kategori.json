@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "nama": "Kilometer",
+            "singkatan" : "KM"
+        },
+        {
+            "nama": "Hektometer",
+            "singkatan" : "HM"
+        }
+
+    ]
+}

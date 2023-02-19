@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiLoginController;
+use App\Http\Controllers\Api\ApiPatokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,13 @@ use App\Http\Controllers\Api\ApiLoginController;
 /* START AUTH */
 Route::post('login', [ApiLoginController::class, 'login']);
 Route::post('logout', [ApiLoginController::class, 'logout']);
+
+
+Route::post('/patok_limit', [ApiPatokController::class, 'patok_limit']);
+Route::get('/patok_detail/{id}', [ApiPatokController::class, 'patok_detail']);
+Route::post('/patok_cari', [ApiPatokController::class, 'patok_cari']);
+
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
