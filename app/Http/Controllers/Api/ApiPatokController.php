@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Images;
 use App\Models\Patok;
+use App\Models\RuasJalan;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,9 +20,9 @@ class ApiPatokController extends Controller
         ->join("images", "patok.image_id", "=", "images.id")
         ->join("kategori", "kategori.id", "=", "patok.kategori_id")
         ->join("users", "users.id", "=" , "patok.id_user")
-        ->select("patok.nama as nama_patok", "kategori.nama as nama_kategori", "users.nama as nama_user"
+        ->select("patok.id","patok.nama as nama_patok", "kategori.nama as nama_kategori", "users.nama as nama_user"
         ,"patok.ruas_jalan", "patok.wilayah", "patok.rusak", "patok.hilang", "patok.geser", "patok.terhalang",
-        "images.path as path", "images.path_new as path_new", "patok.status", "patok.status_geser")
+        "images.path as path", "images.path_new as path_new", "patok.status", "patok.status_geser", "patok.created_at")
         ->paginate($request->limit);
 
         return response()->json([
@@ -144,5 +146,67 @@ class ApiPatokController extends Controller
 
 
 
+    }
+
+    public function patok_add(Request $request)
+    {
+
+        if(empty(@response()->json(auth('api')->user())->original->id)){
+            return response()->json([
+                'success' => false,
+                'pesan' => 'Silahkan login kembali',
+                'data' => null
+            ], 200);
+        }else{
+            if(!empty($request->image)){
+                $image = $request->file('image');
+                $data_image = $image->getClientOriginalName();
+
+                $tujuan_upload = 'images/patok/';
+                $image->move($tujuan_upload, $data_image);
+
+                $path = '/images/patok/'.$data_image;
+
+                $images = Images::create([
+                    'filename' => $data_image,
+                    'path' => $path
+                ]);
+
+                $idImages = $images->id;
+            }
+            $patok = Patok::create([
+                'kategori_id' => $request->kategori_id,
+                'image_id' => $idImages,
+                'id_user' => auth('api')->user()->id,
+                'nama' => $request->nama,
+                'nilai_km' => $request->nilai_km,
+                'nilai_hm' => $request->nilai_hm,
+                'wilayah' => $request->wilayah,
+                'ruas_jalan' => $request->ruas_jalan,
+                'hilang' => $request->hilang,
+                'rusak' => $request->rusak,
+                'terhalang' => $request->terhalang,
+                'geser' => $request->geser,
+                'status_geser' => $request->status_geser,
+                'status' => $request->status,
+                'deskripsi' => $request->deskripsi,
+                'latlng' => $request->latlng
+            ]);
+            return response()->json([
+                'success' => true,
+                'pesan' => 'Lowongan Berhasil Ditambah',
+            ], 200);
+        }
+
+    }
+
+    public function ruas_jalan()
+    {
+        $data = RuasJalan::all();
+        return response()->json([
+            'success' => true,
+            'pesan' => 'List Ruas Jalan',
+            'data' => $data
+        ], 200);
     }
 }

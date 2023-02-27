@@ -2,36 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use Yajra\DataTables\DataTables;
-use App\DataTable\PatokDataTable;
-use App\Models\Patok;
 
-class PatokController extends AppBaseController
+class RuasJalanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $kategori = Kategori::pluck('nama', 'id');
-
-
-        if ($request->ajax()) {
-
-
-            return DataTables::of((new PatokDataTable())->get($request->only(['kategori_id'])))->make(true);
-
-        }
-
-        return view('admin.patok.index', compact('kategori'));
-
-
     }
 
     /**
@@ -75,11 +57,6 @@ class PatokController extends AppBaseController
     public function edit($id)
     {
         //
-
-        $detail_patok = Patok::select("*")->where('id', $id)->orderBy('id', 'DESC')->with("image", "user")->first();
-
-        return $this->sendResponse($detail_patok, 'Layer  successfully retrieved.');
-
     }
 
     /**

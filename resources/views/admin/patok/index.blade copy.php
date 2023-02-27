@@ -19,15 +19,15 @@
                     </div> --}}
                     <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
                         <div class="ml-auto text-center mr-3 custom_all_button mt-2rem">
-                            {{-- {{ Form::select('kategori_id', $kategori, null, ['id' => 'filterCountry', 'class' => 'form-control' ,'placeholder' => 'Filter Patok']) }} --}}
-                                <select name="kategori_id" id="filterCountry" class="form-control" placeholder="Filter Patok">
-                                    <option value="">Filter Patok</option>
-                                    <option value="ideal">Patok Ideal</option>
+                            {{ Form::select('kategori_id', $kategori, null, ['id' => 'filterCountry', 'class' => 'form-control' ,'placeholder' => 'Filter OPD']) }}
+                                {{-- <select name="id_kategori" id="filterCountry" class="form-control" placeholder="Filter Patok">
+                                    <option value="Semua">Semua Patok</option>
+                                    <option value="Bojonegoro">Patok Ideal</option>
                                     <option value="rusak">Patok Rusak</option>
                                     <option value="hilang">Patok Hilang</option>
                                     <option value="terhalang">Patok Terhalang</option>
                                     <option value="geser">Patok Geser</option>
-                                </select>
+                                </select> --}}
                         </div>
                         {{-- <div class="mt-2rem custom_exp_button">
                             <a href="#" class="btn btn-group-lg btn-neutral custom-button-size" data-toggle="modal"
@@ -49,7 +49,7 @@
         @include('admin.patok.detail_modal')
 
         @include('admin.patok.templates.templates')
-        @include('admin.patok.templates.warna')
+        {{-- @include('admin.patok.templates.warna') --}}
 
     </div>
 @endsection

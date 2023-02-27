@@ -15,4 +15,6 @@ class Kategori extends Model
     {
         return $this->hasMany(Patok::class, 'kategori_id');
     }
+
+
 }

@@ -13,6 +13,26 @@ class Patok extends Model
 
     protected $with = array('kategori');
 
+    protected $fillable = [
+        'kategori_id',
+        'image_id',
+        'id_user',
+        'nama',
+        'nilai_km',
+        'nilai_hm',
+        'wilayah',
+        'ruas_jalan',
+        'hilang',
+        'rusak',
+        'terhalang',
+        'geser',
+        'status_geser',
+        'status',
+        'deskripsi',
+        'latlng',
+    ];
+
+
     public function kategori(): BelongsTo
     {
         return $this->belongsTo(kategori::class, 'kategori_id');

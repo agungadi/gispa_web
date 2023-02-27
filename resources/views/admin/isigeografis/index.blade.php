@@ -14,14 +14,14 @@
             <div class="header-body">
                 <div class="row align-items-center py-4 d-flex content-responsive">
                     <div class="col-lg-6 col-6 content-text">
-                        <h6 class="h2 text-white d-inline-block mb-0">Layer</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Data Geografis</h6>
                         {{-- {{ Form::text('id', null, ['id' => 'getParam', 'value' => {{ $en }}]) }} --}}
                         <input type="hidden" name="getParams" id="getParam" value="{{ $tabel }}">
 
                     </div>
                     <div class="col-lg-6 col-6 text-right categories-btn">
                         <a href="#" class="btn btn-group-lg btn-neutral custom-button-size add-btn" data-toggle="modal"
-                            data-target="#stateModal">Tambah Layer</a>
+                            data-target="#stateModal">Tambah Data Geografis</a>
                     </div>
                     {{-- <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
                         <div class="ml-auto text-center mr-3 custom_all_button mt-2rem">

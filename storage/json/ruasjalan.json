@@ -1,0 +1,75 @@
+{
+    "data": [
+        {
+            "nama": "Bts. Kota Bojonegoro – Bts. Kab Tuban",
+            "wilayah" : "Bojonegoro",
+            "kode" : "143",
+            "panjang" : "3.11",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Jln. Jagung. Suprapto",
+            "wilayah" : "Bojonegoro",
+            "kode" : "143",
+            "panjang" : "0.54",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Jln. Sawunggaling",
+            "wilayah" : "Bojonegoro",
+            "kode" : "143",
+            "panjang" : "0.99",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Jln. Basuki Rahmad",
+            "wilayah" : "Bojonegoro",
+            "kode" : "143",
+            "panjang" : "1.54",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Jln. Cokroaminoto",
+            "wilayah" : "Bojonegoro",
+            "kode" : "144",
+            "panjang" : "0.98",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Jln. KH. R. Moch Rosyid",
+            "wilayah" : "Bojonegoro",
+            "kode" : "144",
+            "panjang" : "1.68",
+            "active" : "Ya"
+        },
+        {
+            "nama": "BTS. Kota Bojonegoro – (Pajeng) Bts.Kab Nganjuk",
+            "wilayah" : "Bojonegoro",
+            "kode" : "144",
+            "panjang" : "39.57",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Bts. Kota Bojonegoro – Ponco",
+            "wilayah" : "Tuban",
+            "kode" : "145",
+            "panjang" : "3.66",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Ponco – Jatirogo (Bts. Prov. Jateng)",
+            "wilayah" : "Tuban",
+            "kode" : "146",
+            "panjang" : "42.46",
+            "active" : "Ya"
+        },
+        {
+            "nama": "Pakah - Ponco",
+            "wilayah" : "Tuban",
+            "kode" : "147",
+            "panjang" : "35.96",
+            "active" : "Ya"
+        }
+
+    ]
+}

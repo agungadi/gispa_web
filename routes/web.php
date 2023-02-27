@@ -7,6 +7,7 @@ use App\Http\Controllers\LayerController;
 use App\Http\Controllers\IsiGeografisController;
 use App\Http\Controllers\PetaController;
 use App\Http\Controllers\PatokController;
+use App\Http\Controllers\KomponenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,6 @@ Route::get('result/datageo', [IsiGeografisController::class, 'hasil'])->name('ed
 Route::get('/petabeta', [App\Http\Controllers\HomeController::class, 'leaflet'])->name('leaflet');
 
 Route::get('/peta', [PetaController::class, 'index'])->name('geografis.peta');
+
+
+

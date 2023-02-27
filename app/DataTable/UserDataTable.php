@@ -25,10 +25,9 @@ class UserDataTable
         ->join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->join('roles', 'roles.id', '=', 'model_has_roles.role_id');
 
-        $query->when(isset($input['unit_opd']), function (Builder $q) use ($input) {
-            $q->where('roles.id', $input['unit_opd']);
-            $q->where('roles.id', $input['unit_opd']);
-        });
+        // $query->when(isset($input['unit_opd']), function (Builder $q) use ($input) {
+        //     $q->where('users.nama', $input['unit_opd']);
+        // });
 
         return $query;
     }

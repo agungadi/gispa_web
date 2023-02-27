@@ -42,7 +42,7 @@ if ($field8[0] != 'text') {
     <div class="modalfull-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modalfull-title" id="stateModalLabel">Edit Layer</h4>
+                <h3 class="modalfull-title" id="stateModalLabel">Edit Data Geografis</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
