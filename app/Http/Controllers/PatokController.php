@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use Yajra\DataTables\DataTables;
 use App\DataTable\PatokDataTable;
 use App\Models\Patok;
+use App\Models\RuasJalan;
 
 class PatokController extends AppBaseController
 {
@@ -20,6 +21,7 @@ class PatokController extends AppBaseController
     {
         //
         $kategori = Kategori::pluck('nama', 'id');
+        $jalan = RuasJalan::pluck('nama', 'nama');
 
 
         if ($request->ajax()) {
@@ -29,7 +31,7 @@ class PatokController extends AppBaseController
 
         }
 
-        return view('admin.patok.index', compact('kategori'));
+        return view('admin.patok.index', compact('kategori', 'jalan'));
 
 
     }
@@ -92,6 +94,48 @@ class PatokController extends AppBaseController
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'kategori' => 'required',
+            'nilaikm' => 'required',
+            'nilaihm' => 'required',
+            'wilayah' => 'required',
+            'jalan' => 'required',
+            'rusak' => 'required',
+            'hilang' => 'required',
+            'terhalang' => 'required',
+            'geser' => 'required',
+            'statuspatok' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        $km = $request->get('nilaikm');
+        $hm = $request->get('nilaihm');
+
+        $namaPatok = "Patok KM.{$km}+{$hm}00";
+
+
+        $patok = Patok::find($id);
+
+        $patok->nama = $namaPatok;
+        $patok->kategori_id = $request->get('kategori');
+        $patok->nilai_km = $request->get('nilaikm');
+        $patok->nilai_hm = $request->get('nilaihm');
+        $patok->wilayah = $request->get('wilayah');
+        $patok->ruas_jalan = $request->get('jalan');
+        $patok->rusak = $request->get('rusak');
+        $patok->hilang = $request->get('hilang');
+        $patok->terhalang = $request->get('terhalang');
+        $patok->geser = $request->get('geser');
+        $patok->status = $request->get('statuspatok');
+        $patok->deskripsi = $request->get('deskripsi');
+
+
+        $patok->save();
+
+
+
+        return $this->sendSuccess('Patok berhasil diubah.');
+
     }
 
     /**

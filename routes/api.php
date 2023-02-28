@@ -27,6 +27,7 @@ Route::post('/patok_cari', [ApiPatokController::class, 'patok_cari']);
 Route::post('/patok_add', [ApiPatokController::class, 'patok_add']);
 Route::get('/ruas_jalan', [ApiPatokController::class, 'ruas_jalan']);
 
+Route::post('/patok_last', [ApiPatokController::class, 'patok_last']);
 
 
 

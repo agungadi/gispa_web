@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="countryModalLabel">Edit User</h5>
+                <h5 class="modal-title" id="countryModalLabel">Edit Patok</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,60 +13,87 @@
                 {{ Form::open(['id' =>'editStateForm','method'=>'post']) }}
                 {{ Form::hidden('id', null, ['id' => 'stateFieldId']) }}
                 <div class="row">
-                    <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Nama :') }}<span class="text-danger">*</span>
-                        {{ Form::text('nama', null , ['class' => 'form-control','required','placeholder' => 'Tahap 1','id'=>'editName']) }}
-                    </div>
 
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('country_id','Data Geografis :') }}<span
+                        {{ Form::label('Jenis Patok :') }}<span
                                 class="text-danger">*</span>
-                        {{ Form::select('geografis', $kategori, null, ['class' => 'form-control','required', 'id' => 'editGeo', 'placeholder' => "Pilih Data Geografis"]) }}
+                        {{ Form::select('kategori', $kategori, null, ['class' => 'form-control','required', 'id' => 'editJenis', 'placeholder' => "Pilih Jenis Patok"]) }}
                     </div>
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Warna :') }}<span class="text-danger">*</span>
-
-                            <input type="color" class="form-control" id="edit_warna" name="warna"  value="""
-                                   onchange="edit_preview_warna($('#edit_warna').val(), $('#edit_warnastroke').val(), $('#edit_warna_tebal').val(), $('#edit_opacity').val());">
+                        {{ Form::label('Nilai KM :') }}<span class="text-danger">*</span>
+                        {{ Form::number('nilaikm', null , ['class' => 'form-control','required','placeholder' => 'Nilai KM','id'=>'editKM']) }}
                     </div>
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Warna border :') }}<span class="edit-danger">*</span>
-                            <input type="color" class="form-control" id="edit_warnastroke" name="border"
-                                   onchange="edit_preview_warna($('#edit_warna').val(), $('#edit_warnastroke').val(), $('#edit_warna_tebal').val(), $('#edit_opacity').val());">
+                        {{ Form::label('Nilai HM :') }}<span class="text-danger">*</span>
+                        {{ Form::number('nilaihm', null , ['class' => 'form-control','required','placeholder' => 'Nilai HM','id'=>'editHM']) }}
+                    </div>
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Wilayah :') }}<span class="text-danger">*</span>
+                        <select name="wilayah" id="editWilayah" class="form-control" placeholder="Filter Patok">
+                            <option value="Bojonegoro">Bojonegoro</option>
+                            <option value="Tuban">Tuban</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Ruas Jalan :') }}<span
+                                class="text-danger">*</span>
+                        {{ Form::select('jalan', $jalan, null, ['class' => 'form-control','required', 'id' => 'editJalan', 'placeholder' => "Pilih Ruas Jalan"]) }}
                     </div>
 
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Tebal border :') }}<span class="text-danger">*</span>
-                        <input value="1" min="1" type="number" class="form-control" id="edit_warna_tebal" name="tebalborder"
-                        oninput="edit_preview_warna($('#edit_warna').val(), $('#edit_warnastroke').val(), $('#edit_warna_tebal').val(), $('#edit_opacity').val());">
+                        {{ Form::label('Kondisi Patok Rusak :') }}<span class="text-danger">*</span> &nbsp;
+                        <input name="rusak" id="yarusak" value="Ya" type="radio">
+                        <label for="radiorusak">Ya</label> &nbsp; &nbsp; &nbsp;
+                        <input name="rusak" id="tidakrusak" value="Tidak" type="radio">
+                        <label for="radiorusak">Tidak</label>
+                    </div>
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Kondisi Patok Hilang :') }}<span class="text-danger">*</span> &nbsp;
+                        <input name="hilang" id="yahilang" value="Ya" type="radio">
+                        <label for="radiohilang">Ya</label> &nbsp; &nbsp; &nbsp;
+                        <input name="hilang" id="tidakhilang" value="Tidak" type="radio">
+                        <label for="radiohilang">Tidak</label>
+                    </div>
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Kondisi Patok Terhalang :') }}<span class="text-danger">*</span> &nbsp;
+                        <input name="terhalang" id="yaterhalang" value="Ya" type="radio">
+                        <label for="radioterhalang">Ya</label> &nbsp; &nbsp; &nbsp;
+                        <input name="terhalang" id="tidakterhalang" value="Tidak" type="radio">
+                        <label for="radioterhalang">Tidak</label>
+                    </div>
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Kondisi Patok Geser :') }}<span class="text-danger">*</span> &nbsp;
+                        <input name="geser" id="yageser" value="Ya" type="radio">
+                        <label for="radiogeser">Ya</label> &nbsp; &nbsp; &nbsp;
+                        <input name="geser" id="tidakgeser" value="Tidak" type="radio">
+                        <label for="radiogeser">Tidak</label>
                     </div>
 
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Opacity :') }}<span class="text-danger">*</span>
-                            <input type="range" min="1" max="10" class="form-control" id="edit_opacity" name="opacity"
-                                   onchange="edit_preview_warna($('#edit_warna').val(), $('#edit_warnastroke').val(), $('#edit_warna_tebal').val(), $('#edit_opacity').val());">
+                        {{ Form::label('Status :') }}<span class="text-danger">*</span>
+                        <select name="statuspatok" id="statusPatok" class="form-control" placeholder="Pilih Status">
+                            <option value="Menunggu">Menunggu</option>
+                            <option value="Perbaiki">Perbaiki</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
                     </div>
 
 
                     <div class="form-group col-lg-12 col-sm-12">
-                        {{ Form::label('Preview Warna :') }}<span class="text-danger">*</span>
-                        <div class="col-sm-9 edit_preview_warna">
-                            {{-- <span style="
-                                border:1px solid black;
-                                background-color: black;
-                                content: '';
-                                display: inline-block;
-                                height: 50px;
-                                width: 50px;
-                                position: relative;
-                                vertical-align: middle; ">
-                            </span> --}}
-                        </div>
+                        {{ Form::label('Deskripsi :') }}<span class="text-danger">*</span>
+                        {{ Form::text('deskripsi', null , ['class' => 'form-control','required','placeholder' => 'Deskripsi','id'=>'editDeskripsi']) }}
                     </div>
 
 

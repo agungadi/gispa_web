@@ -209,4 +209,31 @@ class ApiPatokController extends Controller
             'data' => $data
         ], 200);
     }
+
+    public function patok_last(Request $request)
+    {
+        // $patok = DB::table('patok')
+        // ->join("images", "patok.image_id", "=", "images.id")
+        // ->join("kategori", "kategori.id", "=", "patok.kategori_id")
+        // ->join("users", "users.id", "=" , "patok.id_user")
+        // ->select("patok.id","patok.nama as nama_patok", "kategori.nama as nama_kategori", "users.nama as nama_user"
+        // ,"patok.ruas_jalan", "patok.wilayah", "patok.rusak", "patok.hilang", "patok.geser", "patok.terhalang",
+        // "images.path as path", "images.path_new as path_new", "patok.status", "patok.status_geser", "patok.created_at")
+        // ->paginate($request->limit);
+
+        $detail_patok = Patok::select('id', 'kategori_id', 'ruas_jalan', 'nilai_km', 'nilai_hm', 'latlng', 'created_at')
+        ->where('ruas_jalan', $request->ruas_jalan)
+        ->where('nilai_km', $request->nilai_km)
+        ->where('kategori_id', 1)->get();
+
+        // ->orderBy('id', 'ASC')->first();
+
+
+        return response()->json([
+            'success' => true,
+            // 'pesan' => 'Lowongan Perbulan ' . $request->limit . ' Data',
+            // 'lowongan' => LowonganResource::collection($lowongan)
+            'data' => $detail_patok
+        ], 200);
+    }
 }

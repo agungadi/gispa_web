@@ -150,6 +150,8 @@ $(document).ready(function () {
   $(document).on('click', '.edit-btn', function (event) {
     var id = $(event.currentTarget).data('id');
     console.log(id);
+    // $('#editModal').modal('show');
+
     renderData(id);
   });
 
@@ -161,26 +163,51 @@ $(document).ready(function () {
       success: function success(result) {
         console.log(result.data);
         console.log();
-        $('.edit_preview_warna').empty();
         $('#stateFieldId').val(result.data.id);
-        $('#editGeo').val(result.data.geografis_id).trigger('change.select2');
-        $('#editName').val(result.data.nama);
-        $('#edit_warna').val(result.data.warna);
-        $('#edit_warnastroke').val(result.data.warna_border);
-        $('#edi_warna_tebal').val(result.data.tebal_border);
-        $('#edi_opacity').val(result.data.opacity);
+        $('#editJenis').val(result.data.kategori_id).trigger('change.select2');
+        $('#editKM').val(result.data.nilai_km);
+        $('#editHM').val(result.data.nilai_hm);
 
-        $('.edit_preview_warna').append(`<span style="
-        border: ` + result.data.tebal_border + `px solid ` + result.data.warna_border + `;
-        background-color: ` + result.data.warna + `;
-        content: '';
-        display: inline-block;
-        height: 50px;
-        opacity: ` + result.data.opacity + `;
-        width: 50px;
-        position: relative;
-        vertical-align: middle; ">
-        </span>`)
+        $('#editWilayah').val(result.data.wilayah).trigger('change.select2');
+        $('#editJalan').val(result.data.ruas_jalan).trigger('change.select2');
+
+        // $("#radiorusak")('input[value="Ya"]').prop('checked', true);
+        // $("#radiogeser")('input[value="Ya"]').prop('checked', true);
+        // $('input:radio[name=rows]').val(['input[value="Ya"]']).prop('checked', true);
+        // $("#yarusak").prop('checked', true);
+        // $("#yahilang").prop('checked', true);
+        // $("#yarusak").attr('checked', 'checked');
+        // $("#yahilang").attr('checked', 'checked');
+
+
+        if(result.data.rusak == "Ya"){
+            $("#yarusak").prop('checked', true);
+        }else{
+            $("#tidakrusak").prop('checked', true);
+        }
+
+        if(result.data.hilang == "Ya"){
+            $("#yahilang").prop('checked', true);
+        }else{
+            $("#tidakhilang").prop('checked', true);
+        }
+
+        if(result.data.terhalang == "Ya"){
+            $("#yaterhalang").prop('checked', true);
+        }else{
+            $("#tidakterhalang").prop('checked', true);
+        }
+
+        if(result.data.geser == "Ya"){
+            $("#yageser").prop('checked', true);
+        }else{
+            $("#tidakgeser").prop('checked', true);
+        }
+        $('#statusPatok').val(result.data.status).trigger('change.select2');
+
+
+        $('#editDeskripsi').val(result.data.deskripsi);
+
         $('#editModal').modal('show');
       }
     });
