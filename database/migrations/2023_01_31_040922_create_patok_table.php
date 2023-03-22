@@ -29,7 +29,7 @@ class CreatePatokTable extends Migration
             $table->string('geser');
             $table->string('status_geser')->nullable();
             $table->string('status');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->string('latlng');
 
             $table->timestamps();

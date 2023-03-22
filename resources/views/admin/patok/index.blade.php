@@ -50,6 +50,7 @@
 
         @include('admin.patok.templates.templates')
         @include('admin.patok.templates.warna')
+        @include('admin.patok.templates.gambar')
 
     </div>
 @endsection

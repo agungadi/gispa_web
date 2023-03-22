@@ -13,7 +13,7 @@ class PatokDataTable
 
     public function get($input = [])
     {
-        $query = Patok::query()->select('patok.*');
+        $query = Patok::query()->select('patok.*')->with("image", "user");
 
         $query->when(isset($input['kategori_id']), function (Builder $q) use ($input) {
             if($input['kategori_id'] == "ideal"){

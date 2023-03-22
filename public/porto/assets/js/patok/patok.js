@@ -37,17 +37,32 @@ $(document).ready(function () {
     }
     },
     columnDefs: [{
-        'targets': [8],
+        'targets': [7],
         'width': '8%',
         'orderable': false,
         'className': 'text-center action-table-btn'
       },{
-          'targets': [6],
+          'targets': [4],
           'width': '8%',
           "className": "text-center",
           'orderable': false,
           'className': 'text-center action-table-btn'
-        }, {
+        }
+        ,{
+            'targets': [5],
+            'width': '7%',
+            "className": "text-center",
+            'orderable': false,
+            'className': 'text-center action-table-btn'
+          }
+        ,{
+            'targets': [6],
+            'width': '12%',
+            "className": "text-center",
+            'orderable': false,
+            'className': 'text-center action-table-btn'
+          },
+        {
         targets: '_all',
         defaultContent: 'N/A'
       }],
@@ -59,14 +74,7 @@ $(document).ready(function () {
           data: 'kategori.nama',
           name: 'kategori.nama'
         },
-      {
-          data: 'nilai_km',
-          name: 'nilai_km'
-        },
-        {
-          data: 'nilai_hm',
-          name: 'nilai_hm'
-        },
+
         {
           data: 'wilayah',
           name: 'wilayah'
@@ -121,6 +129,17 @@ $(document).ready(function () {
           data: 'status',
           name: 'status'
         },
+        {
+            data: function data(row) {
+                var url = "http://192.168.161.1:8001" +row.image.path;
+              var data = [{
+                'id': row.id,
+                'url' : url
+              }];
+              return prepareTemplateRender('#statesGambar', data);
+            },
+            name: 'id'
+          },
 
       {
         data: function data(row) {
@@ -162,7 +181,7 @@ $(document).ready(function () {
       type: 'GET',
       success: function success(result) {
         console.log(result.data);
-        console.log();
+        $('#fotoedit').empty();
         $('#stateFieldId').val(result.data.id);
         $('#editJenis').val(result.data.kategori_id).trigger('change.select2');
         $('#editKM').val(result.data.nilai_km);
@@ -207,6 +226,8 @@ $(document).ready(function () {
 
 
         $('#editDeskripsi').val(result.data.deskripsi);
+
+        $('#fotoedit').append(`<img src="http://192.168.161.1:8001${result.data.image.path}" style="max-width:128px" />`);
 
         $('#editModal').modal('show');
       }

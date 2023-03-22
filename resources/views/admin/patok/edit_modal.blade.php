@@ -96,6 +96,13 @@
                         {{ Form::text('deskripsi', null , ['class' => 'form-control','required','placeholder' => 'Deskripsi','id'=>'editDeskripsi']) }}
                     </div>
 
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Foto :') }}<span class="text-danger">*</span>
+                        <div id="fotoedit">
+
+                        </div>
+                    </div>
+
 
                 </div>
                 <div class="d-flex align-items-center">
