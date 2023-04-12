@@ -255,4 +255,6 @@ class IsiGeografisController extends AppBaseController
             return $this->sendSuccess('Geografis berhasil dihapus.');
 
         }
+
+
 }

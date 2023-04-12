@@ -7,7 +7,7 @@ use App\Http\Controllers\LayerController;
 use App\Http\Controllers\IsiGeografisController;
 use App\Http\Controllers\PetaController;
 use App\Http\Controllers\PatokController;
-use App\Http\Controllers\KomponenController;
+use App\Http\Controllers\ClusterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +20,21 @@ use App\Http\Controllers\KomponenController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
+
+Route::group(['middleware' => ['auth', 'role:Admin|KepalaUPT']], function () {
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 
 Route::get('users', [UserController::class, 'index'])->name('users.index');
@@ -64,6 +67,8 @@ Route::delete('data_geografis/{id}', [IsiGeografisController::class, 'destroy'])
 Route::get('data_geografis/editdata/{id}', [IsiGeografisController::class, 'editdata'])->name('datageografis.editdata');
 Route::post('data_geografis_hapus/{id}', [IsiGeografisController::class, 'hapus'])->name('datageografis.hapus');
 
+
+
 Route::get('patok', [PatokController::class, 'index'])->name('patok.index');
 Route::get('patok/{id}/edit', [PatokController::class, 'edit'])->name('patok.edit');
 Route::put('patok/{id}', [PatokController::class, 'update'])->name('patok.update');
@@ -76,5 +81,26 @@ Route::get('/petabeta', [App\Http\Controllers\HomeController::class, 'leaflet'])
 
 Route::get('/peta', [PetaController::class, 'index'])->name('geografis.peta');
 
+Route::post('/get_layer', [PetaController::class, 'get_layer'])->name('geografis.getlayer');
+Route::post('/get_patok', [PetaController::class, 'get_patok'])->name('geografis.getpatok');
 
 
+// Route::get('cluster', [ClusterController::class, 'index'])->name('cluster.index');
+// Route::get('cluster', [ClusterController::class, 'index'])->name('cluster.index');
+
+
+Route::get('/clustering', [ClusterController::class, 'homeCluster'])->name('cluster.iterasi');
+Route::post('/clustering/get', [ClusterController::class, 'getDetail'])->name('cluster.get');
+
+Route::get('/clustering/{enc}', [ClusterController::class, 'detailCluster'])->name('cluster.detail');
+
+Route::get('cluster', [ClusterController::class, 'index'])->name('cluster.index');
+
+Route::get('clusterpeta', [ClusterController::class, 'PetaCluster'])->name('cluster.peta');
+
+
+// Route::get('/cluster', [ClusterController::class, 'index'])->name('cluster.index');
+
+
+
+});

@@ -149,8 +149,8 @@ $(document).ready(function () {
         $('#editName').val(result.data.nama);
         $('#edit_warna').val(result.data.warna);
         $('#edit_warnastroke').val(result.data.warna_border);
-        $('#edi_warna_tebal').val(result.data.tebal_border);
-        $('#edi_opacity').val(result.data.opacity);
+        $('#edit_warna_tebal').val(result.data.tebal_border);
+        $('#edit_opacity').val(result.data.opacity * 10);
 
         $('.edit_preview_warna').append(`<span style="
         border: ` + result.data.tebal_border + `px solid ` + result.data.warna_border + `;

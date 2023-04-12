@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Geografis;
 
 use function PHPUnit\Framework\callback;
 
@@ -32,6 +33,7 @@ class ApiPatokController extends Controller
         $hilang = $request->hilang;
         $terhalang = $request->terhalang;
         $geser = $request->geser;
+        $status = $request->status;
 
 
         $patok = DB::table('patok')
@@ -77,6 +79,9 @@ class ApiPatokController extends Controller
         if(!empty($geser)){
             $patok = $patok->where(DB::raw('lower(patok.geser)'), strtolower($geser));
         }
+        if(!empty($status)){
+            $patok = $patok->where(DB::raw('lower(patok.status)'), strtolower($status));
+        }
 
 
         $patok = $patok ->paginate(6, ['*'], 'page', $request->page);
@@ -94,7 +99,7 @@ class ApiPatokController extends Controller
         $lowongan = Patok::select("*")->orderBy('id', 'DESC')->with("image", "user")->paginate($request->limit);
         return response()->json([
             'success' => true,
-            'pesan' => 'Lowongan Perbulan ' . $request->limit . ' Data',
+            'pesan' => 'patok list success',
             // 'lowongan' => LowonganResource::collection($lowongan)
             'lowongan' => $lowongan
         ], 200);
@@ -316,6 +321,22 @@ class ApiPatokController extends Controller
 
                 }
             }
+            $longlat = $request->latlng;
+
+            $split  = explode(',', $longlat);
+            $lat = doubleval($split[0]);
+            $long = doubleval($split[1]);
+            $koordinat = "POINT(".$long.", ".$lat.")";
+            $point = "POINT(".$long." ".$lat.")";
+
+            $a = Carbon::now();
+
+            // $a->month($a->month-3);
+            $lastQuarter = $a->quarter;
+            $years = $a->year;
+
+            $periode = "Q".$lastQuarter." ".$years;
+
 
             $patok = Patok::create([
                 'kategori_id' => $request->kategori_id,
@@ -333,13 +354,16 @@ class ApiPatokController extends Controller
                 'status_geser' => $jml,
                 'status' => $request->status,
                 'deskripsi' => $request->deskripsi,
-                'latlng' => $request->latlng
+                'latlng' => $request->latlng,
+                'longlat' => $koordinat,
+                'p_longlat' => $point,
+                'periode' => $periode
             ]);
 
 
             return response()->json([
                 'success' => true,
-                'data' => $geser,
+                'data' => $periode,
                 'pesan' => 'Lowongan Berhasil Ditambah',
             ], 200);
         }
@@ -349,12 +373,68 @@ class ApiPatokController extends Controller
 
     public function patok_test(Request $request)
     {
-        $data_patok = Patok::where('id', $request->id)->with('image')->first();
+        // $data_patok = Patok::where('id', $request->id)->with('image')->first();
+        // return response()->json([
+        //     'success' => true,
+        //     'pesan' => 'Lowongan Berhasil Ditambah',
+        //     'data' => $data_patok['image']->path
+        // ], 200);
+
+
+
+        // $rusak = $request->rusak;
+        // $hilang = $request->hilang;
+        // $terhalang = $request->terhalang;
+        // $geser = $request->geser;
+        // $ideal = $request->ideal;
+        // $kuartal = $request->kuartal;
+
+
+        // $patok = Patok::query()->select('patok.*');
+
+
+        // if(!empty($rusak)){
+        //     $patok = $patok->where(DB::raw('lower(patok.rusak)'), strtolower($rusak));
+        // }
+        // if(!empty($hilang)){
+        //     $patok = $patok->where(DB::raw('lower(patok.hilang)'), strtolower($hilang));
+
+        // }
+        // if(!empty($terhalang)){
+        //     $patok = $patok->where(DB::raw('lower(patok.terhalang)'), strtolower($terhalang));
+        // }
+        // if(!empty($geser)){
+        //     $patok = $patok->where(DB::raw('lower(patok.geser)'), strtolower($geser));
+        // }
+        // if(!empty($ideal)){
+        //     $patok = $patok->
+        //     where([
+        //         ['patok.rusak', '=', 'Tidak'],
+        //         ['patok.hilang', '=', 'Tidak'],
+        //         ['patok.terhalang', '=', 'Tidak'],
+        //         ['patok.geser', '=', 'Tidak'],
+        //     ]);
+        // }
+        // if(!empty($kuartal)){
+        //     $patok = $patok->where(DB::raw('lower(patok.periode)'), strtolower($kuartal));
+        // }
+
+        // $patok = $patok->get();
+
+        $patok =  Patok::select([
+            'wilayah',
+            'ruas_jalan',
+            'nilai_km'
+        ])
+        ->groupBy('wilayah','ruas_jalan', 'nilai_km')
+        ->orderBy('nilai_km', 'DESC')
+        ->get();
+
         return response()->json([
             'success' => true,
-            'pesan' => 'Lowongan Berhasil Ditambah',
-            'data' => $data_patok['image']->path
+            'data' => $patok
         ], 200);
+
     }
 
 
@@ -389,7 +469,13 @@ class ApiPatokController extends Controller
             // else{
             //     $path = $data_patok['image']->path;
             // }
-            if($request->status_geser == "-"){
+
+
+
+
+
+
+            if($request->address == ""){
                 $patok = Patok::where('id', $request->id)->update([
                     'kategori_id' => $request->kategori_id,
                     'image_id' => $idImages,
@@ -402,12 +488,85 @@ class ApiPatokController extends Controller
                     'hilang' => $request->hilang,
                     'rusak' => $request->rusak,
                     'terhalang' => $request->terhalang,
-                    'geser' => $request->geser,
                     'status' => $request->status,
                     'deskripsi' => $request->deskripsi,
                     'latlng' => $request->latlng
                 ]);
             }else{
+                $cekHaversine = Patok::where('nilai_km', $request->nilai_km)
+                ->where('ruas_jalan', $request->ruas_jalan)
+                ->where('kategori_id', 2)
+                ->where('status_geser', "-")->get();
+
+
+                $latlng1 = $request->latlng;
+                $split1 = explode(',', $latlng1);
+
+                $detail_patok = Patok::select('id','nama', 'kategori_id', 'ruas_jalan', 'nilai_km', 'nilai_hm', 'latlng', 'created_at')
+                ->where('ruas_jalan', $request->ruas_jalan)
+                ->where('nilai_km', $request->nilai_km)
+                ->where('kategori_id', 1)->get();
+
+                if($request->kategori_id == "2" && sizeof($detail_patok) >= 1){
+                    $latlng2 = $detail_patok[0]['latlng'];
+                    $split2 = explode(',', $latlng2);
+                    $jml = $this->fillHaversine($split2[0], $split2[1], $split1[0], $split1[1]);
+                }
+
+                if($request->kategori_id == "2" && sizeof($detail_patok) >= 1){
+                    $latlng2 = $detail_patok[0]['latlng'];
+                    $split2 = explode(',', $latlng2);
+                    $jml = $this->fillHaversine($split2[0], $split2[1], $split1[0], $split1[1]);
+
+                    if (floatval($jml) == 0) {
+                        $geser = "-";
+                        $jarakGeser = "-";
+                      }
+                      else if (floatval($jml) <= 89 && floatval($jml) >= 1) {
+                        $geser = "Ya";
+                        $jarakGeser = floatval($jml);
+                      } else if (str_contains($request->nama , "000")) {
+                        $geser = "Tidak";
+                        $jarakGeser = "0";
+                      } else if (floatval($jml) >= 90 && floatval($jml) <= 110) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 190 && floatval($jml) <= 210) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 290 && floatval($jml) <= 310) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 390 && floatval($jml) <= 410) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 490 && floatval($jml) <= 510) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 590 && floatval($jml) <= 610) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 690 && floatval($jml) <= 710) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 790 && floatval($jml) <= 810) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 890 && floatval($jml) <= 910) {
+                        $geser = "Tidak";
+                        $jarakGeser = floatval($jml);
+                      } else if (floatval($jml) >= 111 && floatval($jml) <= 1900) {
+                        $geser = "Ya";
+                        $jarakGeser = floatval($jml);
+                      } else {
+                        $geser = "Ya";
+                        $jarakGeser = floatval($jml);
+                      }
+                }elseif($request->kategori_id == "2" && sizeof($detail_patok) == 0){
+                    $jml = "-";
+                    $geser = "-";
+                }
+
                 $patok = Patok::where('id', $request->id)->update([
                     'kategori_id' => $request->kategori_id,
                     'image_id' => $idImages,
@@ -420,8 +579,8 @@ class ApiPatokController extends Controller
                     'hilang' => $request->hilang,
                     'rusak' => $request->rusak,
                     'terhalang' => $request->terhalang,
-                    'geser' => $request->geser,
-                    'status_geser' => $request->status_geser,
+                    'geser' => $geser,
+                    'status_geser' => $jml,
                     'deskripsi' => $request->deskripsi,
                     'latlng' => $request->latlng
                 ]);
@@ -685,6 +844,93 @@ class ApiPatokController extends Controller
 
 
 
+        }
+
+        public function patok_map(Request $request)
+        {
+            $id_user = auth('api')->user()->id;
+            $filter = $request->get("filter");
+
+            // $patok = DB::table('patok')->select('id', 'nama', 'latlng', 'ruas_jalan')->orderBy("id", "ASC")->get();
+            $patok = Patok::query();
+
+
+            if(!empty($filter)){
+                $patok->where(DB::raw('lower(ruas_jalan)'), strtolower($filter));
+            }
+
+            $patok = $patok->select('id', 'nama', 'latlng', 'ruas_jalan', 'rusak', 'terhalang','geser', 'hilang')->get();
+
+            foreach($patok as $p){
+                $latlng = $p->latlng;
+                $split = explode(',', $latlng);
+                $p->lat = doubleval($split[0]);
+                $p->long = doubleval($split[1]);
+                if($p->rusak == "Tidak" && $p->terhalang == "Tidak" && $p->geser == "Tidak" && $p->hilang =="Tidak" ){
+                    $p->kondisi = "Patok Ideal";
+                }else{
+                    $p->kondisi = "Patok Bermasalah";
+                }
+                $p->makeHidden('kategori', 'latlng', 'rusak', 'terhalang','geser', 'hilang');
+
+            }
+
+
+
+
+
+            // $detail_patok = Patok::select('id', 'kategori_id', 'ruas_jalan', 'nilai_km', 'nilai_hm', 'latlng', 'created_at')
+            // ->where('ruas_jalan', $request->ruas_jalan)
+            // ->where('nilai_km', $request->nilai_km)
+            // ->where('kategori_id', 1)->get();
+
+            // if(!empty($search)){
+            //     $patok = $patok->where(function ($query) use ($request) {
+            //         $query->where('patok.nama', 'ilike', '%'.$request->search.'%')
+            //         ->orWhere('kategori.nama', 'ilike', '%'.$request->search.'%')
+            //         ->orWhere('patok.ruas_jalan', 'ilike', '%'.$request->search.'%')
+            //         ->orWhere('patok.wilayah', 'ilike', '%'.$request->search.'%')
+            //         ->orWhere('patok.status', 'ilike', '%'.$request->search.'%')
+            //         ->orWhere(DB::raw('patok.created_at::text'), 'ilike', '%'.$request->search.'%')
+            //         ;
+            //     });
+            // }
+            // if(!empty($kategori)){
+            //     $patok = $patok->where(DB::raw('lower(kategori.nama)'), strtolower($kategori));
+
+            // }
+            // if(!empty($wilayah)){
+            //     $patok = $patok->where(DB::raw('lower(patok.wilayah)'), strtolower($wilayah));
+            // }
+            // if(!empty($ruas_jalan)){
+            //     $patok = $patok->where(DB::raw('lower(patok.ruas_jalan)'), strtolower($ruas_jalan));
+            // }
+            // if(!empty($rusak)){
+            //     $patok = $patok->where(DB::raw('lower(patok.rusak)'), strtolower($rusak));
+            // }
+            // if(!empty($hilang)){
+            //     $patok = $patok->where(DB::raw('lower(patok.hilang)'), strtolower($hilang));
+
+            // }
+            // if(!empty($terhalang)){
+            //     $patok = $patok->where(DB::raw('lower(patok.terhalang)'), strtolower($terhalang));
+            // }
+            // if(!empty($geser)){
+            //     $patok = $patok->where(DB::raw('lower(patok.geser)'), strtolower($geser));
+            // }
+            // if(!empty($status)){
+            //     $patok = $patok->where(DB::raw('lower(patok.status)'), strtolower($status));
+            // }
+
+
+            // $patok = $patok ->paginate(6, ['*'], 'page', $request->page);
+
+            return response()->json([
+                'success' => true,
+                // 'pesan' => 'Lowongan Perbulan ' . $request->limit . ' Data',
+                // 'lowongan' => LowonganResource::collection($lowongan)
+                'data' => $patok
+            ], 200);
         }
 
 

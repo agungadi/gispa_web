@@ -10,7 +10,7 @@
     <!-- Favicon -->
     {{-- <link rel="icon" href="{{ asset(getAdminSettingValue('favicon')) }}" type="image/png"> --}}
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Fonts -->
     <link href="//fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">

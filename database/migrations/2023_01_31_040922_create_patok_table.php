@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Grammars\PostgresGrammar;
 
 class CreatePatokTable extends Migration
 {
@@ -18,6 +19,7 @@ class CreatePatokTable extends Migration
             $table->unsignedInteger('kategori_id');
             $table->unsignedInteger('image_id');
             $table->unsignedInteger('id_user');
+            $table->unsignedInteger('update_id_user')->nullable();
             $table->string('nama');
             $table->integer('nilai_km');
             $table->integer('nilai_hm');
@@ -26,12 +28,14 @@ class CreatePatokTable extends Migration
             $table->string('hilang');
             $table->string('rusak');
             $table->string('terhalang');
-            $table->string('geser');
+            $table->string('geser')->nullable();;
             $table->string('status_geser')->nullable();
             $table->string('status');
             $table->string('deskripsi')->nullable();
             $table->string('latlng');
-
+            $table->string('longlat')->nullable();
+            $table->point('p_longlat')->nullable();
+            $table->string('periode')->nullable();;
             $table->timestamps();
 
 

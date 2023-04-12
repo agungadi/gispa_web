@@ -23,6 +23,8 @@ Route::post('logout', [ApiLoginController::class, 'logout']);
 Route::get('/me', [ApiPatokController::class, 'me']);
 
 Route::post('/patok_limit', [ApiPatokController::class, 'patok_limit']);
+Route::post('/patok_map', [ApiPatokController::class, 'patok_map']);
+
 Route::post('/patok_history', [ApiPatokController::class, 'patok_history']);
 
 Route::get('/patok_detail/{id}', [ApiPatokController::class, 'patok_detail']);

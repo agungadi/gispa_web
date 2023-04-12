@@ -14,15 +14,30 @@ class ApiLoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if ($token = auth('api')->attempt($credentials)) {
-            return response()->json([
-                'success' => true,
-                'pesan' => 'Berhasil Login',
-                'data' => [
-                    'user' =>response()->json(auth('api')->user())->original
-                    , 'token' => $this->respondWithToken($token)->original['access_token']
-                ]
-            ], 200);
+
+        if ($token = auth('api')->attempt($credentials))
+        {
+            $roles = auth('api')->user()->roles->pluck('name')->first();
+
+            if($roles == "Survei"){
+                return response()->json([
+                    'success' => true,
+                    'pesan' => 'Berhasil Login',
+                    'roles' => $roles,
+                    'data' => [
+                        'user' =>response()->json(auth('api')->user())->original
+                        , 'token' => $this->respondWithToken($token)->original['access_token']
+                    ]
+                ], 200);
+            }else{
+                return response()->json([
+                    'success' => true,
+                    'pesan' => 'Roles Tidak Boleh Login',
+                    'roles' => $roles,
+                ], 200);
+            }
+
+
         }
 
         return response()->json([

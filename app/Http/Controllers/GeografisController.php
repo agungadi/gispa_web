@@ -73,7 +73,8 @@ class GeografisController extends AppBaseController
         $array_isi_field=array();
         $array_isi_field_choro=array();
         $list_field = "";
-        $convertString = preg_replace('/\s+/', '_', $nama);
+        $namatb = str_replace(' ', '', $nama);
+        $convertString = preg_replace('/\s+/', '_', $namatb);
         $toLowerString = strtolower($convertString);
         $nama_tabel = "tb_$toLowerString";
 

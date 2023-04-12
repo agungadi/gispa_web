@@ -353,6 +353,10 @@ function detailData(id) {
           <th>Tanggal </th>
           <td> : ${result.data.created_at}</td>
       </tr>
+      <tr>
+      <th>Periode </th>
+      <td> : ${result.data.periode}</td>
+  </tr>
         `+
         (result.data.image.path_new != ""  && result.data.image.path_new != null ? ` <tr>
         <th>Diperbarui </th>

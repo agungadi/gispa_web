@@ -2428,10 +2428,401 @@ header {
 	margin-left: 5px;
 	margin-top: 15px;
 }
+/* /// filter layer //// */
+
+
+
+.accordion-container {
+	max-width: 60rem;
+	margin: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 0.5em;
+}
+.header {
+	font-size: 1rem;
+	font-weight: bold;
+	color: #fff;
+	background-color: #222;
+	padding: 0.5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.accordion {
+	width: 100%;
+	display: block;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 0.75em 0;
+	text-align: start;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: #fff;
+	background-color: teal;
+	transition: 0.5s ease-in-out;
+	position: relative;
+	border-bottom: 2px solid rgb(214, 214, 214);
+}
+
+.accordion span {
+	margin: 0 0.5em;
+
+}
+
+.accordion .step {
+	background-color: rgb(0, 83, 83);
+	padding: 0.4em 0.6em;
+	font-size: 0.8rem;
+	border-radius: 1em;
+}
+.accordion .accordion-title {
+	margin-right: 1em;
+}
+.accordion:last-of-type {
+	border-bottom: 0;
+}
+.active,
+.accordion:hover {
+	/* background-color: rgb(1, 92, 92); */
+}
+
+.accordion::after {
+	content: "\2b";
+	font-family: "Font Awesome 5 Free";
+	font-size: 1rem;
+	font-weight: 900;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	transition: 0.5s ease-in-out;
+}
+/* Peta edit */
+/* .active::after {
+	content: "\f00d";
+	font-family: "Font Awesome 5 Free";
+	font-size: 1rem;
+	font-weight: 900;
+	transition: 0.5s ease-in-out;
+} */
+.panel {
+	overflow: hidden;
+	max-height: 0;
+	transition: 0.5s ease-in-out;
+}
+.panel ul {
+	padding: 1em 2em;
+	font-size: 1rem;
+}
+
+
+
+/*  SWITCH  */
+
+:root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+    --white: #FFFFFF;
+    --greyLight-1: #E4EBF5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+  }
+.switch {
+    /* grid-column: 1/2; */
+    /* display: grid;
+    grid-template-columns: repeat(2, -webkit-min-content);
+    grid-template-columns: repeat(2, min-content); */
+    /* grid-gap: 1rem; */
+    /* justify-self: center; */
+  }
+  .switch input {
+    display: none;
+  }
+  .switch__1, .switch__2 {
+    margin-left: 0.5em;
+    margin-top: 0.4em;
+    width: 2.5rem;
+  }
+  .switch__1 label, .switch__2 label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 1.2rem;
+    box-shadow: 0.2rem 0.2rem 0.5rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+    background: rgba(255, 255, 255, 0);
+    position: relative;
+    cursor: pointer;
+    border-radius: 1.6rem;
+  }
+  .switch__1 label::after, .switch__2 label::after {
+    content: "";
+    position: absolute;
+    left: 0.1rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--greyDark);
+    transition: all 0.4s ease;
+  }
+  .switch__1 label::before, .switch__2 label::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(330deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  .switch input:checked ~ label::before {
+    opacity: 1;
+  }
+  .switch input:checked ~ label::after {
+    left: 57%;
+    background: var(--greyLight-1);
+  }
+
+  .grid-containers {
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(5px, 1fr));
+  }
+
+
+
+
+
+  .cellss {
+    display: flex;
+    justify-items: stretch;
+    gap: 5px;
+  }
+
+  .cellss div {
+    /* border: 1px solid black; */
+  }
+
+  .largess {
+    font-size: 1.2em;
+
+    padding: 5px;
+    flex-grow: 12;
+  }
+
+  .smallss {
+    font-size: 1.2em;
+
+    padding: 5px;
+    flex-grow: 1;
+  }
+
+
+  /* drowdown maps layer */
+
+
+.dropdownss {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 38px;
+    width: 100%;
+    background: #f2f2f2;
+    border: 1px solid;
+    border-color: white #f7f7f7 whitesmoke;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  }
+
+  .dropdownss:before, .dropdownss:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 5px dashed;
+    border-color: #888888 transparent;
+    pointer-events: none;
+  }
+
+  .dropdownss:before {
+    border-bottom-style: solid;
+    border-top: none;
+  }
+
+  .dropdownss:after {
+    margin-top: 7px;
+    border-top-style: solid;
+    border-bottom: none;
+  }
+
+  .dropdownss-select {
+    position: relative;
+    width: 130%;
+    margin: 0;
+    padding: 6px 8px 6px 10px;
+    height: 38px;
+    line-height: 16px;
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    text-shadow: 0 1px white;
+    background: #f2f2f2; /* Fallback for IE 8 */
+    background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .dropdownss-select:focus {
+    z-index: 3;
+    width: 100%;
+    color: #394349;
+    outline: 2px solid #49aff2;
+    outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+
+  .dropdownss-select > option {
+    margin: 3px;
+    padding: 6px 8px;
+    text-shadow: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  #btn-cluster {
+    background-color: #036280;
+    width: 100%;
+    border: 0;
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+    color: #fff;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+
+  /* clustering iterasi */
+
+  .accordion-table {
+	max-width: 75rem;
+	margin: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	border-radius: 0.5em;
+}
+
+.accordiontable {
+	width: 100%;
+	display: block;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 0.75em 0;
+	text-align: start;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: #fff;
+	background-color: teal;
+	transition: 0.5s ease-in-out;
+	position: relative;
+	border-bottom: 2px solid rgb(214, 214, 214);
+}
+
+.accordiontable span {
+	margin: 0 0.5em;
+    font-size: 1.1rem;
+
+
+}
+
+.accordiontable .step {
+	background-color: rgb(0, 83, 83);
+	padding: 0.4em 0.6em;
+	font-size: 0.9rem;
+	border-radius: 1em;
+}
+
+.accordiontable::after {
+	content: "\2b";
+	font-family: "Font Awesome 5 Free";
+	font-size: 1rem;
+	font-weight: 900;
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	transform: translateY(-50%);
+	transition: 0.5s ease-in-out;
+}
+
+  #tblIterasi table {
+	max-width: 65rem;
+	border-collapse: collapse;
+	margin:50px auto;
+	}
+
+#tblIterasi th {
+	background: #3498db;
+	color: white;
+	font-weight: bold;
+    border: 1px solid #ccc;
+
+	}
+
+#tblIterasi td {
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: left;
+	font-size: 18px;
+	}
+
+.r-detail th {
+    padding: 6px;
+    /* border: 1px solid #ccc; */
+    text-align: left;
+    font-size: 17px;
+    }
+
+
+
+.labels tr td {
+	background-color: #2cc16a;
+	font-weight: bold;
+	color: #fff;
+}
+
+.label tr td label {
+	display: block;
+}
+
+
+#tblIterasi [data-toggle="toggle"] {
+	display: none;
+}
+
+
 
 
 /* /// peta utama //// */
+.leaflet-sidebar-tabs {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    }
 
+    .leaflet-sidebar-header {
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
 
 #mapwrap {
     width: 100%;
@@ -2454,9 +2845,9 @@ header {
     width: 200px;
     height: 600px;
     height: 100vh;
-    position: absolute;
+    position:fixed;
     left: -200px;
-    z-index: 1;
+    z-index: 99;
     transition: .5s left;
     padding: 20px;
     box-sizing: border-box;
@@ -2475,10 +2866,11 @@ header {
     position: absolute;
     right: -25px;
     top: 40%;
+    z-index: 99;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     border: 1px solid #333;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 
   .hamburger span {
@@ -2697,6 +3089,10 @@ header {
 
   .greeniconcolor {
     color: #0bbe29;
+  }
+
+  .yellowiconcolor {
+    color: #f8ca4a;
   }
 
   .rediconcolor {

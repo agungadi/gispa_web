@@ -15,8 +15,10 @@
             "geser" : "Ya",
             "status_geser" : "",
             "status" : "Menunggu",
+            "latlng" : "-7.267805, 111.87572166666665",
             "deskripsi" : "Patok Membutuhkan Pengecatan Ulang",
-            "latlng" : "-7.267805, 111.87572166666665"
+            "longlat" : "POINT(111.87572166666665, -7.267805)",
+            "p_longlat" : "POINT(111.87572166666665 -7.267805)"
         },
         {
             "kategori_id" : 2,
@@ -33,8 +35,11 @@
             "geser" : "Ya",
             "status_geser" : "",
             "status" : "Menunggu",
+            "latlng" : "-7.190410000000001, 111.86470666666668",
             "deskripsi" : "Patok Membutuhkan Pengecatan Ulang",
-            "latlng" : "-7.190410000000001, 111.86470666666668"        }
+            "longlat" : "POINT(111.86470666666668, -7.190410000000001)",
+            "p_longlat" : "POINT(111.86470666666668 -7.190410000000001)"
+        }
 
     ]
 }

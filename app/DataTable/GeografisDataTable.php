@@ -24,7 +24,7 @@ class GeografisDataTable
         // $query = User::query()->select('users.*');
         // $query = Geografis::query()->select('geografis.*');
 
-        $query = Geografis::query()->select('geografis.id', 'geografis.nama', 'geografis.keterangan', 'geografis.tipe', 'geografis.kelompok_data', 'kelompokdata.nama as keldata')
+        $query = Geografis::query()->select('geografis.id', 'geografis.nama', 'geografis.keterangan', 'geografis.tipe', 'geografis.kelompok_data', 'kelompokdata.nama as keldata', 'geografis.nama_tabel')
         ->join('kelompokdata', 'kelompokdata.id', '=', 'geografis.kelompok_data')
         ->get();
 

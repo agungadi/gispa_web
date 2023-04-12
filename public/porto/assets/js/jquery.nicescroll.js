@@ -46,7 +46,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     var path = scripts ? scripts.src.split('?')[0] : '';
     return path.split('/').length > 0 ? path.split('/').slice(0, -1).join('/') + '/' : '';
-  } // based on code by Paul Irish https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/  
+  } // based on code by Paul Irish https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
 
 
   var setAnimationFrame = _win.requestAnimationFrame || _win.webkitRequestAnimationFrame || _win.mozRequestAnimationFrame || false;
@@ -174,12 +174,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     d.ismozilla = "MozAppearance" in _style;
     d.iswebkit = !d.ismsedge && "WebkitAppearance" in _style;
     d.ischrome = d.iswebkit && "chrome" in _win;
-    d.ischrome38 = d.ischrome && "touchAction" in _style; // behavior changed in touch emulation    
+    d.ischrome38 = d.ischrome && "touchAction" in _style; // behavior changed in touch emulation
 
     d.ischrome22 = !d.ischrome38 && d.ischrome && d.haspointerlock;
     d.ischrome26 = !d.ischrome38 && d.ischrome && "transition" in _style; // issue with transform detection (maintain prefix)
 
-    d.cantouch = "ontouchstart" in _doc.documentElement || "ontouchstart" in _win; // with detection for Chrome Touch Emulation    
+    d.cantouch = "ontouchstart" in _doc.documentElement || "ontouchstart" in _win; // with detection for Chrome Touch Emulation
 
     d.hasw3ctouch = (_win.PointerEvent || false) && (navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0); //IE11 pointer events, following W3C Pointer Events spec
 
@@ -304,7 +304,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.istextarea = this.win[0].nodeName == 'TEXTAREA';
     this.forcescreen = false; //force to use screen position on events
 
-    this.canshowonmouseevent = opt.autohidemode != "scroll"; // Events jump table    
+    this.canshowonmouseevent = opt.autohidemode != "scroll"; // Events jump table
 
     this.onmousedown = false;
     this.onmouseup = false;
@@ -318,7 +318,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.onscrollend = false;
     this.onscrollcancel = false;
     this.onzoomin = false;
-    this.onzoomout = false; // Let's start!  
+    this.onzoomout = false; // Let's start!
 
     this.view = false;
     this.page = false;
@@ -537,7 +537,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         ty: "0px"
       }; //this one can help to enable hw accel on ios6 http://indiegamr.com/ios6-html-hardware-acceleration-changes-and-how-to-fix-them/
 
-      if (cap.hastranslate3d && cap.isios) this.doc.css("-webkit-backface-visibility", "hidden"); // prevent flickering http://stackoverflow.com/questions/3461441/      
+      if (cap.hastranslate3d && cap.isios) this.doc.css("-webkit-backface-visibility", "hidden"); // prevent flickering http://stackoverflow.com/questions/3461441/
 
       this.getScrollTop = function (last) {
         if (!last) {
@@ -817,7 +817,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       if (cap.isandroid && !("hidden" in _doc)) return true; // Android 3- SORRY, DO NOT WORK!
 
-      opt.emulatetouch = opt.emulatetouch || opt.touchbehavior; // mantain compatibility with "touchbehavior"      
+      opt.emulatetouch = opt.emulatetouch || opt.touchbehavior; // mantain compatibility with "touchbehavior"
 
       self.hasborderbox = _win.getComputedStyle && _win.getComputedStyle(_doc.body)['box-sizing'] === "border-box";
       var _scrollyhidden = {
@@ -1323,7 +1323,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
 
               if (!self.hasmoving) {
-                if (self.rail.drag.y === e.clientY && self.rail.drag.x === e.clientX) return self.cancelEvent(e); // prevent first useless move event 
+                if (self.rail.drag.y === e.clientY && self.rail.drag.x === e.clientX) return self.cancelEvent(e); // prevent first useless move event
 
                 var ay = Math.abs(my);
                 var ax = Math.abs(mx);
@@ -1581,16 +1581,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           self.onselectionstart = function (e) {
-            //  More testing - severe chrome issues           
+            //  More testing - severe chrome issues
 
-            /* 
+            /*
                           if (!self.haswrapper&&(e.which&&e.which==2)) {  // fool browser to manage middle button scrolling
                             self.win.css({'overflow':'auto'});
                             setTimeout(function(){
                               self.win.css({'overflow':'hidden'});
-                            },10);                
+                            },10);
                             return true;
-                          }            
+                          }
             */
             if (self.ispage) return;
             self.selectiondrag = self.win.offset();
@@ -1774,7 +1774,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           } else {
             self.bind(self.rail, "mousedown", function (e) {
               e.preventDefault();
-            }); // prevent text selection             
+            }); // prevent text selection
 
             self.railh && self.bind(self.railh, "mousedown", function (e) {
               e.preventDefault();
@@ -1810,7 +1810,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             if (self.canshowonmouseevent) self.noticeCursor();
           });
           self.bind(self.win, "mouseleave", function (e) {
-            // *       
+            // *
             mousefocus = false;
             self.hasmousefocus = false;
             if (!self.rail.drag) self.hideCursor();
@@ -1888,7 +1888,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               case 36:
               case 63273:
-                // safari                
+                // safari
                 self.railh && ctrl ? self.doScrollPos(0, 0) : self.doScrollTo(0);
                 ret = true;
                 break;
@@ -2038,7 +2038,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           if (self.iframexd) {
             if ("console" in _win) console.log('NiceScroll error: policy restriced iframe');
-            return true; //cross-domain - I can't manage this        
+            return true; //cross-domain - I can't manage this
           }
 
           self.forcescreen = true;
@@ -2222,13 +2222,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       self.page.maxw = Math.max(0, self.page.w - self.view.w);
 
       if (self.page.maxh == premaxh && self.page.maxw == premaxw && self.view.w == previeww && self.view.h == previewh) {
-        // test position        
+        // test position
         if (!self.ispage) {
           var pos = self.win.offset();
 
           if (self.lastposition) {
             var lst = self.lastposition;
-            if (lst.top == pos.top && lst.left == pos.left) return self; //nothing to do            
+            if (lst.top == pos.top && lst.left == pos.left) return self; //nothing to do
           }
 
           self.lastposition = pos;
@@ -2389,7 +2389,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         // Modern browsers support "wheel"
         self._bind(el, "wheel", fn, bubble || false);
       } else {
-        var wname = _doc.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll"; // older Webkit+IE support or older Firefox          
+        var wname = _doc.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll"; // older Webkit+IE support or older Firefox
 
         _modernWheelEvent(el, wname, fn, bubble || false);
 
@@ -2427,7 +2427,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return false;
       };
     } else {
-      // inspired from https://gist.github.com/jonathantneal/2415137      
+      // inspired from https://gist.github.com/jonathantneal/2415137
       Event.prototype.preventDefault = function () {
         this.returnValue = false;
       };
@@ -2532,10 +2532,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         b: bubble,
         q: false
       });
-      passiveSupported && active ? el.addEventListener(name, fn, {
-        passive: false,
-        capture: bubble
-      }) : el.addEventListener(name, fn, bubble || false);
+
+
+      (passiveSupported && active) ? el.addEventListener(name, fn, { passive: false, capture: bubble }) : el.addEventListener(name, fn, bubble || false);
     };
 
     this._unbind = function (el, name, fn, bub) {
@@ -2886,7 +2885,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       if (hr && opt.oneaxismousemode && px === 0 && py) {
-        // classic vertical-only mousewheel + browser with x/y support 
+        // classic vertical-only mousewheel + browser with x/y support
         px = py;
         py = 0;
 
@@ -3066,7 +3065,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         //trans
         var py = self.getScrollTop();
         var px = self.getScrollLeft();
-        if ((self.newscrolly - py) * (y - py) < 0 || (self.newscrollx - px) * (x - px) < 0) self.cancelScroll(); //inverted movement detection      
+        if ((self.newscrolly - py) * (y - py) < 0 || (self.newscrollx - px) * (x - px) < 0) self.cancelScroll(); //inverted movement detection
 
         if (!opt.bouncescroll) {
           if (y < 0) y = 0;else if (y > self.page.maxh) y = self.page.maxh;
@@ -3135,7 +3134,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         self.scrollendtrapped = false;
         self.resetTransition();
         self.timerscroll = false;
-        self.setScrollTop(py); // fire event onscroll        
+        self.setScrollTop(py); // fire event onscroll
 
         if (self.railh) self.setScrollLeft(px); // fire event onscroll left
 
@@ -3354,7 +3353,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     this.init();
     $.nicescroll.push(this);
   }; // Inspired by the work of Kin Blas
-  // http://webpro.host.adobe.com/people/jblas/momentum/includes/jquery.momentum.0.7.js  
+  // http://webpro.host.adobe.com/people/jblas/momentum/includes/jquery.momentum.0.7.js
 
 
   var ScrollMomentumClass2D = function ScrollMomentumClass2D(nc) {

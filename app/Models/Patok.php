@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 
 class Patok extends Model
 {
@@ -30,8 +31,15 @@ class Patok extends Model
         'status',
         'deskripsi',
         'latlng',
+        'longlat',
+        'p_longlat',
+        'periode'
     ];
 
+
+    protected $spatialFields = [
+        'p_longlat'
+    ];
 
     public function kategori(): BelongsTo
     {

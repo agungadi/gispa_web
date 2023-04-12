@@ -66,7 +66,7 @@ class LayerController extends AppBaseController
         $geo->warna = $request->get('warna');
         $geo->warna_border = $request->get('border');
         $geo->tebal_border = $request->get('tebalborder');
-        $geo->opacity = $request->get('opacity');
+        $geo->opacity = $request->get('opacity') / 10;
 
         $geo->save();
 
@@ -123,7 +123,7 @@ class LayerController extends AppBaseController
         $geo->warna = $request->get('warna');
         $geo->warna_border = $request->get('border');
         $geo->tebal_border = $request->get('tebalborder');
-        $geo->opacity = $request->get('opacity');
+        $geo->opacity = $request->get('opacity') / 10;
 
         $geo->save();
 
