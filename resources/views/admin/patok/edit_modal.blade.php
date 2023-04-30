@@ -13,7 +13,10 @@
                 {{ Form::open(['id' =>'editStateForm','method'=>'post']) }}
                 {{ Form::hidden('id', null, ['id' => 'stateFieldId']) }}
                 <div class="row">
-
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Nama :') }}<span class="text-danger">*</span>
+                        {{ Form::text('nama', null , ['class' => 'form-control','required','placeholder' => 'Nama','id'=>'editNama']) }}
+                    </div>
 
                     <div class="form-group col-lg-12 col-sm-12">
                         {{ Form::label('Jenis Patok :') }}<span
@@ -80,20 +83,35 @@
                         <label for="radiogeser">Tidak</label>
                     </div>
 
+                    @role('Admin')
+
+                    <div class="form-group col-lg-12 col-sm-12">
+                        {{ Form::label('Status :') }}<span class="text-danger">*</span>
+                        <select name="statuspatok" id="statusPatok" class="form-control" placeholder="Pilih Status">
+                            <option value="Menunggu">Menunggu</option>
+                            <option value="Laporkan">Laporkan</option>
+                            <option value="Ideal">Ideal</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                    </div>
+                    @endrole
+
+                    @role('KepalaUPT')
 
                     <div class="form-group col-lg-12 col-sm-12">
                         {{ Form::label('Status :') }}<span class="text-danger">*</span>
                         <select name="statuspatok" id="statusPatok" class="form-control" placeholder="Pilih Status">
                             <option value="Menunggu">Menunggu</option>
                             <option value="Perbaiki">Perbaiki</option>
-                            <option value="Selesai">Selesai</option>
+                            <option value="Ideal">Ideal</option>
                         </select>
                     </div>
+                    @endrole
 
 
                     <div class="form-group col-lg-12 col-sm-12">
                         {{ Form::label('Deskripsi :') }}<span class="text-danger">*</span>
-                        {{ Form::text('deskripsi', null , ['class' => 'form-control','required','placeholder' => 'Deskripsi','id'=>'editDeskripsi']) }}
+                        {{ Form::text('deskripsi', null , ['class' => 'form-control','placeholder' => 'Deskripsi','id'=>'editDeskripsi']) }}
                     </div>
 
                     <div class="form-group col-lg-12 col-sm-12">

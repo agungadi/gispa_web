@@ -2782,10 +2782,14 @@ header {
 	}
 
 #tblIterasi td {
-	padding: 10px;
+	/* padding: 10px;
 	border: 1px solid #ccc;
 	text-align: left;
-	font-size: 18px;
+	font-size: 18px; */
+    /* max-width: 100px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 	}
 
 .r-detail th {

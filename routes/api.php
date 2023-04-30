@@ -33,7 +33,7 @@ Route::post('/patok_add', [ApiPatokController::class, 'patok_add']);
 Route::post('/patok_edit', [ApiPatokController::class, 'patok_edit']);
 Route::post('/patok_delete', [ApiPatokController::class, 'patok_delete']);
 
-Route::post('/patok_test', [ApiPatokController::class, 'patok_test']);
+Route::get('/patok_test', [ApiPatokController::class, 'patok_test']);
 
 Route::get('/ruas_jalan', [ApiPatokController::class, 'ruas_jalan']);
 

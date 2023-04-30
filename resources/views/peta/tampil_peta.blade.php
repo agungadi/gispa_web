@@ -35,11 +35,11 @@
 
                 </br>
                     <div class="dropdownss">
-                        <select name="one" class="dropdownss-select">
+                        <select name="one" id="select-cluster" class="dropdownss-select">
                           <option value="">Clustering</option>
-                          <option value="1">Option #1</option>
-                          <option value="2">Option #2</option>
-                          <option value="3">Option #3</option>
+                          <option value="1">Cluster 1</option>
+                          <option value="2">Cluster 2</option>
+                          <option value="3">Cluster 3</option>
                         </select>
                       </div>
                     </br>

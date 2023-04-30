@@ -37,11 +37,19 @@
                 @endrole
 
                 <div id="brand">
-                    <a href="javascript:void(0);">
+                    {{-- <a href="javascript:void(0);">
                         <h1>Home</h1>
+                    </a> --}}
+                    @role('Admin')
+
+                    <a href="{{ route('geografis.peta') }}">
+                        <h1>Peta</h1>
                     </a>
                     <a href="{{ route('patok.index') }}">
                         <h1>Patok</h1>
+                    </a>
+                    <a href="{{ route('patok.proses') }}">
+                        <h1>Proses</h1>
                     </a>
                     <a href="{{ route('geografis.index') }}">
                         <h1>Geografis</h1>
@@ -49,15 +57,33 @@
                     <a href="{{ route('layer.index') }}">
                         <h1>Layer</h1>
                     </a>
-                    <a href="javascript:void(0);">
+                    <a href="{{ route('cluster.iterasi') }}">
                         <h1>Clustering</h1>
                     </a>
-                    <a href="{{ route('geografis.peta') }}">
-                        <h1>Peta</h1>
-                    </a>
+
                     <a href="{{ route('users.index') }}">
                         <h1>User</h1>
                     </a>
+                    @endrole
+
+                    @role('KepalaUPT')
+
+                    <a href="{{ route('geografis.peta') }}">
+                        <h1>Peta</h1>
+                    </a>
+                    <a href="{{ route('patok.index') }}">
+                        <h1>Patok</h1>
+                    </a>
+                    <a href="{{ route('patok.proses') }}">
+                        <h1>Proses</h1>
+                    </a>
+
+                    <a href="{{ route('cluster.iterasi') }}">
+                        <h1>Clustering</h1>
+                    </a>
+
+                    @endrole
+
 
                     <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                         <li class="dropdown language-menu no-hover mr-2">

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Yajra\DataTables\DataTables;
 use App\DataTable\PatokDataTable;
+use App\DataTable\ProsesDataTable;
+
 use App\Models\Patok;
 use App\Models\RuasJalan;
 
@@ -105,13 +107,15 @@ class PatokController extends AppBaseController
             'terhalang' => 'required',
             'geser' => 'required',
             'statuspatok' => 'required',
-            'deskripsi' => 'required',
         ]);
 
         $km = $request->get('nilaikm');
         $hm = $request->get('nilaihm');
+        $nama = $request->get('nama');
 
-        $namaPatok = "Patok KM.{$km}+{$hm}00";
+
+
+        $namaPatok = "{$nama} KM.{$km}+{$hm}00";
 
 
         $patok = Patok::find($id);
@@ -147,5 +151,18 @@ class PatokController extends AppBaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function proses(Request $request)
+    {
+        //
+        $kategori = Kategori::pluck('nama', 'id');
+        $jalan = RuasJalan::pluck('nama', 'nama');
+
+        if ($request->ajax()) {
+            return DataTables::of((new ProsesDataTable())->get($request->only(['kategori_id'])))->make(true);
+
+        }
+        return view('kepala.proses.index', compact('kategori', 'jalan'));
     }
 }

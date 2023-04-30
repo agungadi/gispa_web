@@ -96,11 +96,12 @@ Route::get('/clustering/{enc}', [ClusterController::class, 'detailCluster'])->na
 
 Route::get('cluster', [ClusterController::class, 'index'])->name('cluster.index');
 
-Route::get('clusterpeta', [ClusterController::class, 'PetaCluster'])->name('cluster.peta');
+Route::post('clusterpeta', [ClusterController::class, 'PetaCluster'])->name('cluster.peta');
 
 
 // Route::get('/cluster', [ClusterController::class, 'index'])->name('cluster.index');
 
+Route::get('proses', [PatokController::class, 'proses'])->name('patok.proses');
 
 
 });

@@ -210,9 +210,13 @@ accordion.forEach((element) => {
       type: 'GET',
       success: function success(result) {
         console.log(result.data);
+
+        var stringArray = result.data.nama.split(/(\s+)/);
+
         $('#fotoedit').empty();
         $('#stateFieldId').val(result.data.id);
         $('#editJenis').val(result.data.kategori_id).trigger('change.select2');
+        $('#editNama').val(stringArray[0]);
         $('#editKM').val(result.data.nilai_km);
         $('#editHM').val(result.data.nilai_hm);
 
@@ -256,7 +260,7 @@ accordion.forEach((element) => {
 
         $('#editDeskripsi').val(result.data.deskripsi);
 
-        $('#fotoedit').append(`<img src="http://192.168.161.1:8001${result.data.image.path}" style="max-width:128px" />`);
+        $('#fotoedit').append(`<img src="https://nanomacine.my.id${result.data.image.path}" style="max-width:128px" />`);
 
         $('#editModal').modal('show');
       }
@@ -317,9 +321,9 @@ function detailData(id) {
         $('#img-detail').append(`
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-        <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path_new}" alt="">
+        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
         <p class="detail__bagBtn">add to bag</p>`: `
-        <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path}" alt="">
+        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
         `) +`
 
         `)

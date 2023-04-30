@@ -131,7 +131,7 @@ $(document).ready(function () {
         },
         {
             data: function data(row) {
-                var url = "http://192.168.161.1:8001" +row.image.path;
+                var url = "https://nanomacine.my.id" +row.image.path;
               var data = [{
                 'id': row.id,
                 'url' : url
@@ -181,6 +181,9 @@ $(document).ready(function () {
       type: 'GET',
       success: function success(result) {
         console.log(result.data);
+        var stringArray = result.data.nama.split(/(\s+)/);
+        $('#editNama').val(stringArray[0]);
+
         $('#fotoedit').empty();
         $('#stateFieldId').val(result.data.id);
         $('#editJenis').val(result.data.kategori_id).trigger('change.select2');
@@ -227,7 +230,7 @@ $(document).ready(function () {
 
         $('#editDeskripsi').val(result.data.deskripsi);
 
-        $('#fotoedit').append(`<img src="http://192.168.161.1:8001${result.data.image.path}" style="max-width:128px" />`);
+        $('#fotoedit').append(`<img src="https://nanomacine.my.id${result.data.image.path}" style="max-width:128px" />`);
 
         $('#editModal').modal('show');
       }
@@ -288,9 +291,9 @@ function detailData(id) {
         $('#img-detail').append(`
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-        <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path_new}" alt="">
+        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
         <p class="detail__bagBtn">add to bag</p>`: `
-        <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path}" alt="">
+        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
         `) +`
 
         `)

@@ -64,7 +64,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2" >No</th>
-                        <th rowspan="2"  class="text-center" >Ruas Jalan</th>
+                        <th rowspan="2"  class="text-center">Ruas Jalan</th>
                         <th rowspan="2"  class="text-center" >Nilai Km</th>
                         <th rowspan="1"  class="text-center" colspan="4">Jumlah</th>
                         <th rowspan="1" colspan="3"  class="text-center" >Jarak Ke Centroid</th>
@@ -89,7 +89,7 @@
                     <?php foreach ($value as $key_data => $value_data) { ?>
                     <tr>
                         <td>{{ $key_data + 1}}</td>
-                        <td>{{ $value_data['data']->ruas_jalan }}</td>
+                        <td style="max-width: 260px">{{ $value_data['data']->ruas_jalan }}</td>
                         <td>{{ $value_data['data']->nilai_km }}</td>
                         <td>{{ $value_data['data']->jumlah_rusak }}</td>
                         <td>{{ $value_data['data']->jumlah_hilang }}</td>
@@ -99,27 +99,27 @@
                             @if($value_data['jarak_ke_centroid'][0] == 0)
                             0
                             @else
-                            {{ number_format($value_data['jarak_ke_centroid'][0], 4) }}
+                            {{ number_format($value_data['jarak_ke_centroid'][0], 2) }}
                             @endif
                         </td>
                         <td>
                             @if($value_data['jarak_ke_centroid'][1] == 0)
                             0
                             @else
-                            {{ number_format($value_data['jarak_ke_centroid'][1], 4) }}
+                            {{ number_format($value_data['jarak_ke_centroid'][1], 2) }}
                             @endif                        </td>
                         <td>
                             @if($value_data['jarak_ke_centroid'][2] == 0)
                             0
                             @else
-                            {{ number_format($value_data['jarak_ke_centroid'][2], 4) }}
+                            {{ number_format($value_data['jarak_ke_centroid'][2], 2) }}
                             @endif
                         </td>
                         <td>
                             @if( $value_data['jarak_terdekat']['value']  == 0)
                             0
                             @else
-                            {{ number_format( $value_data['jarak_terdekat']['value'], 4) }}
+                            {{ number_format( $value_data['jarak_terdekat']['value'], 2) }}
                             @endif
                         </td>
                         <td>{{ $value_data['jarak_terdekat']['cluster'] }}</td>

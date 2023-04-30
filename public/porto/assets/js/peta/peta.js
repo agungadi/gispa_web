@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     var ii = 1000;
 
     var feat = new Array(ii);
@@ -8,12 +7,9 @@ $(document).ready(function () {
 
     var markerpatok = new Array(ii);
 
-
     //$('#sidebar').hide();
 
-
     // function init_show_map() {
-
 
     var map = L.map('leafletmap', {
         zoomControl: true,
@@ -100,7 +96,6 @@ $(document).ready(function () {
     $("#switch-hilang").change(function () {
         if ($("#switch-hilang").is(':checked')) {
             formDataPatok['hilang'] = "Ya";
-
             // console.log($("#switch-terhalang").val());
             $.each(featPatok, function (i, d) {
                 map.removeLayer(d);
@@ -175,6 +170,26 @@ $(document).ready(function () {
     });
 
 
+    $(document).on('click', '#btn-cluster', function (e) {
+
+        $.each(featPatok, function (i, d) {
+            map.removeLayer(d);
+        });
+        console.log($("#select-cluster").val());
+        // formDataPatok['kuartal'] = $("#select-periode").val();
+        if($("#select-cluster").val() == ""){
+            console.log("null kan")
+            renderPatok();
+        }else{
+            console.log("tidak null kan")
+            clusterPatok($("#select-cluster").val());
+
+        }
+
+
+
+    });
+
     $(document).on('click', '.btn-periode', function (e) {
 
         $.each(featPatok, function (i, d) {
@@ -210,9 +225,9 @@ $(document).ready(function () {
             $('#img-detail').append(`
             `+
             (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-            <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path_new}" alt="">
+            <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
             <p class="detail__bagBtn">add to bag</p>`: `
-            <img class="modal__img" src="http://192.168.161.1:8001${result.data.image.path}" alt="">
+            <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
             `) +`
 
             `)
@@ -301,9 +316,6 @@ $(document).ready(function () {
     // console.log("ambil patok");
 
     function renderPatok() {
-
-
-
 
         // var formDataPatok = {
         // };
@@ -427,6 +439,88 @@ $(document).ready(function () {
         });
     }
 
+    function clusterPatok(cluister) {
+
+        var formData = {
+            cluster: cluister,
+        };
+        console.log(formData);
+
+
+        $.ajax({
+            url: route('cluster.peta'),
+            type: 'POST',
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function success(result) {
+                console.log(result.data);
+                var datapatok = result.data;
+
+                var wkt = [];
+                var temp = [];
+                var temp = [];
+                var detail = '';
+                console.log("ambil cluster");
+
+                $.each(datapatok, function (i, d) {
+                    if (d['longlat'] != null) {
+                        temp[i] = "<table>";
+                        temp[i] = temp[i] +
+                        `<tr>
+                        <td>`
+                            + d['nama'] +
+                            `</td>
+                        <td>:</td>
+                        <td>` + d['ruas_jalan'] +
+                        `</td>
+                        </tr>`
+                        ;
+                        detail = `<button class="btn-detail" data-id="${d['id']}" > Detail</button></br>`;
+
+                        wkt[i] = new Wkt.Wkt();
+                        wkt[i].read(d['longlat']);
+
+                        var greenIcon = new L.Icon({
+                            iconUrl: 'leaflet/icons/marker-icon-green.png',
+                            // shadowUrl: 'leaflet/icons/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+
+                        var redIcon = new L.Icon({
+                            iconUrl: 'leaflet/icons/marker-icon-red.png',
+                            // shadowUrl: 'leaflet/icons/marker-shadow.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+
+                        if (d["hilang"] == "Tidak" && d["rusak"] == "Tidak" && d["terhalang"] == "Tidak" && d["geser"] == "Tidak") {
+                            featPatok[i] = wkt[i].toObject({ icon: greenIcon });
+
+                        } else {
+                            featPatok[i] = wkt[i].toObject({ icon: redIcon });
+
+                        }
+
+                        featPatok[i].addTo(map);
+                        featPatok[i].bindPopup(temp[i] + detail);
+                        console.log("lastt finish")
+
+                    }
+
+                });
+
+
+            }});
+
+
+    }
 
 
 
@@ -639,12 +733,7 @@ $(document).ready(function () {
 
                 });
 
-
-
-
             });
-
-
 
             const accordion = document.querySelectorAll(".accordion");
 

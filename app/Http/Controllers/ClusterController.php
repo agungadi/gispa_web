@@ -559,6 +559,8 @@ class ClusterController extends AppBaseController
         $hasil_iterasi = [];
 		$hasil_cluster = [];
 
+        $nilaiCluster = $request->cluster;
+
         //iterasi
         $iterasi = 0;
         while (true) {
@@ -607,32 +609,46 @@ class ClusterController extends AppBaseController
         // ->orderBy('nilai_km', 'DESC')->get();
         // dd(end($hasil_iterasi));
 
-        $result = array_filter(end($hasil_iterasi), function($value) {
-            return $value['jarak_terdekat']['cluster'] == 2;
+        $result = array_filter(end($hasil_iterasi), function($value)  use ($nilaiCluster) {
+            return $value['jarak_terdekat']['cluster'] == $nilaiCluster;
         });
 
 
-        $query = Patok::query()->select('patok.*')
-        ->orWhere([
-            ['patok.wilayah', '=', "Bojonegoro"],
-            ['patok.ruas_jalan', '=', "Jln. Basuki Rahmad"],
-            ['patok.nilai_km', '=', "2"],
-        ])
-        ->orWhere([
-            ['patok.wilayah', '=', "Tuban"],
-            ['patok.ruas_jalan', '=', "Pakah - Ponco"],
-            ['patok.nilai_km', '=', "6"]
-        ])
-        ->get();
+
+        $query = Patok::query()->select('patok.*');
+        // $query = DB::table('patok');
+
+        // Patok::select("*")
+        foreach($result as $datas){
+            // dd($datas['data']->nilai_km);
+            $query->orWhere([
+                ['patok.wilayah', '=', $datas['data']->wilayah],
+                ['patok.ruas_jalan', '=', $datas['data']->ruas_jalan],
+                ['patok.nilai_km', '=', $datas['data']->nilai_km],
+            ]);
+        };
 
 
-        return [
-            'min' => $query,
+        // ->orWhere([
+        //     ['patok.wilayah', '=', "Tuban"],
+        //     ['patok.ruas_jalan', '=', "Pakah - Ponco"],
+        //     ['patok.nilai_km', '=', "6"]
+        // ])
+
+        // $query = Patok::query()->select('patok.*');
+        $data = $query->get();
+
+        return $this->sendResponse($data, 'Data patok successfully retrieved.');
+
+        // return ['data' => $data];
+
+        // return [
+        //     'min' => $query->toJson(),
             // 'max' => $data,
             // 'middle' => $middle,
             // 'iterasi' => $iterasi,
             // 'searchIndex' => $hasil_iterasi
-        ];
+        // ];
 
 
     }

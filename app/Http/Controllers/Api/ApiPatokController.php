@@ -165,7 +165,7 @@ class ApiPatokController extends Controller
             $query->where('patok.ruas_jalan', 'ILIKE', '%' . $ruas_jalan . '%');
         }
         if(!empty($rusak)){
-            $query->where('patok.patok', 'ILIKE', '%' . $rusak . '%');
+            $query->where('patok.rusak', 'ILIKE', '%' . $rusak . '%');
         }
         if(!empty($hilang)){
             $query->where('patok.hilang', 'ILIKE', '%' . $hilang . '%');
@@ -507,11 +507,11 @@ class ApiPatokController extends Controller
                 ->where('nilai_km', $request->nilai_km)
                 ->where('kategori_id', 1)->get();
 
-                if($request->kategori_id == "2" && sizeof($detail_patok) >= 1){
-                    $latlng2 = $detail_patok[0]['latlng'];
-                    $split2 = explode(',', $latlng2);
-                    $jml = $this->fillHaversine($split2[0], $split2[1], $split1[0], $split1[1]);
-                }
+                // if($request->kategori_id == "2" && sizeof($detail_patok) >= 1){
+                //     $latlng2 = $detail_patok[0]['latlng'];
+                //     $split2 = explode(',', $latlng2);
+                //     $jml = $this->fillHaversine($split2[0], $split2[1], $split1[0], $split1[1]);
+                // }
 
                 if($request->kategori_id == "2" && sizeof($detail_patok) >= 1){
                     $latlng2 = $detail_patok[0]['latlng'];
