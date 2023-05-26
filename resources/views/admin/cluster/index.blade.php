@@ -13,7 +13,7 @@
             <div class="header-body">
                 <div class="row align-items-center py-4 d-flex content-responsive">
                     <div class="col-lg-6 col-6 content-text">
-                        <h6 class="h2 text-white d-inline-block mb-0">Patok KM & HM</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Clustering</h6>
                     </div>
 
                     <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
@@ -33,12 +33,19 @@
                                data-target="#detailModal">Detail Iterasi</a>
                         </div>
 
-                        <div class="mt-2rem custom_exp_button" style="margin-right: 1rem;">
+                        {{-- <div class="mt-2rem custom_exp_button" style="margin-right: 1rem;">
                             <a href="#" class="btn btn-group-lg btn-neutral custom-button-size" data-toggle="modal"
                                data-target="#stateModal">Cetak</a>
+                        </div> --}}
+
+                        <div class="mt-2rem custom_exp_button" style="margin-right: 1rem;">
+                            <select name="cluster_id" id="filterCluster" class="form-control" placeholder="Filter Status">
+                                <option value="">Filter Cluter</option>
+                                <option value="1">Cluster 1</option>
+                                <option value="2">Cluster 2</option>
+                                <option value="3">Cluster 3</option>
+                            </select>
                         </div>
-
-
                         {{-- <div class="mt-2rem custom_exp_button">
                             <a href="#" class="btn btn-group-lg btn-neutral custom-button-size" data-toggle="modal"
                                data-target="#stateModal">Simpan</a>

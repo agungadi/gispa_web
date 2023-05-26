@@ -29,11 +29,19 @@
                                     <option value="geser">Patok Geser</option>
                                 </select>
                         </div>
-                        {{-- <div class="mt-2rem custom_exp_button">
-                            <a href="#" class="btn btn-group-lg btn-neutral custom-button-size" data-toggle="modal"
-                               data-target="#stateModal">Tambah User</a>
-                        </div> --}}
+
+                        <div class="mt-2rem custom_exp_button">
+
+                            <select name="status_id" id="filterStatus" class="form-control" placeholder="Filter Status">
+                                <option value="">Filter Status</option>
+                                <option value="Menunggu">Menunggu</option>
+                                <option value="Laporkan">Laporkan</option>
+                                <option value="Ideal">Ideal</option>
+                                <option value="Selesai">Selesai</option>
+                            </select>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -51,6 +59,7 @@
         @include('admin.patok.templates.templates')
         @include('admin.patok.templates.warna')
         @include('admin.patok.templates.gambar')
+        @include('admin.patok.templates.status')
 
     </div>
 @endsection

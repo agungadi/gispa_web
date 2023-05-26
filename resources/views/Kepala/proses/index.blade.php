@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
                         <div class="ml-auto text-center mr-3 custom_all_button mt-2rem">
-                                <select name="kategori_id" id="filterCountry" class="form-control" placeholder="Filter Patok">
+                                <select name="status_id" id="filterCountry" class="form-control" placeholder="Filter Patok">
                                     <option value="">Filter Status</option>
                                     <option value="Laporkan">Laporkan</option>
                                     <option value="Perbaiki">Perbaiki</option>

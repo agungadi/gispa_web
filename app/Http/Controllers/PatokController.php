@@ -28,10 +28,11 @@ class PatokController extends AppBaseController
 
         if ($request->ajax()) {
 
-
-            return DataTables::of((new PatokDataTable())->get($request->only(['kategori_id'])))->make(true);
+            return DataTables::of((new PatokDataTable())->get($request->only(['kategori_id', 'status_id'])))->make(true);
 
         }
+
+
 
         return view('admin.patok.index', compact('kategori', 'jalan'));
 
@@ -160,7 +161,7 @@ class PatokController extends AppBaseController
         $jalan = RuasJalan::pluck('nama', 'nama');
 
         if ($request->ajax()) {
-            return DataTables::of((new ProsesDataTable())->get($request->only(['kategori_id'])))->make(true);
+            return DataTables::of((new ProsesDataTable())->get($request->only(['status_id'])))->make(true);
 
         }
         return view('kepala.proses.index', compact('kategori', 'jalan'));

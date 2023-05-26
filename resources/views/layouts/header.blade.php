@@ -48,9 +48,9 @@
                     <a href="{{ route('patok.index') }}">
                         <h1>Patok</h1>
                     </a>
-                    <a href="{{ route('patok.proses') }}">
+                    {{-- <a href="{{ route('patok.proses') }}">
                         <h1>Proses</h1>
-                    </a>
+                    </a> --}}
                     <a href="{{ route('geografis.index') }}">
                         <h1>Geografis</h1>
                     </a>
@@ -74,9 +74,9 @@
                     <a href="{{ route('patok.index') }}">
                         <h1>Patok</h1>
                     </a>
-                    <a href="{{ route('patok.proses') }}">
+                    {{-- <a href="{{ route('patok.proses') }}">
                         <h1>Proses</h1>
-                    </a>
+                    </a> --}}
 
                     <a href="{{ route('cluster.iterasi') }}">
                         <h1>Clustering</h1>

@@ -50,6 +50,16 @@
             </div>
             <!-- footer -->
 
+                {{-- pop up image --}}
+
+                <div class="img-popup">
+                    <img src="" alt="Popup Image" style="max-width:384px" >
+                    <div class="close-btn">
+                      <div class="bar"></div>
+                      <div class="bar"></div>
+                    </div>
+                  </div>
+
         </div>
         <!-- content -->
 

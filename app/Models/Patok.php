@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use App\Models\Kategori;
+use App\Models\Images;
+use App\Models\User;
 
 class Patok extends Model
 {
@@ -35,6 +38,8 @@ class Patok extends Model
         'p_longlat',
         'periode'
     ];
+
+    protected $hidden = ['p_longlat'];
 
 
     protected $spatialFields = [

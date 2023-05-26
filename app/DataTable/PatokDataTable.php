@@ -30,6 +30,10 @@ class PatokDataTable
 
         });
 
+        $query->when(isset($input['status_id']), function (Builder $q) use ($input) {
+            $q->where('status', $input['status_id']);
+        });
+
         return $query;
 
 

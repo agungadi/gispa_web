@@ -170,7 +170,7 @@ $(document).ready(function () {
     });
 
 
-    $(document).on('click', '#btn-cluster', function (e) {
+    $(document).on('click', '.btn-cluster', function (e) {
 
         $.each(featPatok, function (i, d) {
             map.removeLayer(d);
@@ -192,11 +192,14 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-periode', function (e) {
 
+
+
         $.each(featPatok, function (i, d) {
             map.removeLayer(d);
         });
         console.log($("#select-periode").val());
         formDataPatok['kuartal'] = $("#select-periode").val();
+        // console.log(formDataPatok);
         renderPatok();
 
 
@@ -225,12 +228,26 @@ $(document).ready(function () {
             $('#img-detail').append(`
             `+
             (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-            <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
-            <p class="detail__bagBtn">add to bag</p>`: `
-            <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
+            <img class="modal__img" src="https://gispatok.com${result.data.image.path_new}" alt="">
+            <p class="detail__bagBtn" id="popup-img">Foto Lama</p>`: `
+            <img class="modal__img" src="https://gispatok.com${result.data.image.path}" alt="">
             `) +`
 
-            `)
+            `);
+
+            $(document).on('click', '#popup-img', function (event) {
+                var img_src = "https://gispatok.com" + result.data.image.path;
+                console.log(img_src);
+                $('.img-popup').children('img').attr('src', img_src);
+                $('.img-popup').addClass('opened');
+            });
+
+                $(document).on('click', '.img-popup', '.close-btn', function (event) {
+                console.log("wowowow");
+                $('.img-popup').removeClass('opened');
+                $('.img-popup').children('img').attr('src', '');
+              });
+
 
             $('.r-detail').append(`
             <table>

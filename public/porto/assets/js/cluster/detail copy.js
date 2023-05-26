@@ -8,6 +8,41 @@ var __webpack_exports__ = {};
 
 $(document).ready(function () {
 
+    function addImage(url, workbook, worksheet, excelCell, resolve) {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.responseType = 'blob'
+        xhr.onload = function () {
+          var reader = new FileReader();
+          reader.readAsDataURL(xhr.response);
+          reader.onloadend = function() {
+            var base64data = reader.result;
+            const image = workbook.addImage({
+              base64: base64data,
+              extension: 'png',
+            });
+
+            worksheet.getRow(excelCell.row).height = 75;
+            worksheet.addImage(image, {
+              tl: { col: excelCell.col - 1, row: excelCell.row - 1 },
+              br: { col: excelCell.col, row: excelCell.row }
+            });
+
+            resolve();
+          }
+        }
+        xhr.onerror = function () {
+          console.error('could not add image to excel cell')
+        };
+        xhr.send();
+      }
+
+    var url = $(location).attr('href');
+    var last_part=url.substr(url.lastIndexOf('/') + 1)
+
+    let splitStr = last_part.split("%")[0];
+    console.log(splitStr);
+
     const accordion = document.querySelectorAll(".accordiontable");
 
 accordion.forEach((element) => {
@@ -37,13 +72,10 @@ accordion.forEach((element) => {
   $('#filterCountry').select2({
     width: '170px'
   });
-  $('#filterCluster').select2({
-    width: '170px'
-  });
   $('#stateModal, #editModal').on('shown.bs.modal', function () {
     $(document).off('focusin.modal');
   });
-  var tablename = $('#clusterTable');
+  var tablename = $('#userTable');
   tablename.DataTable({
     deferRender: true,
     scroller: true,
@@ -51,46 +83,55 @@ accordion.forEach((element) => {
     serverSide: true,
     'order': [[0, 'asc']],
     ajax: {
-      url: route('cluster.iterasi'),
+      url: route('cluster.detail', splitStr),
       data: function data(_data) {
         console.log(_data);
         _data.kategori_id = $('#filterCountry').find('option:selected').val();
         console.log(_data.kategori_id);
 
-    }
+    },
+
     },
     columnDefs: [
-        // {
-        //     'orderable': false,
-        //     'className': 'select-checkbox',
-        //     'targets':   [0]
-        // },
         {
-        'targets': [5],
-        'width': '8%',
+            'targets': [0],
+            'width': '9%',
+            'visible': false,
+            'className': 'text-center action-table-btn'
+          },
+        {
+        'targets': [7],
+        'width': '9%',
         'orderable': false,
         'className': 'text-center action-table-btn'
-      },{
-          'targets': [2],
-          'width': '8%',
+      },
+      {
+        'targets': [4],
+        'width': '9%',
+        'orderable': false,
+        'className': 'text-center action-table-btn'
+      },
+      {
+        'targets': [6],
+        'width': '9%',
+        'orderable': false,
+        'className': 'text-center action-table-btn'
+      },
+      {
+        'targets': [5],
+        'width': '9%',
+        'orderable': false,
+        'className': 'text-center action-table-btn'
+      },
+      {
+          'targets': [3],
+          'width': '30%',
           "className": "text-center",
           'orderable': false,
           'className': 'text-center action-table-btn'
-        }
-        ,{
-            'targets': [3],
-            'width': '7%',
-            "className": "text-center",
-            'orderable': false,
-            'className': 'text-center action-table-btn'
-          }
-        ,{
-            'targets': [4],
-            'width': '9%',
-            "className": "text-center",
-            'orderable': false,
-            'className': 'text-center action-table-btn'
-          },
+        },
+
+
         {
         targets: '_all',
         defaultContent: 'N/A'
@@ -100,75 +141,58 @@ accordion.forEach((element) => {
         selector: 'td.select-checkbox'
     },
       columns: [
-
-        //  {   // Checkbox select column
-        //    data: null,
-        //    defaultContent: '',
-        //    className: 'select-checkbox',
-        //    orderable: false,
-        //    width: '3%',
-
-        //  },
-
-    //   {
-    //       data: 'kategori.nama',
-    //       name: 'kategori.nama'
-    //     },
-
         {
-          data: 'data.wilayah',
-          name: 'data.wilayah'
-        },
-        {
-          data: 'data.ruas_jalan',
-          name: 'data.ruas_jalan'
-        },
-        {
-            data: 'data.nilai_km',
-            name: 'data.nilai_km'
+            data: 'image.path',
+            name: 'image.path'
           },
         {
-            data: 'jarak_terdekat.cluster',
-            name: 'jarak_terdekat.cluster'
+          data: 'nama',
+          name: 'nama'
+        },
 
+        {
+            data: 'kategori.nama',
+            name: 'kategori.nama'
+          },
+          {
+            data: 'status',
+            name: 'status'
+          },
+        {
+            data: 'deskripsi',
+            name: 'deskripsi'
+          },
+        {
+            data: 'rusak',
+            name: 'rusak'
         },
         {
-        data: function data(row) {
-            var status;
-
-            if(row.jarak_terdekat.cluster == 1){
-                status = "<i class='fas fa-check-circle greeniconcolor'> Sedikit"
-            }else if(row.jarak_terdekat.cluster == 2){
-                status = "<i class='fas fa-check-circle yellowiconcolor'> Sedang"
-            }
-            else {
-                status = "<i class='fas fa-times-circle rediconcolor'> Banyak"
-            }
-
-            var data = [{
-                'status': status,
-              }];
-              return prepareTemplateRender('#statesWarna', data);
-
-        }
+            data: 'hilang',
+            name: 'hilang'
         },
-
+        {
+            data: 'terhalang',
+            name: 'terhalang'
+        },
+        {
+            data: 'geser',
+            name: 'geser'
+        },
       {
         data: function data(row) {
           var data = [{
-            'ruas': row.data.ruas_jalan,
-            'wilayah': row.data.wilayah,
-            'km' : row.data.nilai_km,
-            'cluster' : row.jarak_terdekat.cluster
+            'id': row.id,
+
           }];
           return prepareTemplateRender('#statesTemplate', data);
         },
         name: 'id'
       }],
+
     'fnInitComplete': function fnInitComplete() {
+
       $(document).on('change', '#filterCountry', function () {
         console.log('sada');
-        console.log($(this).val());
         $('#clusterTable').DataTable().ajax.reload(null, true);
         console.log('working');
       });
@@ -177,68 +201,164 @@ accordion.forEach((element) => {
 
 
 
-$('#filterCluster').on('change', function() {
-    console.log("sasasa");
+  $('#exportButton').on('click', function() {
+    var workbook = new ExcelJS.Workbook();
+    var worksheet = workbook.addWorksheet('Main sheet');
+    var promiseArray = [];
 
-    var selectedValue = $(this).val();
-    console.log(selectedValue);
+    worksheet.getCell('A1').value = "Image";
+    worksheet.getCell('B1').value = "Nama";
+    worksheet.getCell('C1').value = 'LastName';
+    worksheet.getCell('D1').value = 'Position';
+    worksheet.getCell('E1').value = 'HireDate';
+    worksheet.getCell('F1').value = 'BirthDate';
 
-      if( (selectedValue == '') || (selectedValue == null) ){
-        $('#clusterTable').DataTable().column(3).search('', true, false).draw();
-    } else {
-        $('#clusterTable').DataTable().column(3).search(selectedValue, true, false).draw();
-    }
+    worksheet.getCell('A1').border = {
+      top: {style:'thin'},
+      left: {style:'thin'},
+      bottom: {style:'thin'},
+      right: {style:'thin'}
+    };
 
-});
+    worksheet.getCell('C1').border = {
+      top: {style:'double', color: {argb:'3D3D3D'}},
+      left: {style:'double', color: {argb:'3D3D3D'}},
+      bottom: {style:'double', color: {argb:'3D3D3D'}},
+      right: {style:'double', color: {argb:'3D3D3D'}}
+    };
 
-//   dtSearchAction = function(selector){
-//     var fv = selector.val();
-//     console.log($(this));
-    // if( (fv == '') || (fv == null) ){
-    //   dataTable.api().column(columnId).search('', true, false).draw();
-    // } else {
-    //   dataTable.api().column(columnId).search(fv, true, false).draw();
-    // }
-// };
+    worksheet.getCell('A1').style = {font:{bold: true, name: 'Arial'}};
+    worksheet.getCell('B1').style = {font:{bold: true, name: 'Arial'}};
+    worksheet.getCell('C1').style = {font:{bold: true, name: 'Arial'}};
+    worksheet.getCell('D1').style = {font:{bold: true, name: 'Arial'}};
+    worksheet.getCell('E1').style = {font:{bold: true, name: 'Arial'}};
+    worksheet.getCell('F1').style = {font:{bold: true, name: 'Arial'}};
+
+
+
+
+    tablename.rows().every(function() {
+      var rowData = this.data();
+      var rowNode = this.node();
+      var rowIndex = table.row(rowNode).index() + 2;
+
+      console.log(rowData);
+      console.log(rowNode);
+
+      console.log(rowData['FirstName']);
+      console.log(rowIndex);
+
+      worksheet.getCell('B' + rowIndex).value = rowData['FirstName'];
+      worksheet.getCell('C' + rowIndex).value = rowData['LastName'];
+      worksheet.getCell('D' + rowIndex).value = rowData['Position'];
+      worksheet.getCell('E' + rowIndex).value = rowData['HireDate'];
+      worksheet.getCell('F' + rowIndex).value = rowData['BirthDate'];
+
+      worksheet.getCell('A' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+      worksheet.getCell('B' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+      worksheet.getCell('C' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+      worksheet.getCell('D' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+      worksheet.getCell('E' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+      worksheet.getCell('F' + rowIndex).border = {
+        top: {style:'thin'},
+        left: {style:'thin'},
+        bottom: {style:'thin'},
+        right: {style:'thin'}
+      };
+
+
+
+
+
+      var pictureUrl = rowData.Picture;
+      var pictureCell = worksheet.getCell('A' + rowIndex);
+      pictureCell.value = undefined;
+
+      var promise = new Promise(function(resolve, reject) {
+        addImage(pictureUrl, workbook, worksheet, pictureCell, resolve);
+      });
+      promiseArray.push(promise);
+    });
+
+    worksheet.columns.forEach(function (column, i) {
+      if(i!==0)
+      {
+          var maxLength = 0;
+          column["eachCell"]({ includeEmpty: true }, function (cell) {
+              var columnLength = cell.value ? cell.value.toString().length : 15;
+              if (columnLength > maxLength ) {
+                  maxLength = columnLength;
+              }
+          });
+          column.width = maxLength < 12 ? 12 : maxLength;
+      }
+  });
+
+
+    Promise.all(promiseArray).then(function() {
+      workbook.xlsx.writeBuffer().then(function(buffer) {
+        saveAs(new Blob([buffer], { type: "application/octet-stream" }), "ExcelJSFormat.xlsx");
+      });
+    });
+  });
+
 
 
   $(document).on('click', '.detail-cluster', function (event) {
     var wilayah = $(event.currentTarget).data('id');
     var km = $(event.currentTarget).data('km');
     var ruas = $(event.currentTarget).data('ruas');
-    var cluster = $(event.currentTarget).data('cluster');
 
     console.log(wilayah);
     console.log(km);
     console.log(ruas);
-    console.log(cluster);
-
 
     var formData = {
         wilayah: wilayah,
         ruas_jalan: ruas,
         nilai_km: km,
-        cluster: cluster,
-
     };
 
     console.log(formData);
 
     $.ajax({
-        url: route('cluster.get'),
+        url: route('cluster.detail'),
         type: 'POST',
         data: formData,
         success: function success(result) {
             console.log(result.data);
-            var enc = result.data;
-            var url = route('cluster.detail', enc);
-            window.open(url, '_blank').focus();
             // var enc = result.data.enkrip;
             // var url = route('datageografis.index', enc);
             // window.open(url, '_blank').focus();
 
         }
     });
+    // renderData(id);
   });
 
   $('#stateModal').on('hidden.bs.modal', function () {
@@ -262,9 +382,13 @@ $('#filterCluster').on('change', function() {
       type: 'GET',
       success: function success(result) {
         console.log(result.data);
+
+        var stringArray = result.data.nama.split(/(\s+)/);
+
         $('#fotoedit').empty();
         $('#stateFieldId').val(result.data.id);
         $('#editJenis').val(result.data.kategori_id).trigger('change.select2');
+        $('#editNama').val(stringArray[0]);
         $('#editKM').val(result.data.nilai_km);
         $('#editHM').val(result.data.nilai_hm);
 
@@ -353,6 +477,10 @@ $('#filterCluster').on('change', function() {
 });
 
 
+
+
+
+
 function detailData(id) {
     console.log("lfg 1");
 
@@ -370,7 +498,7 @@ function detailData(id) {
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
         <img class="modal__img" src="https://gispatok.com${result.data.image.path_new}" alt="">
-        <p class="detail__bagBtn">add to bag</p>`: `
+        <button class="detail__bagBtn" id="popup-img">Foto Lama</button>`: `
         <img class="modal__img" src="https://gispatok.com${result.data.image.path}" alt="">
         `) +`
 
@@ -454,6 +582,10 @@ function detailData(id) {
     });
   }
 
+  $(document).on('click', '#popup-img', function (event) {
+    console.log("wowowow");
+
+});
 
 });
 /******/ })()

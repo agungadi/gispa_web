@@ -152,7 +152,7 @@ class ClusterController extends AppBaseController
             ['patok.wilayah', '=', $wilayah],
             ['patok.ruas_jalan', '=', $ruas_jalan],
             ['patok.nilai_km', '=', $nilai_km]
-        ])->get();
+        ])->with("image")->get();
 
 
         if ($request->ajax()) {
@@ -211,10 +211,6 @@ class ClusterController extends AppBaseController
         $tempCentroid[0][] = $data[array_search($middle, $arrayOri)];
         $tempCentroid[0][] = $data[array_search($max, $arrayOri)];
 
-
-
-
-
         // mengolah centroid pertama
         $centroid = array();
         $centroid[0] = $this->transformArray($tempCentroid[0]);
@@ -228,7 +224,6 @@ class ClusterController extends AppBaseController
         while (true) {
             // menampung setiap iterasi
 			$table_iterasi = array();
-
             foreach ($data as $key => $value) {
 
 				//untuk setiap table centroid pada iterasi ke i
@@ -242,11 +237,9 @@ class ClusterController extends AppBaseController
 				//hitung jarak terdekat dan tentukan cluster nya
 				$table_iterasi[$key]['jarak_terdekat'] = $this->jarakTerdekat($table_iterasi[$key]['jarak_ke_centroid']);
 			}
-
             array_push($hasil_iterasi, $table_iterasi);
             $centroid[++$iterasi] = $this->perbaruiCentroid($table_iterasi, $hasil_cluster);
 			$lanjutkan = $this->centroidBerubah($centroid, $iterasi);
-
 
             if (!$lanjutkan)
 				break;
@@ -257,7 +250,6 @@ class ClusterController extends AppBaseController
             return DataTables::of(end($hasil_iterasi))->make(true);
         }
 
-        // dd(end($hasil_iterasi));
 
         return view('admin.cluster.index', compact('data', 'hasil_iterasi', 'centroid'));
 
@@ -283,129 +275,6 @@ class ClusterController extends AppBaseController
 
     }
 
-    public function iterasi()
-    {
-        //
-
-        $data = DB::table('data_knn')->get();
-
-        $centroid1 = [];
-        $arrayOri = [];
-        foreach($data as $sum){
-            $centroid1[] = $sum->hr + $sum->pr + $sum->qrs;
-            $arrayOri[] = $sum->hr + $sum->pr + $sum->qrs;
-        }
-
-
-        sort($centroid1); // Urutkan array dari nilai terkecil ke terbesar
-        $min = $centroid1[0];
-        $max = end($centroid1);
-        $middleIndex = floor(count($centroid1) / 2);
-        $middle = $centroid1[$middleIndex]; // Nilai tengah-tengah
-
-
-        $centroidSatu = array();
-
-        $centroidSatu[0][] = $data[array_search($min, $arrayOri)];
-        $centroidSatu[0][] = $data[array_search($middle, $arrayOri)];
-        $centroidSatu[0][] = $data[array_search($max, $arrayOri)];
-
-
-        $centroid = array();
-        $centroid[0] = $this->transformArray($centroidSatu[0]);
-
-
-
-        // $hasil = $this->jarakEuclidean($data, $centroidSatu);
-
-
-        $hasil_iterasi = [];
-		$hasil_cluster = [];
-
-        //iterasi
-		$iterasi = 0;
-        while (true) {
-			$table_iterasi = array();
-
-			foreach ($data as $key => $value) {
-
-				//untuk setiap table centroid pada iterasi ke i
-				$table_iterasi[$key]['data'] = $value;
-
-				foreach ($centroid[$iterasi] as $key_c => $value_c) {
-
-					//hitung jarak euclidean
-                    // dd($value, $centroidSatu[$iterasi]);
-					$table_iterasi[$key]['jarak_ke_centroid'][] =  $this->jarakEuclidean($value, $value_c);
-				}
-				//hitung jarak terdekat dan tentukan cluster nya
-				$table_iterasi[$key]['jarak_terdekat'] = $this->jarakTerdekat($table_iterasi[$key]['jarak_ke_centroid']);
-			}
-
-            array_push($hasil_iterasi, $table_iterasi);
-			$centroid[++$iterasi] = $this->perbaruiCentroid($table_iterasi, $hasil_cluster);
-			$lanjutkan = $this->centroidBerubah($centroid, $iterasi);
-
-            // dd($lanjutkan);
-
-            if (!$lanjutkan)
-				break;
-            // dd($centroidSatu);
-
-        }
-
-        $patok =  Patok::select([
-            'wilayah',
-            'ruas_jalan',
-            'nilai_km'
-        ])
-        ->groupBy('wilayah','ruas_jalan', 'nilai_km')
-        ->orderBy('nilai_km', 'DESC')
-        ->get();
-
-
-        $patokAll =  Patok::query()->select('patok.wilayah','patok.ruas_jalan', 'patok.nilai_km', 'patok.rusak', 'patok.hilang', 'patok.terhalang', 'patok.geser')->get();
-        // ->groupBy('wilayah','ruas_jalan', 'nilai_km')
-        // ->orderBy('nilai_km', 'DESC')
-        // ->get();
-
-
-        // $data = DB::table('patok')
-        // ->select('wilayah', 'ruas_jalan', 'nilai_km')
-        // ->selectRaw('SUM(CASE WHEN rusak = "Ya" THEN 1 ELSE 0 END) AS rusak')
-        // ->selectRaw('SUM(CASE WHEN hilang = "Ya" THEN 1 ELSE 0 END) AS hilang')
-        // ->selectRaw('SUM(CASE WHEN terhalang = "Ya" THEN 1 ELSE 0 END) AS terhalang')
-        // ->selectRaw('SUM(CASE WHEN geser = "Ya" THEN 1 ELSE 0 END) AS geser')
-        // ->where('wilayah', '=', 'Tuban')
-        // ->where('ruas_jalan', '=', 'Pakah - Ponco')
-        // ->groupBy('wilayah', 'ruas_jalan', 'nilai_km')
-        // ->orderBy('nilai_km')
-        // ->get();
-
-
-
-        $results = DB::table('patok')
-        ->select('wilayah', 'ruas_jalan', 'nilai_km',
-            DB::raw('SUM(CASE WHEN rusak = \'Ya\' THEN 1 ELSE 0 END) AS jumlah_rusak'),
-            DB::raw('SUM(CASE WHEN hilang = \'Ya\' THEN 1 ELSE 0 END) AS jumlah_hilang'),
-            DB::raw('SUM(CASE WHEN terhalang = \'Ya\' THEN 1 ELSE 0 END) AS jumlah_terhalang'),
-            DB::raw('SUM(CASE WHEN geser = \'Ya\' THEN 1 ELSE 0 END) AS jumlah_geser'))
-        ->groupBy('wilayah', 'ruas_jalan', 'nilai_km')
-        ->orderBy('wilayah', 'asc')
-        ->orderBy('ruas_jalan', 'asc')
-        ->orderBy('nilai_km', 'asc')
-        ->get();
-        return [
-            // 'min' => $patok,
-            'max' => $results,
-            // 'middle' => $middle,
-            // 'iterasi' => $iterasi,
-            // 'searchIndex' => $hasil_iterasi
-        ];
-
-        // dd(($centroid1));
-
-    }
 
     function jarakEuclidean($data, $centroid)
     {
@@ -442,18 +311,19 @@ class ClusterController extends AppBaseController
         // dd($hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][0][]);
         //looping untuk mengelompokan x dan y sesuai cluster
 
+        //looping untuk mengelompokan jumlah patok bermasalah
         foreach ($table_iterasi as $key => $value) {
-            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][0][] = $value['data']->jumlah_rusak; //data x
-            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][1][] = $value['data']->jumlah_hilang; //data y
-            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][2][] = $value['data']->jumlah_terhalang; //data z
-            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][3][] = $value['data']->jumlah_geser; //data w
+            //hasil cluster untuk menampung susuai hasil iterasi cluster sebelumnya
+            //jika pada cluster 1 terdapat jumlah rusak maka akan dimasukan ke dalam hasil_cluster[0][0]
+            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][0][] = $value['data']->jumlah_rusak;
+            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][1][] = $value['data']->jumlah_hilang;
+            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][2][] = $value['data']->jumlah_terhalang;
+            $hasil_cluster[($value['jarak_terdekat']['cluster'] - 1)][3][] = $value['data']->jumlah_geser;
         }
-
-
-
+        //menampung centroid baru
         $new_centroid = [];
         foreach ($hasil_cluster as $key => $value) {
-            // dd(array_sum($value[3]));
+            //lakukan penjumlahan pada setiap nilai hasil cluster kemudian bagi total cluster yang masuk
             $new_centroid[$key] = [
                 array_sum($value[0]) / count($value[0]),
                 array_sum($value[1]) / count($value[1]),
@@ -461,8 +331,6 @@ class ClusterController extends AppBaseController
                 array_sum($value[3]) / count($value[3])
             ];
         }
-
-
         ksort($new_centroid);
 
         return $new_centroid;
@@ -615,7 +483,8 @@ class ClusterController extends AppBaseController
 
 
 
-        $query = Patok::query()->select('patok.*');
+        $query = Patok::select('id','nama', 'kategori_id', 'image_id' , 'id_user' , 'ruas_jalan', 'nilai_km', 'nilai_hm', 'wilayah', 'ruas_jalan', 'hilang', 'rusak', 'terhalang', 'geser', 'status_geser','status' ,'deskripsi', 'latlng' , 'longlat', 'periode', 'created_at');
+
         // $query = DB::table('patok');
 
         // Patok::select("*")

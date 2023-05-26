@@ -327,7 +327,8 @@ class ApiPatokController extends Controller
             $lat = doubleval($split[0]);
             $long = doubleval($split[1]);
             $koordinat = "POINT(".$long.", ".$lat.")";
-            $point = "POINT(".$long." ".$lat.")";
+            // $point = "ST_PointFromText('POINT(.$long.' '.$lat.)')";
+            $point = DB::raw("ST_PointFromText('POINT($long $lat)')");
 
             $a = Carbon::now();
 
@@ -460,10 +461,18 @@ class ApiPatokController extends Controller
 
                 $path = '/images/patok/update/'.$data_image;
 
-                $images = Images::where('id', $idImages)->update([
-                    'filename_new' => $data_image,
-                    'path_new' => $path
-                ]);
+                if($request->status == 'Selesai'){
+                    $images = Images::where('id', $idImages)->update([
+                        'filename_new' => $data_image,
+                        'path_new' => $path
+                    ]);
+                }else{
+                    $images = Images::where('id', $idImages)->update([
+                        'filename' => $data_image,
+                        'path' => $path
+                    ]);
+                }
+
 
             }
             // else{

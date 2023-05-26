@@ -47,7 +47,8 @@ class PetaController extends AppBaseController
 
     public function get_patok(Request $request){
 
-        $rusak = $request->rusak;
+
+		$rusak = $request->rusak;
         $hilang = $request->hilang;
         $terhalang = $request->terhalang;
         $geser = $request->geser;
@@ -55,25 +56,25 @@ class PetaController extends AppBaseController
         $kuartal = $request->kuartal;
 
 
-        $patok = Patok::query()->select('patok.*');
 
+        $patok = Patok::select('id','nama', 'kategori_id', 'image_id' , 'id_user' , 'ruas_jalan', 'nilai_km', 'nilai_hm', 'wilayah', 'ruas_jalan', 'hilang', 'rusak', 'terhalang', 'geser', 'status_geser','status' ,'deskripsi', 'latlng' , 'longlat', 'periode', 'created_at');
 
-        if(!empty($rusak)){
-            $patok = $patok->where(DB::raw('lower(patok.rusak)'), strtolower($rusak));
+		 if(!empty($rusak)){
+            $patok = $patok->orwhere(DB::raw('lower(patok.rusak)'), strtolower($rusak));
         }
         if(!empty($hilang)){
-            $patok = $patok->where(DB::raw('lower(patok.hilang)'), strtolower($hilang));
+            $patok = $patok->orwhere(DB::raw('lower(patok.hilang)'), strtolower($hilang));
 
         }
         if(!empty($terhalang)){
-            $patok = $patok->where(DB::raw('lower(patok.terhalang)'), strtolower($terhalang));
+            $patok = $patok->orwhere(DB::raw('lower(patok.terhalang)'), strtolower($terhalang));
         }
         if(!empty($geser)){
-            $patok = $patok->where(DB::raw('lower(patok.geser)'), strtolower($geser));
+            $patok = $patok->orwhere(DB::raw('lower(patok.geser)'), strtolower($geser));
         }
         if(!empty($ideal)){
             $patok = $patok->
-            where([
+            orwhere([
                 ['patok.rusak', '=', 'Tidak'],
                 ['patok.hilang', '=', 'Tidak'],
                 ['patok.terhalang', '=', 'Tidak'],
@@ -84,12 +85,14 @@ class PetaController extends AppBaseController
             $patok = $patok->where(DB::raw('lower(patok.periode)'), strtolower($kuartal));
         }
 
-
         $patok = $patok->get();
 
+
+
+
+
+
         return $this->sendResponse($patok, 'Data patok successfully retrieved.');
-
-
 
     }
 }

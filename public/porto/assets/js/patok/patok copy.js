@@ -267,9 +267,9 @@ function detailData(id) {
         $('#img-detail').append(`
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path_new}" alt="">
         <p class="detail__bagBtn">add to bag</p>`: `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path}" alt="">
         `) +`
 
         `)

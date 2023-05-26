@@ -15,7 +15,7 @@ class CreateIsigeografisTable extends Migration
     {
         Schema::create('isigeografis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('geografis_id');
+            $table->unsignedBigInteger('geografis_id');
 
             $table->string('nama');
             $table->string('warna');

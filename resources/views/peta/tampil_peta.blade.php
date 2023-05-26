@@ -8,7 +8,7 @@
 
     <link rel='stylesheet' href='https://unpkg.com/leaflet@1.6.0/dist/leaflet.css'>
 
-    <link rel='stylesheet' href='https://rawgit.com/nickpeihl/leaflet-sidebar-v2/master/css/leaflet-sidebar.css'>
+    <link rel='stylesheet' href="{{ asset('porto/assets/js/peta/leaflet-sidebar.css') }}">
 @endsection
 
 @section('content')
@@ -35,7 +35,7 @@
 
                 </br>
                     <div class="dropdownss">
-                        <select name="one" id="select-cluster" class="dropdownss-select">
+                        <select name="one" id="select-cluster"  class="dropdownss-select">
                           <option value="">Clustering</option>
                           <option value="1">Cluster 1</option>
                           <option value="2">Cluster 2</option>
@@ -44,7 +44,7 @@
                       </div>
                     </br>
 
-                      <button id="btn-cluster">Submit Cluster</button>
+                      <button id="btn-cluster" class="btn-cluster">Submit Cluster</button>
                     </br>
 
 
@@ -172,5 +172,5 @@
     <script type="text/javascript" src="{{ asset('leaflet/wicket/wicket-leaflet.js') }}"></script>
     <script src="{{ asset('porto/assets/js/peta/peta.js') }}"></script>
     <script src='https://unpkg.com/leaflet@1.6.0/dist/leaflet.js'></script>
-    <script src='https://rawgit.com/nickpeihl/leaflet-sidebar-v2/master/js/leaflet-sidebar.js'></script>
+    <script src="{{ asset('porto/assets/js/peta/leaflet-sidebar.js') }}"></script>
 @endsection

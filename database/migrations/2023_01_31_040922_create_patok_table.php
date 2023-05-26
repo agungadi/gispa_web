@@ -16,10 +16,10 @@ class CreatePatokTable extends Migration
     {
         Schema::create('patok', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('kategori_id');
-            $table->unsignedInteger('image_id');
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('update_id_user')->nullable();
+            $table->unsignedBigInteger('kategori_id');
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('update_id_user')->nullable();
             $table->string('nama');
             $table->integer('nilai_km');
             $table->integer('nilai_hm');
@@ -37,7 +37,6 @@ class CreatePatokTable extends Migration
             $table->point('p_longlat')->nullable();
             $table->string('periode')->nullable();;
             $table->timestamps();
-
 
             $table->foreign('kategori_id')->references('id')->on('kategori')
             ->onDelete('cascade')->onUpdate('cascade');

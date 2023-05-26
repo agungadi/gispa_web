@@ -18,7 +18,7 @@ class CreateGeografisTable extends Migration
             $table->string('nama');
             $table->string('keterangan');
             $table->string('tipe');
-            $table->unsignedInteger('kelompok_data');
+            $table->unsignedBigInteger('kelompok_data');
             $table->string('nama_tabel');
             $table->string('field1')->nullable();
             $table->string('field2')->nullable();

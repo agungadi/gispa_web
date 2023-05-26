@@ -31,8 +31,8 @@ $(document).ready(function () {
     ajax: {
       url: route('patok.proses'),
       data: function data(_data) {
-        _data.kategori_id = $('#filterCountry').find('option:selected').val();
-        console.log(_data.kategori_id);
+        _data.status_id = $('#filterCountry').find('option:selected').val();
+        console.log(_data.status_id);
 
     }
     },
@@ -131,7 +131,7 @@ $(document).ready(function () {
         },
         {
             data: function data(row) {
-                var url = "https://nanomacine.my.id" +row.image.path;
+                var url = "https://gispatok.com" +row.image.path;
               var data = [{
                 'id': row.id,
                 'url' : url
@@ -230,7 +230,7 @@ $(document).ready(function () {
 
         $('#editDeskripsi').val(result.data.deskripsi);
 
-        $('#fotoedit').append(`<img src="https://nanomacine.my.id${result.data.image.path}" style="max-width:128px" />`);
+        $('#fotoedit').append(`<img src="https://gispatok.com${result.data.image.path}" style="max-width:128px" />`);
 
         $('#editModal').modal('show');
       }
@@ -291,9 +291,9 @@ function detailData(id) {
         $('#img-detail').append(`
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path_new}" alt="">
         <p class="detail__bagBtn">add to bag</p>`: `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path}" alt="">
         `) +`
 
         `)

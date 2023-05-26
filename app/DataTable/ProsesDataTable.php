@@ -23,8 +23,8 @@ class ProsesDataTable
               ->orWhere('status', 'Selesai');
         });
 
-        $query->when(isset($input['kategori_id']), function (Builder $q) use ($input) {
-            $q->where('status', $input['kategori_id']);
+        $query->when(isset($input['status_id']), function (Builder $q) use ($input) {
+            $q->where('status', $input['status_id']);
         });
 
         return $query;

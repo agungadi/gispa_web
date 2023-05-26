@@ -18,6 +18,9 @@ $(document).ready(function () {
   $('#filterCountry').select2({
     width: '170px'
   });
+  $('#filterStatus').select2({
+    width: '170px'
+  });
   $('#stateModal, #editModal').on('shown.bs.modal', function () {
     $(document).off('focusin.modal');
   });
@@ -32,8 +35,9 @@ $(document).ready(function () {
       url: route('patok.index'),
       data: function data(_data) {
         _data.kategori_id = $('#filterCountry').find('option:selected').val();
-        console.log(_data.kategori_id);
-
+        console.log(_data.kategori);
+        _data.status_id = $('#filterStatus').find('option:selected').val();
+        console.log(_data.status_id);
     }
     },
     columnDefs: [{
@@ -125,13 +129,39 @@ $(document).ready(function () {
             },
           name: 'id'
         },
-        {
-          data: 'status',
-          name: 'status'
-        },
+        // {
+
+        //   data: 'status',
+        //   name: 'status'
+        // },
+
         {
             data: function data(row) {
-                var url = "https://nanomacine.my.id" +row.image.path;
+                var status;
+
+                if(row.status == "Menunggu"){
+                    status = "<i class='fa fa-spinner yellowiconcolor'> Menunggu"
+                }else if(row.status == "Laporkan"){
+                    status = "<i class='fa fa-exclamation-circle rediconcolor'> Laporkan"
+                }else if(row.status == "Ideal"){
+                    status = "<i class='fas fa-check-circle greeniconcolor'> Ideal"
+                }
+                else {
+                    status = "<i class='fas fa-check-circle greeniconcolor'> Selesai"
+                }
+
+                var data = [{
+                    'status': status,
+                  }];
+                  return prepareTemplateRender('#statusWarna', data);
+
+            },
+            name: 'status'
+
+            },
+        {
+            data: function data(row) {
+                var url = "https://gispatok.com" +row.image.path;
               var data = [{
                 'id': row.id,
                 'url' : url
@@ -154,6 +184,11 @@ $(document).ready(function () {
       }],
     'fnInitComplete': function fnInitComplete() {
       $(document).on('change', '#filterCountry', function () {
+        console.log('sada');
+        $('#userTable').DataTable().ajax.reload(null, true);
+        console.log('working');
+      });
+      $(document).on('change', '#filterStatus', function () {
         console.log('sada');
         $('#userTable').DataTable().ajax.reload(null, true);
         console.log('working');
@@ -230,7 +265,7 @@ $(document).ready(function () {
 
         $('#editDeskripsi').val(result.data.deskripsi);
 
-        $('#fotoedit').append(`<img src="https://nanomacine.my.id${result.data.image.path}" style="max-width:128px" />`);
+        $('#fotoedit').append(`<img src="https://gispatok.com${result.data.image.path}" style="max-width:128px" />`);
 
         $('#editModal').modal('show');
       }
@@ -291,12 +326,26 @@ function detailData(id) {
         $('#img-detail').append(`
         `+
         (result.data.image.path_new != "" && result.data.image.path_new != null ? `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path_new}" alt="">
-        <p class="detail__bagBtn">add to bag</p>`: `
-        <img class="modal__img" src="https://nanomacine.my.id${result.data.image.path}" alt="">
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path_new}" alt="">
+        <p class="detail__bagBtn" id="popup-img">Foto Lama</p>`: `
+        <img class="modal__img" src="https://gispatok.com${result.data.image.path}" alt="">
         `) +`
 
         `)
+
+        $(document).on('click', '#popup-img', function (event) {
+            var img_src = "https://gispatok.com" + result.data.image.path;
+            console.log(img_src);
+            $('.img-popup').children('img').attr('src', img_src);
+            $('.img-popup').addClass('opened');
+        });
+
+            $(document).on('click', '.img-popup', '.close-btn', function (event) {
+            console.log("wowowow");
+            $('.img-popup').removeClass('opened');
+            $('.img-popup').children('img').attr('src', '');
+          });
+
 
         $('.r-detail').append(`
         <table>
@@ -375,6 +424,8 @@ function detailData(id) {
       }
     });
   }
+
+
 
 
 });

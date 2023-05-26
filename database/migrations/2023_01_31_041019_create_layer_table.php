@@ -15,14 +15,13 @@ class CreateLayerTable extends Migration
     {
         Schema::create('layer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('geografis_id');
+            $table->unsignedBigInteger('geografis_id');
             $table->string('nama');
             $table->string('warna');
             $table->string('warna_border');
             $table->string('tebal_border');
             $table->string('opacity');
             $table->timestamps();
-
 
             $table->foreign('geografis_id')->references('id')->on('geografis')
             ->onDelete('cascade')->onUpdate('cascade');

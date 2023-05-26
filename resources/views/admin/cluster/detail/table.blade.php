@@ -1,6 +1,9 @@
+
 <table class="table table-responsive-sm table-striped table-bordered datatable-table" id="userTable">
     <thead>
     <tr>
+        <th scope="col">Foto</th>
+
         <th scope="col">Nama</th>
         <th scope="col">Kategori</th>
         <th scope="col">status</th>

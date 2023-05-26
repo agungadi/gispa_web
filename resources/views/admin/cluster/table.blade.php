@@ -2,7 +2,7 @@
     <thead>
     <tr>
         {{-- <th  scope="col"></th> --}}
-        <th  scope="col"></th>
+        {{-- <th  scope="col"></th> --}}
         {{-- <th scope="col">Wilayah</th> --}}
         {{-- <th scope="col">Kategori</th> --}}
         {{-- <th scope="col">KM</th> --}}

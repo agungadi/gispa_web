@@ -11,24 +11,27 @@
             <div class="header-body">
                 <div class="row align-items-center py-4 d-flex content-responsive">
                     <div class="col-lg-6 col-6 content-text">
-                        <h6 class="h2 text-white d-inline-block mb-0">Detail Patok : {{$ruas_jalan}} KM.{{$nilai_km}} (Cluster {{$cluster}})</h6>
+                        <h6 id="mycluster" class="h2 text-white d-inline-block mb-0">Detail Patok : {{$ruas_jalan}} KM.{{$nilai_km}} (Cluster {{$cluster}})</h6>
                     </div>
-{{--
+
                     <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
                         <div class="ml-auto text-center mr-3 custom_all_button mt-2rem">
-                                <select name="kategori_id" id="filterCountry" class="form-control" placeholder="Filter Patok">
-                                    <option value="">Filter Patok</option>
-                                    <option value="ideal">Patok Ideal</option>
-                                    <option value="rusak">Patok Rusak</option>
-                                    <option value="hilang">Patok Hilang</option>
-                                    <option value="terhalang">Patok Terhalang</option>
-                                    <option value="geser">Patok Geser</option>
-                                </select>
-                        </div> --}}
-                        {{-- <div class="mt-2rem custom_exp_button">
+
+                        </div>
+                        <div class="mt-2rem custom_exp_button" style="margin-right: 1rem;">
+                            <a id="exportButton" class="btn btn-group-lg btn-neutral custom-button-size">Cetak</a>
+                        </div>
+                        {{-- <button id="exportButton">Export to Excel</button> --}}
+
+
+                        {{-- <div class="col-lg-6 col-6 text-right d-flex experience-alignment">
+
+                        <div class="mt-2rem custom_exp_button" style="margin-right: 1rem;">
                             <a href="#" class="btn btn-group-lg btn-neutral custom-button-size" data-toggle="modal"
-                               data-target="#stateModal">Tambah User</a>
+                               data-target="#stateModal">Cetak</a>
+                        </div>
                         </div> --}}
+
                     </div>
                 </div>
             </div>
@@ -51,10 +54,14 @@
 @endsection
 @section('scripts')
 
+
     <script src="{{ asset('porto/assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('porto/assets/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('porto/assets/js/custom/custom-datatable.js') }}"></script>
     {{-- <script src="{{ asset('porto/assets/js/cluster/cluster.js') }}"></script> --}}
     <script src="{{ asset('porto/assets/js/cluster/detail.js') }}"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/exceljs/1.7.0/exceljs.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js'></script>
 
 @endsection
