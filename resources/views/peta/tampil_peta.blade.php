@@ -74,7 +74,26 @@
                                   <option value="">Periode</option>
                                   @foreach($kuarter as $q)
 
-                                  <option value="{{$q}}">{{$q}}</option>
+                                  @php
+                                  $start_date = '';
+                                  $end_date = '';
+
+                                  if (strpos($q, 'Q1') !== false) {
+                                    $start_date = '1 Januari';
+                                    $end_date = '31 Maret';
+                                    } elseif (strpos($q, 'Q2') !== false) {
+                                    $start_date = '1 April';
+                                    $end_date = '30 Juni';
+                                    } elseif (strpos($q, 'Q3') !== false) {
+                                    $start_date = '1 Juli';
+                                    $end_date = '30 September';
+                                    } elseif (strpos($q, 'Q4') !== false) {
+                                    $start_date = '1 Oktober';
+                                    $end_date = '31 Desember';
+                                }
+                                @endphp
+
+                                  <option value="{{$q}}">{{$q}} ({{$start_date}} - {{$end_date}})</option>
                                   {{-- <option value="2">Option #2</option>
                                   <option value="3">Option #3</option> --}}
                                   @endforeach

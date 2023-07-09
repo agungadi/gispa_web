@@ -522,9 +522,9 @@ accordion.forEach((element) => {
       type: 'PUT',
       data: $(this).serialize(),
       success: function success(result) {
+        window.location.reload();
         $('#editModal').modal('hide');
         displaySuccessMessage(result.message);
-        $(tablename).DataTable().ajax.reload(null, false);
       },
       error: function error(result) {
         displayErrorMessage(result.responseJSON.message);

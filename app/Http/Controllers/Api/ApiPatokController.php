@@ -45,14 +45,28 @@ class ApiPatokController extends Controller
         ,"patok.ruas_jalan", "patok.wilayah", "patok.rusak", "patok.hilang", "patok.geser", "patok.terhalang",
         "images.path as path", "images.path_new as path_new", "patok.status", "patok.status_geser", "patok.created_at");
 
+        // if(!empty($search)){
+        //     $patok = $patok->where(function ($query) use ($request) {
+        //         $query->where('patok.nama', 'ilike', '%'.$request->search.'%')
+        //         ->orWhere('kategori.nama', 'ilike', '%'.$request->search.'%')
+        //         ->orWhere('patok.ruas_jalan', 'ilike', '%'.$request->search.'%')
+        //         ->orWhere('patok.wilayah', 'ilike', '%'.$request->search.'%')
+        //         ->orWhere('patok.status', 'ilike', '%'.$request->search.'%')
+        //         ->orWhere(DB::raw('patok.created_at::text'), 'ilike', '%'.$request->search.'%')
+        //         ;
+        //     });
+        // }
+
         if(!empty($search)){
             $patok = $patok->where(function ($query) use ($request) {
-                $query->where('patok.nama', 'ilike', '%'.$request->search.'%')
-                ->orWhere('kategori.nama', 'ilike', '%'.$request->search.'%')
-                ->orWhere('patok.ruas_jalan', 'ilike', '%'.$request->search.'%')
-                ->orWhere('patok.wilayah', 'ilike', '%'.$request->search.'%')
-                ->orWhere('patok.status', 'ilike', '%'.$request->search.'%')
-                ->orWhere(DB::raw('patok.created_at::text'), 'ilike', '%'.$request->search.'%')
+                $query->where('patok.nama', 'like', '%'.$request->search.'%')
+                ->orWhere('kategori.nama', 'like', '%'.$request->search.'%')
+                ->orWhere('patok.ruas_jalan', 'like', '%'.$request->search.'%')
+                ->orWhere('patok.wilayah', 'like', '%'.$request->search.'%')
+                ->orWhere('patok.status', 'like', '%'.$request->search.'%')
+                ->orWhere(DB::raw('DATE(patok.created_at)'), 'like', '%' . $request->search . '%');
+
+
                 ;
             });
         }

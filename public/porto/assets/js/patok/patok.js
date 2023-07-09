@@ -145,6 +145,9 @@ $(document).ready(function () {
                     status = "<i class='fa fa-exclamation-circle rediconcolor'> Laporkan"
                 }else if(row.status == "Ideal"){
                     status = "<i class='fas fa-check-circle greeniconcolor'> Ideal"
+
+                }else if(row.status == "Perbaiki"){
+                    status = "<i class='fas fa-check-circle yellowiconcolor'> Perbaiki"
                 }
                 else {
                     status = "<i class='fas fa-check-circle greeniconcolor'> Selesai"
@@ -320,7 +323,22 @@ function detailData(id) {
         $('.r-detail').empty();
         $('#img-detail').empty();
         console.log(result.data);
-        console.log();
+        console.log("yoyoyo");
+
+        let rentangTanggal = '';
+
+        if (result.data.periode.includes("Q1")) {
+        rentangTanggal = "1 Januari - 31 Maret";
+        } else if (result.data.periode.includes("Q2")) {
+        rentangTanggal = "1 April - 30 Juni";
+        } else if (result.data.periode.includes("Q3")) {
+        rentangTanggal = "1 Juli - 30 September";
+        } else if (result.data.periode.includes("Q4")) {
+        rentangTanggal = "1 Oktober - 31 Desember";
+        }
+
+
+
         $('#d_nama').val(result.data.nama);
 
         $('#img-detail').append(`
@@ -407,7 +425,10 @@ function detailData(id) {
       </tr>
       <tr>
       <th>Periode </th>
-      <td> : ${result.data.periode}</td>
+      <td> : ${result.data.periode} (${rentangTanggal})</td>
+      <tr>
+      <th>Oleh </th>
+      <td> : ${result.data.user.nama}</td>
   </tr>
         `+
         (result.data.image.path_new != ""  && result.data.image.path_new != null ? ` <tr>

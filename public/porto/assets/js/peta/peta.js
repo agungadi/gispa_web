@@ -222,7 +222,20 @@ $(document).ready(function () {
             $('.r-detail').empty();
             $('#img-detail').empty();
             console.log(result.data);
-            console.log();
+
+
+            let rentangTanggal = '';
+
+            if (result.data.periode.includes("Q1")) {
+            rentangTanggal = "1 Januari - 31 Maret";
+            } else if (result.data.periode.includes("Q2")) {
+            rentangTanggal = "1 April - 30 Juni";
+            } else if (result.data.periode.includes("Q3")) {
+            rentangTanggal = "1 Juli - 30 September";
+            } else if (result.data.periode.includes("Q4")) {
+            rentangTanggal = "1 Oktober - 31 Desember";
+            }
+
             $('#d_nama').val(result.data.nama);
 
             $('#img-detail').append(`
@@ -304,12 +317,11 @@ $(document).ready(function () {
               <td> : ${result.data.latlng}</td>
           </tr>
           <tr>
-              <th>Tanggal </th>
-              <td> : ${result.data.created_at}</td>
-          </tr>
-          <tr>
           <th>Periode </th>
-          <td> : ${result.data.periode}</td>
+          <td> : ${result.data.periode} (${rentangTanggal})</td>
+          <tr>
+          <th>Oleh </th>
+          <td> : ${result.data.user.nama}</td>
       </tr>
             `+
             (result.data.image.path_new != ""  && result.data.image.path_new != null ? ` <tr>

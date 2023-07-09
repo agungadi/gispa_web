@@ -110,9 +110,9 @@
                             <div class="dropdown-menu  dropdown-menu-right">
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">
-                                        {{ __('messages.user.welcome') }},&nbsp;&nbsp;{{ Auth::user()->nama }}</h6>
+                                        Welcome ,&nbsp;&nbsp;{{ Auth::user()->nama }}</h6>
                                 </div>
-                                <a href="#!" class="dropdown-item edit-profile" data-target="#editProfileModal"
+                                {{-- <a href="#!" class="dropdown-item edit-profile" data-target="#editProfileModal"
                                     data-toggle="modal" data-id="{{ auth()->id() }}">
                                     <i class="ni ni-single-02"></i>
                                     <span>Edit Profil</span>
@@ -121,7 +121,7 @@
                                     data-target="#changePasswordModal" data-id="{{ auth()->id() }}">
                                     <i class="ni ni-lock-circle-open"></i>
                                     <span>Ubah Password</span>
-                                </a>
+                                </a> --}}
                                 {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-id="{{ auth()->id() }}"
                                data-target="#changeLanguageModal"><i
                                         class="fa fa-language"></i>{{__('messages.user.change_language')}}</a> --}}

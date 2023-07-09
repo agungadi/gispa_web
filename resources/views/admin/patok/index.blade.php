@@ -36,8 +36,9 @@
                                 <option value="">Filter Status</option>
                                 <option value="Menunggu">Menunggu</option>
                                 <option value="Laporkan">Laporkan</option>
-                                <option value="Ideal">Ideal</option>
+                                <option value="Perbaiki">Perbaiki</option>
                                 <option value="Selesai">Selesai</option>
+                                <option value="Ideal">Ideal</option>
                             </select>
                         </div>
                     </div>
